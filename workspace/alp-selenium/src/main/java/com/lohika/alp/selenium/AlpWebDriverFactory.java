@@ -34,6 +34,8 @@ import com.lohika.alp.selenium.log.LoggingWebDriverListener;
 
 public class AlpWebDriverFactory {
 
+    public static void TestMaven(){}
+
 	public static WebDriver getDriver(String SeleniumUrl,
 			DesiredCapabilities capabilities) throws MalformedURLException {
 
