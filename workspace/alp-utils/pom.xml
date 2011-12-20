@@ -27,6 +27,12 @@
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-jaxrs</artifactId>
 			<version>1.8.0</version>
-		</dependency>
+	</dependency>
+	<dependency>
+		<groupId>xstream</groupId>
+		<artifactId>xstream</artifactId>
+		<version>1.2.2</version>
+    </dependency>
   </dependencies>
+  
 </project>
