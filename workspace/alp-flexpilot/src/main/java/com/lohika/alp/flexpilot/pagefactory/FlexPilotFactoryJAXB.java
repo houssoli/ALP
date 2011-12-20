@@ -106,6 +106,21 @@ public class FlexPilotFactoryJAXB implements FlexPilotFactory {
 		return action;
 	}
 
+	public Object drugAndDrop(DescribedElement self, DescribedElement toElement, int x, int y) {
+		Action action = getAction(self, "drag and drop");
+		action.getArg().add(toElement.getDescription().getName());
+		action.getArg().add(x);
+		action.getArg().add(y);
+		return action;
+	}
+
+	public Object drugAndDrop(DescribedElement self, int x, int y) {
+		Action action = getAction(self, "drag and drop");
+		action.getArg().add(x);
+		action.getArg().add(y);
+		return action;
+	}
+
 	public Object doubleClick(DescribedElement self) {
 		return getAction(self, "double click");
 	}

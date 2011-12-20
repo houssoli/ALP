@@ -182,21 +182,24 @@ public class FlexPilotElement implements FlexElement, DescribedElement, WrapsEle
 
 	public void dragAndDrop(FlexElement element, Point point) {
 		logger.info(factory.drugAndDrop(this, 
-				((DescribedElement)((WrapsElement)element).getWrappedElement())));
-			WrapsElement we = (WrapsElement)element;
-			FlexElement wfe = we.getWrappedElement();
-			FlexPilotElement toElement = (FlexPilotElement)wfe;
-			
-			// wait for object display, if not throw ElementNotVisibleException exception
-			waitForObject(toElement);
-			
-			String optBy = "'opt"+toElement.getId().substring(1);
-			
-			execute(DriverCommand.DRAG_DROP_ELEM_TO_ELEM,
-				ImmutableMap.of("id", id, "opt", optBy, "offsetx", point.x, "offsety", point.y));
+				((DescribedElement)((WrapsElement)element).getWrappedElement()),
+				point.x, point.y)
+		);
+		WrapsElement we = (WrapsElement)element;
+		FlexElement wfe = we.getWrappedElement();
+		FlexPilotElement toElement = (FlexPilotElement)wfe;
+		
+		// wait for object display, if not throw ElementNotVisibleException exception
+		waitForObject(toElement);
+		
+		String optBy = "'opt"+toElement.getId().substring(1);
+		
+		execute(DriverCommand.DRAG_DROP_ELEM_TO_ELEM,
+			ImmutableMap.of("id", id, "opt", optBy, "offsetx", point.x, "offsety", point.y));
 	}
 
 	public void dragAndDrop(Point point) {
+		logger.info(factory.drugAndDrop(this, point.x, point.y)); 
 		execute(DriverCommand.DRAG_DROP_TO_COORDS,
 				ImmutableMap.of("id", id, "offsetx", point.getX(), "offsety", point.getY()));
 	}

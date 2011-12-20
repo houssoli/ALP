@@ -36,6 +36,8 @@ public interface FlexPilotFactory {
 	 */
 	public Object screenshot(WebDriver driver, String description);
 	public Object drugAndDrop(DescribedElement self, DescribedElement toElement);
+	public Object drugAndDrop(DescribedElement self, DescribedElement toElement, int x, int y);
+	public Object drugAndDrop(DescribedElement self, int x, int y);
 	public Object doubleClick(DescribedElement self);
 	public Object mouseOver(DescribedElement self);
 	public Object mouseOut(DescribedElement self);
