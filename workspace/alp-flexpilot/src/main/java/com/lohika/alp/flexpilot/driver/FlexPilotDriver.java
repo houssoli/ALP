@@ -118,15 +118,6 @@ public class FlexPilotDriver implements FlexDriver,FindsById, FindsByName, Finds
 		return "'"+by+"':'"+using+"'";
 	}
 
-	private String getId(String xpath, String rootobj, String maxdepth) {
-		String id =  "'xpath':'"+xpath+"'";
-		if (!"".equals(rootobj))
-			id += ",'rootobj':'"+rootobj+"'";
-		if (!"".equals(maxdepth))
-			id += ",'maxdepth':'"+maxdepth+"'";
-		return id;
-	}
-
 	protected FlexElement findElement(String by, String using) {
 		if (using == null) {
 			throw new IllegalArgumentException("Cannot find elements when the selector is null.");

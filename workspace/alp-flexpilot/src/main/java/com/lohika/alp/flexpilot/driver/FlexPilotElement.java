@@ -22,16 +22,10 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.interactions.internal.Coordinates;
-import org.openqa.selenium.internal.Locatable;
 
 import com.google.common.collect.ImmutableMap;
 import com.lohika.alp.flexpilot.By;
 import com.lohika.alp.flexpilot.ElementNotVisibleException;
-import com.lohika.alp.flexpilot.FindsByChain;
-import com.lohika.alp.flexpilot.FindsById;
-import com.lohika.alp.flexpilot.FindsByLinkText;
-import com.lohika.alp.flexpilot.FindsByName;
 import com.lohika.alp.flexpilot.FlexElement;
 import com.lohika.alp.flexpilot.WrapsElement;
 import com.lohika.alp.flexpilot.pagefactory.FlexPilotFactory;

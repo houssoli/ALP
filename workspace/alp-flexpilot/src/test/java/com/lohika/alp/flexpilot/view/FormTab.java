@@ -7,8 +7,6 @@ import com.lohika.alp.selenium.log.LogDescription;
 
 public class FormTab {
 
-	private FlexDriver fDriver;
-
 	@LogDescription(name = "Name", type = "edit")
 	@FindBy(chain = "id:nameTxt")
     public FlexElement txtName;
