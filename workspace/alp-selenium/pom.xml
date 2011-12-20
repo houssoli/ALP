@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.lohika.alp</groupId>
 	<artifactId>alp-selenium</artifactId>
-	<version>0.6.1</version>
+	<version>0.7</version>
 	<name>ALP Selenium Utilities</name>
 	<build>
 		<plugins>
@@ -40,7 +40,7 @@
 		<dependency>
 			<groupId>com.lohika.alp</groupId>
 			<artifactId>alp-reporter</artifactId>
-			<version>0.6</version>
+			<version>0.7</version>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
