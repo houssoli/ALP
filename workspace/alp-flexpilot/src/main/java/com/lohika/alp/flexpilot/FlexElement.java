@@ -14,6 +14,7 @@
 //    along with ALP.  If not, see <http://www.gnu.org/licenses/>.
 package com.lohika.alp.flexpilot;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 
 public interface FlexElement extends SearchContext {
@@ -38,4 +39,37 @@ public interface FlexElement extends SearchContext {
 
 	void doubleClick();
 
+	String getPropertyValue(String propertyName);
+	
+	void setPropertyValue(String propertyName, String value);
+
+	/**
+	 * Where on the page is the top left-hand corner of the rendered element?
+	 * 
+	 * @return A point, containing the location of the top left-hand corner of the element
+	 * (global coords)
+	 */
+	Point getLocation();
+	
+	/**
+	 * What is the width and height of the rendered element?
+	 * 
+	 * @return The size of the element on the page.
+	 */
+	Dimension getSize();
+	
+	void mouseOver();
+	void mouseOut();
+	void mouseUp();
+	void mouseDown();
+	
+	void focusOut();
+	
+	void date(String date);
+	
+	void contextClick(int contextMenuIndex);
+	
+	void setSelection(int begin, int end);
+
+	String dump();
 }

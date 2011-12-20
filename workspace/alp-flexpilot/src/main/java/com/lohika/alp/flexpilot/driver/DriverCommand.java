@@ -23,11 +23,20 @@ public interface DriverCommand {
 	String DOUBLE_CLICK = "fp_doubleClick";
 	String MOUSE_OUT = "fp_mouseOut";
 	String MOUSE_OVER = "fp_mouseOver";
+	String MOUSE_UP = "fp_mouseUp";
+	String MOUSE_DOWN = "fp_mouseDown";
+	String FOCUS_OUT = "fp_focusOut";
 	String GET_PROPERTY_VALUE = "fp_getPropertyValue"; 
+	String SET_PROPERTY_VALUE = "fp_setPropertyValue"; 
 	String DATE = "fp_date";
 	String DRAG_DROP_TO_COORDS = "fp_dragDropToCoords";
 	String DRAG_DROP_ELEM_TO_ELEM = "fp_dragDropElemToElem";
 	String GET_OBJECT_COORDS = "fp_getObjectCoords";
+	String GET_OBJECT_SIZE = "fp_getObjectSize";
+	String CONTEXT_MENU_CLICK = "fp_rightClick";
+	String SET_TEXT_SELECTION = "fp_setTextSelection";
+
+	String DUMP = "fp_dump";
 
 	String GET_VERSION = "fp_getVersion";
 	

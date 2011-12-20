@@ -116,4 +116,49 @@ public class FlexPilotFactoryJAXB implements FlexPilotFactory {
 		return action;
 	}
 
+	public Object mouseOver(DescribedElement self) {
+		return getAction(self, "mouse over");
+	}
+
+	public Object mouseOut(DescribedElement self) {
+		return getAction(self, "mouse out");
+	}
+
+	public Object mouseUp(DescribedElement self) {
+		return getAction(self, "mouse up");
+	}
+
+	public Object mouseDown(DescribedElement self) {
+		return getAction(self, "mouse down");
+	}
+
+	public Object focusOut(DescribedElement self) {
+		return getAction(self, "focus out");
+	}
+
+	public Object date(DescribedElement self, String date) {
+		Action action = getAction(self, "date");
+		action.getArg().add(date);
+		return action;
+	}
+
+	public Object contextClick(DescribedElement self, int contextMenuIndex) {
+		Action action = getAction(self, "context click");
+		action.getArg().add(contextMenuIndex);
+		return action;
+	}
+
+	public Object setSelection(DescribedElement self, int begin, int end) {
+		Action action = getAction(self, "select text");
+		action.getArg().add(begin);
+		action.getArg().add(end);
+		return action;
+	}
+
+	public Object dump(DescribedElement self, String content) {
+		Action action = getAction(self, "dump");
+		action.getArg().add(content);
+		return action;
+	}
+
 }

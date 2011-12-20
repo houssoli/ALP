@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.interactions.internal.Coordinates;
@@ -216,6 +217,87 @@ public class FlexPilotElement implements FlexElement, DescribedElement, WrapsEle
 		logger.info(factory.doubleClick(this));
 		execute(DriverCommand.DOUBLE_CLICK,
 			ImmutableMap.of("id", id));
+	}
+
+	public String getPropertyValue(String propertyName) {
+		return (String) execute(DriverCommand.GET_PROPERTY_VALUE,
+			ImmutableMap.of("id", id, "attrName", propertyName));
+	}
+
+	public void setPropertyValue(String propertyName, String value) {
+		execute(DriverCommand.SET_PROPERTY_VALUE,
+			ImmutableMap.of("id", id, "attrName", propertyName, "value", value));
+	}
+
+	public Point getLocation() {
+		String strPoint = (String)execute(DriverCommand.GET_OBJECT_COORDS,
+				ImmutableMap.of("id", id));
+		strPoint = strPoint.substring(1, strPoint.length()-1);
+		String[] coords = strPoint.split(",");
+		return new Point(Integer.valueOf(coords[0]), Integer.valueOf(coords[1]));
+	}
+
+	public Dimension getSize() {
+		String strSize = (String)execute(DriverCommand.GET_OBJECT_SIZE,
+			ImmutableMap.of("id", id));
+		strSize = strSize.substring(1, strSize.length()-1);
+		String[] size = strSize.split(",");
+		return new Dimension(Integer.valueOf(size[0]), Integer.valueOf(size[1]));
+	}
+
+	public void mouseOver() {
+		logger.info(factory.mouseOver(this));
+		execute(DriverCommand.MOUSE_OVER,
+			ImmutableMap.of("id", id));
+	}
+
+	public void mouseOut() {
+		logger.info(factory.mouseOut(this));
+		execute(DriverCommand.MOUSE_OUT,
+			ImmutableMap.of("id", id));
+	}
+
+	public void mouseUp() {
+		logger.info(factory.mouseUp(this));
+		execute(DriverCommand.MOUSE_UP,
+			ImmutableMap.of("id", id));
+	}
+
+	public void mouseDown() {
+		logger.info(factory.mouseDown(this));
+		execute(DriverCommand.MOUSE_DOWN,
+			ImmutableMap.of("id", id));
+	}
+
+	public void focusOut() {
+		logger.info(factory.focusOut(this));
+		execute(DriverCommand.FOCUS_OUT,
+			ImmutableMap.of("id", id));
+	}
+
+	public void date(String date) {
+		logger.info(factory.date(this, date));
+		execute(DriverCommand.DATE,
+			ImmutableMap.of("id", id, "date", date));
+	}
+
+	public void contextClick(int contextMenuIndex) {
+		logger.info(factory.contextClick(this, contextMenuIndex));
+		execute(DriverCommand.CONTEXT_MENU_CLICK,
+			ImmutableMap.of("id", id, "contextMenuIndex", contextMenuIndex));
+	}
+
+	public void setSelection(int begin, int end) {
+		logger.info(factory.setSelection(this, begin, end));
+		execute(DriverCommand.SET_TEXT_SELECTION,
+			ImmutableMap.of("id", id, "begin", begin, "end", end));
+	}
+
+	public String dump() {
+		String result = (String)execute(DriverCommand.DUMP,
+				ImmutableMap.of("id", id));
+		logger.info(factory.dump(this, result));
+		return result;
 	}
 
 }
