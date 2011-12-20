@@ -20,6 +20,13 @@ public class LogDescriptionBean {
 
 	private String type;
 
+	public LogDescriptionBean() {}
+	
+	public LogDescriptionBean(String name, String type) {
+		this.name = name;
+		this.type = type;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -34,6 +41,10 @@ public class LogDescriptionBean {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+	
+	public String toString() {
+		return getType()+" "+getName();
 	}
 
 }

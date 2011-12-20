@@ -14,11 +14,18 @@
 //    along with ALP.  If not, see <http://www.gnu.org/licenses/>.
 package com.lohika.alp.selenium.log;
 
+import java.util.ArrayList;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverEventListener;
+
+import com.lohika.alp.selenium.jscatcher.JsErrorCatcherConfiguration;
+import com.lohika.alp.selenium.jscatcher.FirefoxJsErrorCathcer;
+import com.lohika.alp.selenium.jscatcher.JSErrorCatcher;
+import com.lohika.alp.selenium.jscatcher.JsErrorCatcherException;
 
 public class LoggingWebDriverListener implements WebDriverEventListener {
 
@@ -34,7 +41,7 @@ public class LoggingWebDriverListener implements WebDriverEventListener {
 	}
 
 	@Override
-	public void afterClickOn(WebElement arg0, WebDriver arg1) {
+	public void afterClickOn(WebElement arg0, WebDriver driver) {
 	}
 
 	@Override
@@ -50,7 +57,19 @@ public class LoggingWebDriverListener implements WebDriverEventListener {
 	}
 
 	@Override
-	public void afterNavigateTo(String arg0, WebDriver arg1) {
+	public void afterNavigateTo(String arg0, WebDriver driver) {
+		if (!JsErrorCatcherConfiguration.getInstance().getJsErrorAutolog())
+			return;
+		JSErrorCatcher catcher = new FirefoxJsErrorCathcer(driver);
+		ArrayList<String> errors;
+		try {
+			errors = catcher.getJsErrors();
+			if (errors!=null && errors.size()>0)
+				logger.warn(errors.toString());
+		} catch (JsErrorCatcherException e) {
+			logger.warn(e.getMessage(), e.getCause());
+		}
+
 	}
 
 	@Override
@@ -62,7 +81,18 @@ public class LoggingWebDriverListener implements WebDriverEventListener {
 	}
 
 	@Override
-	public void beforeClickOn(WebElement arg0, WebDriver arg1) {
+	public void beforeClickOn(WebElement arg0, WebDriver driver) {
+		if (!JsErrorCatcherConfiguration.getInstance().getJsErrorAutolog())
+			return;
+		JSErrorCatcher catcher = new FirefoxJsErrorCathcer(driver);
+		ArrayList<String> errors;
+		try {
+			errors = catcher.getJsErrors();
+			if (errors!=null && errors.size()>0)
+				logger.warn(errors.toString());
+		} catch (JsErrorCatcherException e) {
+			logger.warn(e.getMessage(), e.getCause());
+		}
 	}
 
 	@Override
@@ -78,7 +108,7 @@ public class LoggingWebDriverListener implements WebDriverEventListener {
 	}
 
 	@Override
-	public void beforeNavigateTo(String arg0, WebDriver arg1) {
+	public void beforeNavigateTo(String arg0, WebDriver driver) {
 	}
 
 	@Override
