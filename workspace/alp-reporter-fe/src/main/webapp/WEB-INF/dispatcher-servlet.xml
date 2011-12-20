@@ -93,6 +93,8 @@
 				<prop key="hibernate.c3p0.max_statement">0</prop>
 				<prop key="hibernate.c3p0.preferredTestQuery">select 1;</prop>
 				<prop key="hibernate.c3p0.validate">true</prop>
+                <prop key="hibernate.c3p0.idle_test_period">200</prop>
+                <prop key="hibernate.c3p0.testOnBorrow">true</prop>
 			</props>
 		</property>
 
