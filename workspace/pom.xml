@@ -13,6 +13,7 @@
     <module>alp-reporter-fe</module>
     <module>alp-flexpilot</module>
   </modules>
+
   <build>
     <plugins>
       <plugin>
@@ -25,4 +26,6 @@
       </plugin>
     </plugins>
   </build>
+</project>
+=======
 </project>
