@@ -18,7 +18,10 @@ import com.lohika.alp.flexpilot.pagefactory.FlexPilotFactoryJAXB;
 import com.lohika.alp.flexpilot.pagefactory.FlexPilotPageFactory;
 import com.lohika.alp.flexpilot.view.FormTab;
 import com.lohika.alp.flexpilot.view.GridTab;
+import com.lohika.alp.selenium.AlpWebDriverFactory;
 import com.lohika.alp.selenium.RemoteWebDriverTakeScreenshotFix;
+import com.lohika.alp.selenium.log.DescribedElement;
+import com.lohika.alp.selenium.log.LogDescriptionBean;
 
 public class SanityTest {
 	private Logger				logger	= Logger.getLogger(getClass());
@@ -33,7 +36,8 @@ public class SanityTest {
 		env = new Environment();
 		DesiredCapabilities cap = new DesiredCapabilities(env.getBrowser(), "",
 				Platform.valueOf(env.getPlatform()));
-		wDriver = new RemoteWebDriverTakeScreenshotFix(new URL(env.getHubURL()), cap);
+		//wDriver = new RemoteWebDriverTakeScreenshotFix(new URL(env.getHubURL()), cap);
+		wDriver = AlpWebDriverFactory.getDriver(env.getHubURL(), cap);
 		fpDriver = new FlexPilotDriver(wDriver, "testApp");
 		logFactory = new FlexPilotFactoryJAXB();
 		logger.info("test setUp");
@@ -52,7 +56,9 @@ public class SanityTest {
 	
 	private void selectTab(String tabName) {
 		FlexElement tab = fpDriver.findElement(By.chain(String.format(
-				"className:CustomTab/text:%s", tabName))); 
+				"className:CustomTab/text:%s", tabName)));
+		((DescribedElement)tab).setDescription(new LogDescriptionBean(
+				"Tab '"+tabName+"'"));
 		tab.click();
 	}
 	
@@ -71,6 +77,7 @@ public class SanityTest {
 		gridTab.selectRow(1);
 		
 		FlexElement app = fpDriver.findElement(By.id("testApp"));
+		((DescribedElement)app).setDescription(new LogDescriptionBean("Context Menu", ""));
 		app.contextClick(0);
 	}
 

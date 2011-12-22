@@ -18,7 +18,7 @@ public class LogDescriptionBean {
 
 	private String name;
 
-	private String type;
+	private String type = "element";
 
 	public LogDescriptionBean() {}
 	
@@ -26,7 +26,11 @@ public class LogDescriptionBean {
 		this.name = name;
 		this.type = type;
 	}
-	
+
+	public LogDescriptionBean(String name) {
+		this.name = name;
+	}
+
 	public String getName() {
 		return name;
 	}

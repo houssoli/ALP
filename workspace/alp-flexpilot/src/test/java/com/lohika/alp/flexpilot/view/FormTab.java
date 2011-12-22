@@ -2,7 +2,6 @@ package com.lohika.alp.flexpilot.view;
 
 import com.lohika.alp.flexpilot.FindBy;
 import com.lohika.alp.flexpilot.FlexElement;
-import com.lohika.alp.flexpilot.driver.FlexDriver;
 import com.lohika.alp.selenium.log.LogDescription;
 
 public class FormTab {

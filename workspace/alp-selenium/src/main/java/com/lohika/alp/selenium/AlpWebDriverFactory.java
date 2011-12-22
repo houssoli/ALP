@@ -17,6 +17,7 @@ package com.lohika.alp.selenium;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.apache.log4j.Category;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -33,6 +34,8 @@ import com.lohika.alp.selenium.log.LoggingWebDriver;
 import com.lohika.alp.selenium.log.LoggingWebDriverListener;
 
 public class AlpWebDriverFactory {
+	
+	private static Logger log = Logger.getLogger(AlpWebDriverFactory.class);
 
     public static void TestMaven(){}
 
@@ -57,14 +60,13 @@ public class AlpWebDriverFactory {
 		capabilities = webDriverConfigurator.configure(capabilities);
 
 
-		
 		// Create remote WebDriver instance
 		driver = new RemoteWebDriverTakeScreenshotFix(commandExecutor,
 				capabilities);
 
 		// Set factory for log objects
 		LogElementsSeleniumFactory logObjectsFactory = new LogElementsSeleniumFactoryJAXB();
-
+		
 		// Register WebDriver event listener to handle exceptions
 		// TODO initialize factory separately
 		LogElementsSeleniumFactory elementsFactory = new LogElementsSeleniumFactoryJAXB();
@@ -79,6 +81,20 @@ public class AlpWebDriverFactory {
 		// Otherwise LoggingWebDriver can be only the last in the decorators chain
 		driver = new LoggingWebDriver(driver, name, logObjectsFactory);
 
+		Logger seleniumLogger = Logger.getLogger("selenium-logging");
+		if (seleniumLogger != null)
+		try {
+			// Disable native selenium logging of commands
+			String levelStr = seleniumLogger.getLevel().toString();
+			log.debug("java.util.logging.Level for selenium: "+levelStr);
+			java.util.logging.Level level = java.util.logging.Level.parse(levelStr);
+			RemoteWebDriverTakeScreenshotFix.setLogLevel(level);
+		} catch (IllegalArgumentException e) { 
+			log.warn("Unable turn off native selenium logging");
+		} catch (NullPointerException e) {
+			log.warn("Unable to get log level for native selenium logging");
+		}
+		
 		return driver;
 	}
 
