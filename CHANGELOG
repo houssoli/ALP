@@ -1,0 +1,4 @@
+0.8 
+- [alp-reporter ] Added ability to turn off RemoteWebDriver logging
+- [alp-reporter ] Add default type for @LogDescription annotation
+- [alp-reporter-fe ] Fixed bug #1
