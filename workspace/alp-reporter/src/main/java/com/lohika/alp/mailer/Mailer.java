@@ -22,7 +22,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -50,7 +49,7 @@ import com.lohika.alp.utils.zip.Zip;
 
 /**
  * Listener which send email when tests suite is completed. Recipients cand be
- * adjusted in the "environment.properties" file or in your custom .properties
+ * adjusted in the "reporter.properties" file or in your custom .properties
  * file. You can add recipients for specific suite in the testng xml as
  * 'recipients' parameter
  * @author Dmitry Irzhov
@@ -78,11 +77,7 @@ public class Mailer implements ISuiteListener {
 		if (suiteRecipients != null && suiteRecipients.size()>0)
 			mailerConfigurator.setSuiteRecipients(suiteRecipients); 
 
-		if (mailerConfigurator.getAutoMail()!=null && mailerConfigurator.getAutoMail()) {
-		    session = getSession();
-		} else {
-			mailerConfigurator.setAutoMail(false);
-		}
+		if (mailerConfigurator.getAutoMail()) session = getSession();		
 	}
 
 	public void onFinish(ISuite suite) {
@@ -140,7 +135,8 @@ public class Mailer implements ISuiteListener {
 
 					        msg.setContent(multipart);
 
-							Transport.send(msg);
+					        Transport.send(msg);							
+							
 					} catch (AddressException e) {
 						logger.warn(new MailerException("Unable to sent email to "+mailerConfigurator.getRecipients()+": "+e.getMessage()), e.getCause());
 						e.printStackTrace();						
@@ -158,25 +154,9 @@ public class Mailer implements ISuiteListener {
 	private Session getSession() {
 		Authenticator authenticator = new Authenticator(
 			mailerConfigurator.getSmtpUser(),
-			mailerConfigurator.getSmtpPassword());
-
-		Properties properties = new Properties();
-		if (authenticator.getPasswordAuthentication() != null
-			&& authenticator.getPasswordAuthentication().getUserName()!=null) {
-			properties.setProperty("mail.smtp.submitter",
-				authenticator.getPasswordAuthentication().getUserName());
-			properties.setProperty("mail.smtp.auth", "true");
-		}
+			mailerConfigurator.getSmtpPassword());		
 		
-		if (mailerConfigurator.getSmtpSsl()) {
-			properties.setProperty("mail.smtp.ssl","true");
-			properties.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-		}
-
-		properties.setProperty("mail.smtp.host", mailerConfigurator.getSmtpHost());
-		properties.setProperty("mail.smtp.port", mailerConfigurator.getSmtpPort().toString());
-
-		return Session.getInstance(properties, authenticator);
+		return Session.getInstance(mailerConfigurator.buildProperties(), authenticator);
 	}
     
 	private class Authenticator extends javax.mail.Authenticator {
@@ -232,7 +212,6 @@ public class Mailer implements ISuiteListener {
           (file);
         messageBodyPart.setDataHandler(new DataHandler(fds));
         messageBodyPart.setFileName(newFileName);
-        //messageBodyPart.setHeader("Content-ID","<image>");
         multipart.addBodyPart(messageBodyPart);
     }
     

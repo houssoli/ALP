@@ -15,8 +15,6 @@
 
 package com.lohika.alp.mailer;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,25 +22,25 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
+import com.lohika.alp.configuration.ReporterPropertiesReader;
 import com.lohika.alp.utils.validator.EmailAddressException;
 import com.lohika.alp.utils.validator.EmailValidator;
 
 /**
  * Java class for configuring mailer. Recipients can be described in the 
  * .properties file or in the testng xml file. Default configuration file name is 
- * 'environment.properties'
+ * 'reporter.properties'
  * @author Dmitry Irzhov
  *
  */
-public class MailerConfigurator {
+public class MailerConfigurator extends ReporterPropertiesReader {
 	
 	private Logger logger = Logger.getLogger(MailerConfigurator.class);
 	
 	private static MailerConfigurator instance = null;
-
-	private String configFilePath = "environment.properties";
-
+	
 	private Boolean autoMail = false;
+	private Boolean authNeed = false;
 	private String smtpHost;
 	private Integer smtpPort = 25;
 	private Boolean smtpSsl = false;
@@ -51,22 +49,10 @@ public class MailerConfigurator {
 	private String smtpPassword;
 	private List<String> recipients;
 	private List<String> suiteRecipients;
-	private String template;
-	
-	
-	public String getTemplate() {
-		return template;
-	}
-
-	public void setTemplate(String template) {
-		this.template = template;
-	}
-
-	public String getConfigFilePath() {
-		return configFilePath;
-	}
+		
 
 	public Boolean getAutoMail() {
+		if(autoMail == null) autoMail = false;
 		return autoMail;
 	}
 
@@ -82,8 +68,8 @@ public class MailerConfigurator {
 		this.smtpHost = smtpHost;
 	}
 
-	public Integer getSmtpPort() {
-		return smtpPort;
+	public String getSmtpPort() {
+		return Integer.toString(smtpPort);
 	}
 
 	public Boolean getSmtpSsl() {
@@ -138,62 +124,88 @@ public class MailerConfigurator {
 		this.suiteRecipients = suiteRecipients;
 	}
 
-	public MailerConfigurator () {
-		configure(configFilePath);
-	}
-	
-	public MailerConfigurator (String filePath) {
-		configure(filePath);
-
-	}
-	
-	public static MailerConfigurator getInstance() {
-		if (instance==null)
-			instance = new MailerConfigurator();
-		return instance;
-	}
-	
-	public static MailerConfigurator getInstance(String filePath) {
-		if (instance==null)
-			instance = new MailerConfigurator(filePath);
-		return instance;
-	}
-
-	private void configure(String configFilePath) {
-		Properties properties = new Properties();
-        try {
-			properties.load(new FileInputStream(configFilePath));
-			autoMail = Boolean.parseBoolean(properties.getProperty("mail.autoMail"));
-			if (!autoMail) return;
-			smtpHost = properties.getProperty("mail.smtp.host");
-			if (properties.getProperty("mail.smtp.port") != null)
-				smtpPort = Integer.parseInt(properties.getProperty("mail.smtp.port"));
-			smtpSsl = Boolean.parseBoolean(properties.getProperty("mail.smtp.ssl"));
-			sender = properties.getProperty("mail.smtp.sender");
-			smtpUser = properties.getProperty("mail.smtp.username");
-			smtpPassword = properties.getProperty("mail.smtp.password");
-			setRecipients(readRecipients(properties.getProperty("mail.recipients")));
-			template = properties.getProperty("mail.template");
+	public MailerConfigurator () {			
+			
+			autoMail = getBooleanProperty("mail.autoMail",false);
+			
+			if(!autoMail) return;
+				
+			smtpHost = getProperty("mail.smtp.host");
+			
+			System.out.println(smtpHost);
 			
 			if (smtpHost==null) {
 	    		setAutoMail(false);
-	    		logger.warn(new MailerException("SMTP host is not defined"));
+	    		logger.warn(new MailerException("'mail.smtp.host' is not defined"));
+	    		return;
+	    		
 			}
+			
+			sender = getProperty("mail.smtp.submitter");
+			
 			if (sender!=null) {
 				if (!validateSender(sender)) {
 		    		setAutoMail(false);
 		    		logger.warn(new EmailAddressException(Arrays.asList(sender)));
+		    		return;
 				}
 			} else {
 	    		setAutoMail(false);
-	    		logger.warn(new MailerException("mail's sender should be defined. Automail is turn off."));
+	    		logger.warn(new MailerException("'mail.smtp.submitter' should be defined. Automail is turn off."));
+	    		return;
 			}
-		} catch (IOException e)
-        {
-            logger.error(new MailerException("unable to open file '"+configFilePath+"'"), e.getCause());
-        } catch (NumberFormatException e) {
-            logger.warn(new MailerException("unable to read smtp port number. Will use the default port (25)"), e.getCause());
-        }
+			
+			smtpUser = getProperty("mail.smtp.username");
+			
+			if(smtpUser != null) authNeed = true;
+			
+			
+			smtpPassword = getProperty("mail.smtp.password");			
+			
+			String str = getProperty("mail.recipients");
+			
+			if(str == null)
+			{
+				setAutoMail(false);
+	    		logger.warn(new MailerException("'mail.recipients' should be defined. Automail is turn off."));
+	    		return;
+			}
+			
+			setRecipients(readRecipients(str));
+			
+			smtpPort = getIntProperty("mail.smtp.port",25);
+			
+			smtpSsl = getBooleanProperty("mail.smtp.ssl",false);
+			
+	}	
+	
+	public Properties buildProperties() {
+		Properties to_ret = new Properties();
+		
+		if(authNeed)
+		{
+			to_ret.setProperty("mail.smtp.submitter",getSmtpUser());
+			to_ret.setProperty("mail.smtp.auth","true");
+		}
+		
+		if(smtpSsl)
+		{
+			to_ret.setProperty("mail.smtp.ssl","true");
+			// TODO : Make SSL Factory customizable by user
+			to_ret.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		}
+		
+		to_ret.setProperty("mail.smtp.host", smtpHost);
+		to_ret.setProperty("mail.smtp.port", getSmtpPort());		
+		
+		return to_ret;
+	}
+	
+		
+	public static MailerConfigurator getInstance() {
+		if (instance==null)
+			instance = new MailerConfigurator();
+		return instance;
 	}
 	
 	public ArrayList<String> readRecipients(String recipientsStr) {

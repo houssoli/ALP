@@ -25,15 +25,17 @@ import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.lohika.alp.configuration.ReporterPropertiesReader;
+
 public class LogUploader {
 
 	private String server;
 	
 	public LogUploader() {
-		ReporterPropertiesLoader propsLoader = new ReporterPropertiesLoader();
-		ReporterProperties props = propsLoader.getProperties();
 		
-		server = props.getServer();
+		ReporterPropertiesReader props = new ReporterPropertiesReader();
+		
+		server = props.getStringProperty("server","http://localhost:8080/alp-reporter-fe");
 	}
 
 	public void upload(long testMethodId, File logFile)

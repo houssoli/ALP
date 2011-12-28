@@ -14,45 +14,33 @@
 //    along with ALP.  If not, see <http://www.gnu.org/licenses/>.
 package com.lohika.alp.selenium.jscatcher;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
+import com.lohika.alp.configuration.ReporterPropertiesReader;
+import com.lohika.alp.mailer.MailerConfigurator;
+
 /**
  * <p>Java class of ALP configuration
- * <p>Read all parameter from environment.properties file. These parameters are uses
+ * <p>Read all parameter from reporter.properties file. These parameters are uses
  * for ALP at all.
  * <p>jsErrorAutolog allow to logs js errors automatically
  * hosts is an array which contains each host separated by comma 
  * which is uses in our projects
  * @author Dmitry Irzhov
  */
-public class JsErrorCatcherConfiguration {
-
-	private final Logger log = Logger.getLogger(getClass());
+public class JsErrorCatcherConfiguration extends ReporterPropertiesReader {	
+	
+	private Logger logger = Logger.getLogger(MailerConfigurator.class);
 
 	private static JsErrorCatcherConfiguration instance = null;
 	
-	private String configFilePath = "environment.properties";
-
-	private Properties properties;
-
 	private Boolean jsErrorAutolog = false;
-	private String[] allowDomains;
-	
-	
-	public Properties getProperties() {
-		return properties;
-	}
-
-	public String getConfigFilePath() {
-		return configFilePath;
-	}
-	
+	private String[] allowDomains;	
+		
 	public String[] getAllowDomains() {
 		return allowDomains;
 	}
@@ -67,58 +55,41 @@ public class JsErrorCatcherConfiguration {
 
 	public void setJsErrorAutolog(Boolean jsErrorAutolog) {
 		this.jsErrorAutolog = jsErrorAutolog;
-	}
-
-	public JsErrorCatcherConfiguration () {
-		configure(configFilePath);
-	}
-	
-	public JsErrorCatcherConfiguration (String filePath) {
-		configFilePath = filePath;
-		configure(filePath);
-	}
+	}	
 	
 	public static JsErrorCatcherConfiguration getInstance() {
 		if (instance==null)
 			instance = new JsErrorCatcherConfiguration();
 		return instance;
-	}
+	}	
 	
-	public static JsErrorCatcherConfiguration getInstance(String filePath) {
-		if (instance==null)
-			instance = new JsErrorCatcherConfiguration(filePath);
-		return instance;
-	}
 	
-	private void configure(String configFilePath) {
-		properties = new Properties();
-		// read environment.properties file
-        try {
-			properties.load(new FileInputStream(configFilePath));
-	        
-			Boolean b = Boolean.parseBoolean(properties.getProperty("jserrcatcher.autolog"));
-	        if (b!=null) jsErrorAutolog=b;
-	        
-	        String hostStr = properties.getProperty("jserrcatcher.allowDomains");
-	        if (hostStr!=null) {
-		        allowDomains = hostStr.split(",");
-		        for (String host : allowDomains) {
-		        	URL url = new URL(host);
-		        	url.openConnection();
-		        }
-	        } else {
-	        	jsErrorAutolog = false;
-	        	log.warn(new JsErrorCatcherException("unable to read 'jserrcatcher.allowDomains' parameter in the 'environment.properties' file. Auto logging of js errors was diactivated."));
+	public JsErrorCatcherConfiguration() {		
+		
+		Boolean b = Boolean.parseBoolean(getProperty("jserrcatcher.autolog"));
+        if (b!=null) jsErrorAutolog=b;
+        
+        String hostStr = getProperty("jserrcatcher.allowDomains");
+        
+        if (hostStr!=null) {
+	        allowDomains = hostStr.split(",");
+	        for (String host : allowDomains) {	        	
+				try {					
+					URL url;
+					url = new URL(host);
+					url.openConnection();
+				} catch (MalformedURLException e) {
+					jsErrorAutolog = false;
+		        	logger.warn(new JsErrorCatcherException("Wrong URL in 'jserrcatcher.allowDomains' parameter. Auto logging of js errors was diactivated."));					
+				} catch (IOException e) {
+					jsErrorAutolog = false;
+		            logger.warn(new JsErrorCatcherException("Unable connect to '"+host+"'"), e.getCause());
+				}
+	        	
 	        }
-	        
-		} catch (MalformedURLException e) {
+        } else {
         	jsErrorAutolog = false;
-        	log.warn(new JsErrorCatcherException("wrong URL in 'jserrcatcher.allowDomains' parameter. Auto logging of js errors was diactivated."));
-		} catch (IOException e)
-        {
-        	jsErrorAutolog = false;
-            log.warn(new JsErrorCatcherException("unable to open file '"+configFilePath+"'"), e.getCause());
+        	logger.warn(new JsErrorCatcherException("unable to read 'jserrcatcher.allowDomains' parameter in the 'reporter.properties' file. Auto logging of js errors was diactivated."));
         }
-	}
-	
+	}	
 }
