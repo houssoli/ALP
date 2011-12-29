@@ -14,6 +14,7 @@
 //    along with ALP.  If not, see <http://www.gnu.org/licenses/>.
 package com.lohika.alp.reporter.fe.logs;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -23,6 +24,9 @@ public interface LogStorage {
 			throws IOException;
 
 	public void saveLog(long testMethodId, String name, InputStream is)
+			throws IOException;
+	
+	public File getLogFile(long testMethodId, String name)
 			throws IOException;
 
 }

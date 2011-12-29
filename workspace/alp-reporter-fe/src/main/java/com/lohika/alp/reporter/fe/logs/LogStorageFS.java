@@ -66,4 +66,9 @@ public class LogStorageFS implements LogStorage {
 		return new File(logsPath + "/" + testMethodId);
 	}
 
+	@Override
+	public File getLogFile(long testMethodId, String name) throws IOException {
+				return new File(getTestMethodDir(testMethodId), name);		
+	}
+
 }

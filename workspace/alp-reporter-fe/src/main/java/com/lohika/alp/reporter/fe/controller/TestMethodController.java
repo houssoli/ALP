@@ -14,10 +14,19 @@
 //    along with ALP.  If not, see <http://www.gnu.org/licenses/>.
 package com.lohika.alp.reporter.fe.controller;
 
+
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -39,6 +48,7 @@ import com.lohika.alp.reporter.fe.dao.TestDAO;
 import com.lohika.alp.reporter.fe.dao.TestInstanceDAO;
 import com.lohika.alp.reporter.fe.dao.TestMethodDAO;
 import com.lohika.alp.reporter.fe.form.TestMethodFilter;
+import com.lohika.alp.reporter.fe.logs.LogStorage;
 
 @Controller
 public class TestMethodController {
@@ -50,6 +60,9 @@ public class TestMethodController {
 	
 	@Autowired
 	private TestDAO testDAO;
+	
+	@Autowired
+	LogStorage logStorage;
 	
 	@Autowired
 	private TestInstanceDAO testInstanceDAO;
@@ -92,6 +105,42 @@ public class TestMethodController {
 		model.addAttribute("testMethodFilter", filter);		
 		model.addAttribute("testMethods", testMethodDAO.listTestMethod(filter));
 		return "test-method";
+	}
+	
+	@RequestMapping(
+			method = RequestMethod.GET,
+			value = "/results/test-export")
+	public String Export(@ModelAttribute("testMethodFilter") TestMethodFilter filter,HttpServletResponse response)
+	{		
+		
+		response.setContentType("application/x-download");		
+		response.setHeader("Content-Disposition", "inline;filename=\"" +"staticName"+ "\"");		
+		
+		try {
+			Test test = testDAO.getTest(12);		
+			List<TestMethod> list = testMethodDAO.listTestMethod(filter, test);
+			
+			TestMethod tsm= list.get(1);
+			File f1= logStorage.getLogFile(1,tsm.getName());
+			byte[] bytes = new byte[(int) f1.length()];
+			FileInputStream fis;
+			fis = new FileInputStream(f1);
+			fis.read(bytes);
+
+			response.setContentLength(bytes.length);			
+			response.getOutputStream().write(bytes, 0, bytes.length);
+			response.getOutputStream().flush();
+			response.getOutputStream().close();
+			
+		} catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 	@RequestMapping(

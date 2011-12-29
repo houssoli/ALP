@@ -84,11 +84,17 @@ Copyright 2011 Lohika .  This file is part of ALP.
 	            },
 	            text: false
 			});
+			$("#export button").button({
+	            icons: {
+	                primary: "ui-icon-disk"
+	            },
+	            text: false
+			});
 		});
 	</script>
 	<div id="filter">
 		<form:form modelAttribute="testMethodFilter" method="GET" action="test-method">
-			<button id="filter_button" type="submit" value="Filter" style="float: right;">Filter</button>
+			<button id="filter_button" type="submit" value="Filter" style="float: right;">Filter</button>			
 			<form:label path="cl" style="float: left;" >Class: <form:input path="cl" /></form:label>			
 			<form:label path="gr" style="float: left;">Group: <form:input path="gr" /></form:label>			
 			<div style="float: left;">
@@ -96,7 +102,14 @@ Copyright 2011 Lohika .  This file is part of ALP.
 				<form:label path="till">Till: <form:input path="till" class="datepicker" size="10" /></form:label>
 			</div>
 		</form:form>
+		<div id="export">
+		<form:form modelAttribute="testMethodFilter" method="GET" action="test-export">
+			<button id="export_button" type="submit" value="Export" style="float: right;">Export</button>
+		</form:form>
 	</div>
+	</div>
+	
+	
 	
 	<div id="group_by">
 		Group by
