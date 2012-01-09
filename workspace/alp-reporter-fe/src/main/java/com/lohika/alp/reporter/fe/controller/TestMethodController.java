@@ -117,11 +117,11 @@ public class TestMethodController {
 		response.setHeader("Content-Disposition", "inline;filename=\"" +"staticName"+ "\"");		
 		
 		try {
-			Test test = testDAO.getTest(12);		
+			Test test = testDAO.getTest(1);		
 			List<TestMethod> list = testMethodDAO.listTestMethod(filter, test);
 			
 			TestMethod tsm= list.get(1);
-			File f1= logStorage.getLogFile(1,tsm.getName());
+			File f1= logStorage.getLogFile(1,"index.xml");
 			byte[] bytes = new byte[(int) f1.length()];
 			FileInputStream fis;
 			fis = new FileInputStream(f1);
