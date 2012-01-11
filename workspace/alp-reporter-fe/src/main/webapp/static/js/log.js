@@ -63,7 +63,7 @@ function getTimeFromTimestamp(unix_timestamp){
  * @param {Object} length
  */
 function pad(number, length){
-    var str = '' + number
+    var str = '' + number;
     while (str.length < length) {
         str = '0' + str;
     }
@@ -75,7 +75,7 @@ function pad(number, length){
  * @param {Object} url
  */
 function newPopup(url){
-    popupWindow = window.open(url, 'popUpWindow', 'height=700,width=800,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+    popupWindow = window.open(url, 'popUpWindow', 'height=700,width=800,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
 }
 
 /**

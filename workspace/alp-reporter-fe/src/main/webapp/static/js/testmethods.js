@@ -53,7 +53,7 @@ function enableGroupById(){
     var table = $("#testmethods").dataTable();
     var settings = table.fnSettings();
     
-    settings.aoDrawCallback[0].fn = groupById
+    settings.aoDrawCallback[0].fn = groupById;
     
     // Set 'Id' sorting as fixed	
     settings.aaSortingFixed = [[0, 'desc']];
@@ -148,7 +148,7 @@ $(document).ready(function(){
 	// Dynamic table resize if window size is changed
     $(window).resize(function(){
         table.fnAdjustColumnSizing();
-    })
+    });
     
     // Move filter elements to table tool bar
     var filter = $("div#filter").detach();

@@ -101,7 +101,7 @@ $(document).ready(function(){
 					var nCell = document.createElement('td');
                     nCell.className = "group center";
 					nCell.innerHTML = details;
-                    nGroup.appendChild(nCell)					
+                    nGroup.appendChild(nCell);					
 					
                     nTrs[i].parentNode.insertBefore(nGroup, nTrs[i]);
                     lastSuiteId = suiteId;
@@ -113,7 +113,7 @@ $(document).ready(function(){
 	// Dynamic table resize if window size is changed
     $(window).resize(function(){
         table.fnAdjustColumnSizing();
-    })
+    });
 	
 	// Move filter elements to table tool bar    
 	var filter = $("div#filter").detach();
