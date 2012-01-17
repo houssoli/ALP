@@ -114,7 +114,7 @@ $(document).ready(function(){
         
         "sDom": '<"H"lfr>t<"F"ip>',
         
-        "bScrollCollapse": true,
+        "bScrollCollapse": true,        
         "sScrollX": "100%",
         
         "aoColumns": [
@@ -142,8 +142,10 @@ $(document).ready(function(){
         }],
         
         // Initial grouping function
-        "fnDrawCallback": groupById
-    });
+        "fnDrawCallback": groupById        
+        
+    }); 
+    
 	
 	// Dynamic table resize if window size is changed
     $(window).resize(function(){
@@ -156,5 +158,6 @@ $(document).ready(function(){
     
     // Move grouping elements to table tool bar
     var group_by = $("div#group_by").detach();
-    $("div#testmethods_length").after(group_by);
+    $("div#testmethods_length").after(group_by);   
+        
 });

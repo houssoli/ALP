@@ -15,6 +15,7 @@
 package com.lohika.alp.reporter.fe.controller;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -40,13 +41,13 @@ import com.lohika.alp.reporter.db.model.TestSummary;
 import com.lohika.alp.reporter.fe.dao.SuiteDAO;
 import com.lohika.alp.reporter.fe.dao.TestDAO;
 import com.lohika.alp.reporter.fe.form.TestFilter;
+import com.lohika.alp.reporter.fe.helper.ALPCookies;
+import com.lohika.alp.reporter.fe.helper.Headers;
 
 @Controller
 public class TestController {
 
-	private final String view = "marshallingView";
-	private final String FROM = "from";
-	private final String TILL = "till";
+	private final String view = "marshallingView";	
 	
 	@Autowired
 	private TestDAO testDAO;
@@ -79,25 +80,37 @@ public class TestController {
 		}
 	}
 	
+	// When pressing Suite link
 	@RequestMapping(
 			method = RequestMethod.GET,
 			value = "/results/test",
 			headers = Headers.ACCEPT_HTML)
-	public String getTest(@CookieValue(value = FROM, required = false) String from,
-			@CookieValue(value = TILL, required = false) String till,
+	public String getTest(@CookieValue(value = ALPCookies.ALPfrom, required = false) String from,
+			@CookieValue(value = ALPCookies.ALPtill, required = false) String till,
+			@CookieValue(value = ALPCookies.ALPsuite, required = false) String suite,
+			@CookieValue(value = ALPCookies.ALPsection, required = false) String section,
 			Model model, 
-			@ModelAttribute("testFilter") TestFilter filter) throws Exception {
-		
-		setDefaultPeriod(filter);
+			@ModelAttribute("testFilter") TestFilter filter) throws ParseException {		
 		
 		// set times from the cookies
-		if (from!=null && till!=null) {
+		if (from!=null) 
+		{
 			DateFormat formatter = new SimpleDateFormat("yy-MM-dd");
-		    Date f = (Date)formatter.parse(from);
-		    Date t = (Date)formatter.parse(till);
-			filter.setFrom(f);
+		    Date f = (Date)formatter.parse(from);		    
+			filter.setFrom(f);			
+		}
+		
+		if (till!=null) {
+			DateFormat formatter = new SimpleDateFormat("yy-MM-dd");		    
+		    Date t = (Date)formatter.parse(till);			
 			filter.setTill(t);
 		}
+		
+		if(suite!=null) filter.setSuite(suite);
+		
+		if(section!=null) filter.setTest(section);
+			
+		setDefaultPeriod(filter);
 		
 		List<Test> list = testDAO.listTest(filter);
 		Map<Test, TestSummary> map = testDAO.getTestSummaryMap(list);
@@ -109,6 +122,7 @@ public class TestController {
 		return "test";
 	}
 	
+	// When pressing some certain suite link
 	@RequestMapping(
 			method = RequestMethod.GET,
 			value = "/results/suite/{suiteId}/test",
@@ -130,6 +144,7 @@ public class TestController {
 		return "test";
 	}
 
+	// Not implemented yet
 	@RequestMapping(
 			method = RequestMethod.GET, 
 			value = "/results/test/{testId}",
@@ -142,6 +157,8 @@ public class TestController {
 		return view;
 	}
 	
+	
+ 
 	@RequestMapping(
 			method = RequestMethod.POST, 
 			value = "/results/test/{testId}/test-instances",

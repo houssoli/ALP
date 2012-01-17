@@ -67,7 +67,7 @@ Copyright 2011 Lohika .  This file is part of ALP.
 			<a href="${contextPath}/results/test">Suites</a>
 			<span> / </span>
 			<a href="${contextPath}/results/test-method">Tests</a>
-		</div>
+		</div>		
 	</div>
 	
 	<script type="text/javascript">
@@ -83,30 +83,28 @@ Copyright 2011 Lohika .  This file is part of ALP.
 	                primary: "ui-icon-search"
 	            },
 	            text: false
-			});
-			$("#export button").button({
-	            icons: {
-	                primary: "ui-icon-disk"
-	            },
-	            text: false
-			});
+			});			
 		});
+		
+		function setCookies()
+		{
+			$.cookie("ALPfrom", $("#from").val());
+			$.cookie("ALPtill", $("#till").val());
+			$.cookie("ALPclass", $("#cl").val());
+			$.cookie("ALPgroup", $("#gr").val());
+			
+		}
 	</script>
 	<div id="filter">
 		<form:form modelAttribute="testMethodFilter" method="GET" action="test-method">
-			<button id="filter_button" type="submit" value="Filter" style="float: right;">Filter</button>			
+			<button id="filter_button" type="submit" value="Filter" style="float: right;" onClick='javascript:setCookies()'>Filter</button>			
 			<form:label path="cl" style="float: left;" >Class: <form:input path="cl" /></form:label>			
 			<form:label path="gr" style="float: left;">Group: <form:input path="gr" /></form:label>			
 			<div style="float: left;">
 				<form:label path="from">From: <form:input path="from" class="datepicker" size="10" /></form:label>				
 				<form:label path="till">Till: <form:input path="till" class="datepicker" size="10" /></form:label>
 			</div>
-		</form:form>
-		<div id="export">
-		<form:form modelAttribute="testMethodFilter" method="GET" action="test-export">
-			<button id="export_button" type="submit" value="Export" style="float: right;">Export</button>
-		</form:form>
-	</div>
+		</form:form>		
 	</div>
 	
 	

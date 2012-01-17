@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.lohika.alp.reporter.fe.helper.Headers;
 import com.lohika.alp.testng.results.schema.TestInstance;
 import com.lohika.alp.testng.results.schema.TestMethod;
 
@@ -42,6 +43,7 @@ public class TestInstanceController {
 	@Autowired
 	private Jaxb2Marshaller jaxb2Mashaller;
 
+	// Return xml <ns2:test-instance xmlns:ns2="http://alp.lohika.com/testng/results/schema" id="{testInstanceId}"/>
 	@RequestMapping(
 			method = RequestMethod.GET, 
 			value = "/{testInstanceId}")
@@ -56,6 +58,8 @@ public class TestInstanceController {
 		return view;
 	}
 	
+	
+	// Used by com.lohika.alp.reporter.client.LogUploader.upload
 	@RequestMapping(
 			method = RequestMethod.POST,
 			value = "/{testInstanceId}/test-methods")

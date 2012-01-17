@@ -61,7 +61,7 @@ Copyright 2011 Lohika .  This file is part of ALP.
 			<a href="${contextPath}/results/test">Suites</a>
 			<span> / </span>
 			<a href="${contextPath}/results/test-method">Tests</a>
-		</div>
+		</div>		
 	</div>
 
 	<script type="text/javascript">
@@ -79,10 +79,18 @@ Copyright 2011 Lohika .  This file is part of ALP.
 	            text: false
 			});
 		});
+		
+		function setCookies()
+		{
+			$.cookie("ALPfrom", $("#from").val());
+			$.cookie("ALPtill", $("#till").val());
+			$.cookie("ALPsuite", $("#suite").val());
+			$.cookie("ALPsection", $("#test").val());						
+		}
 	</script>
 	<div id="filter">
 		<form:form modelAttribute="testFilter" method="GET" action="test">
-			<button id="filter_button" type="submit" value="Filter" style="float: right;" onClick='$.cookie("from", $("#from").val());$.cookie("till", $("#till").val());'>Filter</button>			
+			<button id="filter_button" type="submit" value="Filter" style="float: right;" onClick='javascript:setCookies()'>Filter</button>			
 			<form:label path="suite" style="float: left;">Suite: <form:input path="suite" /></form:label>				
 			<form:label path="test" style="float: left;">Suite Section: <form:input path="test" /></form:label>
 			<div style="float: left;">

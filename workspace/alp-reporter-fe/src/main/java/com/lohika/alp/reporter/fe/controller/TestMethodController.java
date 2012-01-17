@@ -14,25 +14,19 @@
 //    along with ALP.  If not, see <http://www.gnu.org/licenses/>.
 package com.lohika.alp.reporter.fe.controller;
 
-
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,7 +42,9 @@ import com.lohika.alp.reporter.fe.dao.TestDAO;
 import com.lohika.alp.reporter.fe.dao.TestInstanceDAO;
 import com.lohika.alp.reporter.fe.dao.TestMethodDAO;
 import com.lohika.alp.reporter.fe.form.TestMethodFilter;
-import com.lohika.alp.reporter.fe.logs.LogStorage;
+import com.lohika.alp.reporter.fe.helper.ALPCookies;
+import com.lohika.alp.reporter.fe.helper.Headers;
+
 
 @Controller
 public class TestMethodController {
@@ -60,9 +56,6 @@ public class TestMethodController {
 	
 	@Autowired
 	private TestDAO testDAO;
-	
-	@Autowired
-	LogStorage logStorage;
 	
 	@Autowired
 	private TestInstanceDAO testInstanceDAO;
@@ -93,12 +86,36 @@ public class TestMethodController {
 		}
 	}
 	
+	
+	// When press "Test" link from anywhere
 	@RequestMapping(
 			method = RequestMethod.GET,
 			value = "/results/test-method",
 			headers = Headers.ACCEPT_HTML)
-	public String getTestMethod(Model model, 
-			@ModelAttribute("testMethodFilter") TestMethodFilter filter) {
+	public String getTestMethod(@CookieValue(value = ALPCookies.ALPfrom, required = false) String from,
+			@CookieValue(value = ALPCookies.ALPtill, required = false) String till,
+			@CookieValue(value = ALPCookies.ALPclass, required = false) String clazz,
+			@CookieValue(value = ALPCookies.ALPgroup, required = false) String group,
+			Model model, 
+			@ModelAttribute("testMethodFilter") TestMethodFilter filter) throws ParseException {
+				
+		if(from!=null)
+		{
+			DateFormat formatter = new SimpleDateFormat("yy-MM-dd");
+		    Date f = (Date)formatter.parse(from);
+			filter.setFrom(f);
+		}
+		
+		if(till!=null)
+		{
+			DateFormat formatter = new SimpleDateFormat("yy-MM-dd");
+		    Date t = (Date)formatter.parse(till);
+			filter.setTill(t);
+		}
+		
+		if(clazz!=null) filter.setCl(clazz);
+		
+		if(group!=null) filter.setGr(group);
 		
 		setDefaultPeriod(filter);
 		
@@ -107,7 +124,9 @@ public class TestMethodController {
 		return "test-method";
 	}
 	
-	@RequestMapping(
+	
+	// failed try to implement save as functionality
+	/*@RequestMapping(
 			method = RequestMethod.GET,
 			value = "/results/test-export")
 	public String Export(@ModelAttribute("testMethodFilter") TestMethodFilter filter,HttpServletResponse response)
@@ -141,13 +160,14 @@ public class TestMethodController {
 		}
 		
 		return null;
-	}
+	}*/
 	
+	// When pressing on some certain Test within test-method.jsp 
 	@RequestMapping(
 			method = RequestMethod.GET,
 			value = "/results/test-instance/{testInstanceId}/test-method",
 			headers = Headers.ACCEPT_HTML)
-	public String getTestMethodForTestInstance(Model model,
+	public String getTestMethodForTestInstance(Model model, 
 			@PathVariable("testInstanceId") long testInstanceId,
 			@ModelAttribute("testMethodFilter") TestMethodFilter filter) {
 		
@@ -160,6 +180,7 @@ public class TestMethodController {
 		return "test-method";
 	}
 	
+	//When drive in from list of suites to one of the tests of some certain suite .
 	@RequestMapping(
 			method = RequestMethod.GET,
 			value = "/results/suite/{suiteId}/test-method",
@@ -178,6 +199,7 @@ public class TestMethodController {
 	}
 
 	
+	// When drive in some certain test from suite list on one suite (/results/suite/{suiteId}/test-method) 
 	@RequestMapping(
 			method = RequestMethod.GET,
 			value = "/results/test/{testId}/test-method",
@@ -195,6 +217,7 @@ public class TestMethodController {
 		return "test-method";
 	}
 
+	// Not implemented yet
 	@RequestMapping(
 			method = RequestMethod.GET,
 			value = "/results/test-method/{testMethodId}",

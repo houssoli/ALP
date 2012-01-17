@@ -29,7 +29,7 @@ $(document).ready(function(){
 		
 		"sDom": '<"H"lfr>t<"F"ip>',
 		
-		"bScrollCollapse": true,
+		"bScrollCollapse": true,		
 		"sScrollX": "100%",
 				
 		// Disable sorting for 'Details' columns
@@ -117,13 +117,14 @@ $(document).ready(function(){
 	
 	// Move filter elements to table tool bar    
 	var filter = $("div#filter").detach();
-    $("div#tests_length").before(filter);
-
+    $("div#tests_length").before(filter);    
+    
     // Add "Change view" controls to filter of grid on the top    
 	var view = $("div#view").detach();
 	$("div#tests_filter label").css("float", "right");
 	$(view).appendTo("div#tests_filter");
-
+	
+	
 	// Add onChange event for "Change view" control 
 	$("#view_select").change(function () {
 		switch ($("#view_select option:selected").text()){

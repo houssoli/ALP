@@ -1,4 +1,4 @@
-//Copyright 2011 Lohika .  This file is part of ALP.
+//Copyright 2011-2012 Lohika .  This file is part of ALP.
 //
 //    ALP is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -12,16 +12,15 @@
 //
 //    You should have received a copy of the GNU General Public License
 //    along with ALP.  If not, see <http://www.gnu.org/licenses/>.
-package com.lohika.alp.reporter.fe.controller;
+package com.lohika.alp.reporter.fe.helper;
 
-public class Headers {
+public class ALPCookies {
 	
-	// Read http://www.gethifi.com/blog/browser-rest-http-accept-headers
-
-	public static final String ACCEPT_HTML = "Accept=text/html,*/*";
-
-	public static final String ACCEPT_XML = "Accept=application/xml";
-
-	public static final String CONTENT_TYPE_XML = "Content-type=application/xml";
-
+	public static final String ALPfrom="ALPfrom";
+	public static final String ALPtill="ALPtill";
+	public static final String ALPsuite="ALPsuite";
+	public static final String ALPsection="ALPsection";
+	public static final String ALPshow="ALPshow";
+	public static final String ALPclass="ALPclass";
+	public static final String ALPgroup="ALPgroup";
 }

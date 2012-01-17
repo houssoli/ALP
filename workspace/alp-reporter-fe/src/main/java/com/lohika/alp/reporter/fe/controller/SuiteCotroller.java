@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.lohika.alp.reporter.fe.helper.Headers;
 import com.lohika.alp.testng.results.schema.Suite;
 import com.lohika.alp.testng.results.schema.Test;
 
@@ -60,6 +61,7 @@ public class SuiteCotroller {
 		return view;
 	}
 	
+	// Return XML <ns2:suite xmlns:ns2="http://alp.lohika.com/testng/results/schema" id="2" name="My Suite"/>
 	@RequestMapping(method = RequestMethod.GET, value = "/suite/{suiteId}")
 	String getSuite(Model model, @PathVariable("suiteId") long suiteId) {
 		// TODO implement XML controller
@@ -72,6 +74,7 @@ public class SuiteCotroller {
 		model.addAttribute(suite);		
 		return view;
 	}
+	
 	
 	@RequestMapping(
 			method = RequestMethod.POST,

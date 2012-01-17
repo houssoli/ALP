@@ -86,6 +86,7 @@ public class LogController {
 		// TODO add log URL to response according REST principles
 	}
 	
+	// Show html log stored on server 
 	@RequestMapping(
 			method = RequestMethod.GET,
 			value = "/results/test-method/{testMethodId}/log/")
@@ -105,6 +106,7 @@ public class LogController {
 			return "log";
 	}
 	
+	// How to get here from UI ?
 	@RequestMapping(
 			method = RequestMethod.GET,
 			value = "/results/test-method/{testMethodId}/log/{name}")
