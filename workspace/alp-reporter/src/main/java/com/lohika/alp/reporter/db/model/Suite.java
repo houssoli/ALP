@@ -14,6 +14,8 @@
 //    along with ALP.  If not, see <http://www.gnu.org/licenses/>.
 package com.lohika.alp.reporter.db.model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -75,6 +77,18 @@ public class Suite {
 
 	public Date getFinishDate() {
 		return finishDate;
+	}
+	
+	public String getFormatedfinish()
+	{
+		DateFormat format = new SimpleDateFormat("HH:mm:ss");
+		return format.format(finishDate);
+	}
+	
+	public String getFormatedstart()
+	{
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return format.format(startDate);
 	}
 
 	public void setFinishDate(Date finishDate) {

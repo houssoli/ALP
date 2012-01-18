@@ -19,7 +19,7 @@ public class ALPCookies {
 	public static final String ALPfrom="ALPfrom";
 	public static final String ALPtill="ALPtill";
 	public static final String ALPsuite="ALPsuite";
-	public static final String ALPsection="ALPsection";
+	public static final String ALPtest="ALPtest";
 	public static final String ALPshow="ALPshow";
 	public static final String ALPclass="ALPclass";
 	public static final String ALPgroup="ALPgroup";

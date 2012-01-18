@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
 	xmlns:c="http://java.sun.com/jstl/core_rt"
-	xmlns:form="http://www.springframework.org/tags/form" 
+	xmlns:form="http://www.springframework.org/tags/form"	
 	version="2.0">
 		<jsp:directive.page language="java"
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
@@ -85,14 +85,14 @@ Copyright 2011-2012 Lohika .  This file is part of ALP.
 			$.cookie("ALPfrom", $("#from").val());
 			$.cookie("ALPtill", $("#till").val());
 			$.cookie("ALPsuite", $("#suite").val());
-			$.cookie("ALPsection", $("#test").val());						
+			$.cookie("ALPtest", $("#test").val());						
 		}
 	</script>
 	<div id="filter">
 		<form:form modelAttribute="testFilter" method="GET" action="test">
 			<button id="filter_button" type="submit" value="Filter" style="float: right;" onClick='javascript:setCookies()'>Filter</button>			
 			<form:label path="suite" style="float: left;">Suite: <form:input path="suite" /></form:label>				
-			<form:label path="test" style="float: left;">Suite Section: <form:input path="test" /></form:label>
+			<form:label path="test" style="float: left;">Suite Section : <form:input path="test" /></form:label>
 			<div style="float: left;">
 				<form:label path="from">From: <form:input path="from" class="datepicker" size="10" /></form:label>				
 				<form:label path="till">Till: <form:input path="till" class="datepicker" size="10" /></form:label>
@@ -138,7 +138,7 @@ Copyright 2011-2012 Lohika .  This file is part of ALP.
 				</c:choose>			
 			<tr class="${statusStyle }">
 				<td>${test.suite.id }</td>
-				<td><a href="${contextPath}/results/suite/${test.suite.id }/test">${test.suite.name }</a></td>
+				<td><a href="${contextPath}/results/suite/${test.suite.id }/test">${test.suite.name }</a>  (${test.suite.formatedstart} - ${test.suite.formatedfinish})</td>
 				<td><a class="ui-icon ui-icon-carat-1-e" style="margin: auto;" href="${contextPath}/results/suite/${test.suite.id }/test-method" /></td>
 				<td>${test.name }</td>
 				<td>${summary.total }</td>

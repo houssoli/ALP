@@ -88,7 +88,7 @@ public class TestController {
 	public String getTest(@CookieValue(value = ALPCookies.ALPfrom, required = false) String from,
 			@CookieValue(value = ALPCookies.ALPtill, required = false) String till,
 			@CookieValue(value = ALPCookies.ALPsuite, required = false) String suite,
-			@CookieValue(value = ALPCookies.ALPsection, required = false) String section,
+			@CookieValue(value = ALPCookies.ALPtest, required = false) String section,
 			Model model, 
 			@ModelAttribute("testFilter") TestFilter filter) throws ParseException {		
 		
