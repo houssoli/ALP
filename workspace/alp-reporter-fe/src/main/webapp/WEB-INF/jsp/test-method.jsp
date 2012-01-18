@@ -18,7 +18,7 @@
 	
 	<html xmlns="http://www.w3.org/1999/xhtml">
 	<!--
-Copyright 2011 Lohika .  This file is part of ALP.
+Copyright 2011-2012 Lohika .  This file is part of ALP.
 
     ALP is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
