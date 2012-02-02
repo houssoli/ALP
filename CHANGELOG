@@ -1,4 +1,6 @@
 0.8 
 - [alp-reporter ] Added ability to turn off RemoteWebDriver logging
 - [alp-reporter ] Add default type for @LogDescription annotation
-- [alp-reporter-fe ] Fixed bug #1
+- [alp-reporter-fe ] Fixed bugs : 1,4,22,23 (partially fixed except 'Table Length' item )
+- [alp-reporter-fe] path where to store logs xmls now not relative and defined in context.xml	
+

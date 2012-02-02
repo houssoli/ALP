@@ -45,9 +45,9 @@ Copyright 2011-2012 Lohika .  This file is part of ALP.
 
 	<title>
 	<c:choose>
-		<c:when test="${suiteId != null}">Results - Suite ${suiteId }</c:when>
-		<c:when test="${testId != null}">Results - Test ${testId }</c:when>
-		<c:when test="${testInstanceId != null}">Results - Test Instance ${testInstanceId }</c:when>
+		<c:when test="${suiteId != null}">Results - ${suiteName} (id=${suiteId})</c:when>
+		<c:when test="${testId != null}">Results - ${testName} ${testId }</c:when>
+		<c:when test="${testInstanceId != null}">Results - ${testName} (Test id=${testInstanceId })</c:when>
 		<c:otherwise>Results - Tests</c:otherwise>		
 	</c:choose>
 	</title>
@@ -57,9 +57,9 @@ Copyright 2011-2012 Lohika .  This file is part of ALP.
 	<div>
 		<span id="nav_info">
 		<c:choose>
-			<c:when test="${suiteId != null}">Results - Suite ${suiteId }</c:when>
-			<c:when test="${testId != null}">Results - Test ${testId }</c:when>
-			<c:when test="${testInstanceId != null}">Results - Test Instance ${testInstanceId }</c:when>
+			<c:when test="${suiteId != null}">Results - ${suiteName} (id=${suiteId })</c:when>
+			<c:when test="${testId != null}">Results - ${testName} (id=${testId })</c:when>
+			<c:when test="${testInstanceId != null}">Results - Methods of ${testName} (Test id=${testInstanceId })</c:when>
 			<c:otherwise>Results - Tests</c:otherwise>		
 		</c:choose>
 		</span>

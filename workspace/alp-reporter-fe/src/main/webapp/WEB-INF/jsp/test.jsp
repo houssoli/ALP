@@ -44,7 +44,7 @@ Copyright 2011-2012 Lohika .  This file is part of ALP.
 	<title>
 	<c:choose>
 		<c:when test="${suiteId == null}">Results - Suites</c:when>
-		<c:otherwise>Results - Suite ${suiteId }</c:otherwise>		
+		<c:otherwise>${suiteName}</c:otherwise>		
 	</c:choose>
 	</title>
 	</head>
@@ -54,7 +54,7 @@ Copyright 2011-2012 Lohika .  This file is part of ALP.
 		<span id="nav_info">
 		<c:choose>
 			<c:when test="${suiteId == null}">Results - Suites</c:when>
-			<c:otherwise>Results - Suite ${suiteId }</c:otherwise>		
+			<c:otherwise>Results - ${suiteName} ( id=${suiteId })</c:otherwise>		
 		</c:choose>
 		</span>
 		<div id="nav_links">
@@ -67,7 +67,7 @@ Copyright 2011-2012 Lohika .  This file is part of ALP.
 	<script type="text/javascript">
 		$(function() {
 			$("#filter .datepicker").datepicker({
-				minDate : new Date(2009, 1, 1),
+				minDate : new Date(2012, 1, 1),
 				maxDate : new Date(),
 				dateFormat : 'yy-mm-dd'
 			});

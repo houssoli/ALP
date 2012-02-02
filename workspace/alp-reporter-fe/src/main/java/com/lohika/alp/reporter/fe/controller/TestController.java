@@ -140,6 +140,7 @@ public class TestController {
 		model.addAttribute("summaryMap", map);
 		model.addAttribute("testFilter", filter);
 		model.addAttribute("suiteId", suiteId);
+		model.addAttribute("suiteName",suite.getName());
 		
 		return "test";
 	}

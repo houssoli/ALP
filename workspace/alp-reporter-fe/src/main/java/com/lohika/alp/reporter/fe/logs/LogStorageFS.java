@@ -29,27 +29,28 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class LogStorageFS implements LogStorage {
 
-	private String logsPath = "data/logs";
 
 	@Override
-	public InputStream getLog(long testMethodId, String name)
+	public InputStream getLog(long testMethodId, String fileName,String filePath)
 			throws IOException {
 
-		File logfile = new File(getTestMethodDir(testMethodId), name);
+		File logdir = new File(filePath + "/" + testMethodId);
+		
+		File logfile = new File(logdir, fileName);
 
 		return new FileInputStream(logfile);
 	}
 
 	@Override
-	public void saveLog(long testMethodId, String name, InputStream is)
+	public void saveLog(long testMethodId, String fileName, InputStream is,String filePath)
 			throws IOException {
 
-		File testMethodDir = getTestMethodDir(testMethodId);
+		File testMethodDir = new File(filePath + "/" + testMethodId);
 
 		if (!testMethodDir.exists())
 			testMethodDir.mkdirs();
 
-		File logfile = new File(testMethodDir, name);
+		File logfile = new File(testMethodDir, fileName);
 		FileOutputStream os = new FileOutputStream(logfile);
 
 		int c;
@@ -58,17 +59,12 @@ public class LogStorageFS implements LogStorage {
 
 		os.flush();
 		os.close();
-	}
-
-	private File getTestMethodDir(long testMethodId) {
-
-		// TODO Improve log directory structure in case of FS performance issue
-		return new File(logsPath + "/" + testMethodId);
-	}
+	}		
 
 	@Override
-	public File getLogFile(long testMethodId, String name) throws IOException {
-				return new File(getTestMethodDir(testMethodId), name);		
+	public File getLogFile(long testMethodId, String fileName,String filePath) throws IOException {
+				File logdir = new File(filePath + "/" + testMethodId);
+				return new File(logdir, fileName);		
 	}
 
 }

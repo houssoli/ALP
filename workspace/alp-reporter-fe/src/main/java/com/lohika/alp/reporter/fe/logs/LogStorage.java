@@ -20,13 +20,13 @@ import java.io.InputStream;
 
 public interface LogStorage {
 
-	public InputStream getLog(long testMethodId, String name)
+	public InputStream getLog(long testMethodId, String fileName,String filePath)
 			throws IOException;
 
-	public void saveLog(long testMethodId, String name, InputStream is)
+	public void saveLog(long testMethodId, String fileName, InputStream is,String filePath)
 			throws IOException;
 	
-	public File getLogFile(long testMethodId, String name)
+	public File getLogFile(long testMethodId, String name,String filePath)
 			throws IOException;
 
 }

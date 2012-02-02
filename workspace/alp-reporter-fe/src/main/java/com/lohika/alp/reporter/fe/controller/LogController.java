@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -53,7 +54,7 @@ public class LogController {
 			method = RequestMethod.POST,
 			value = "/results/test-method/{testMethodId}/log")
 	void saveLog(@PathVariable("testMethodId") long id,
-			@ModelAttribute("uploadItem") UploadItem uploadItem,
+			@ModelAttribute("uploadItem") UploadItem uploadItem,HttpServletRequest request,
 			HttpServletResponse response) 
 	throws IOException {		
 
@@ -62,12 +63,17 @@ public class LogController {
 		// TODO Handle unexpected form data
 		String name = fileData.getOriginalFilename();
 		InputStream is = fileData.getInputStream();
+		
+		ServletContext sc = request.getSession().getServletContext();
+		
+		// geting parameter from context.xml stored under META-INF folder . Default value will be /var/lib/tomcat6/data/logs
+		String datalogsPath = sc.getInitParameter("datalogsPath");
 
 		// If file extension is '.xml' or none save it as 'index.xml'
 		if (name.toLowerCase().endsWith(".xml")
 				|| !name.matches(".*\\.\\w{1,3}$")) {
-
-			logStorage.saveLog(id, "index.xml", is);
+			  
+			logStorage.saveLog(id, "index.xml", is,datalogsPath);
 			
 			// TODO TestMethod database creation should be performed with Spring
 			// and REST web services, not from test listeners directly
@@ -79,7 +85,7 @@ public class LogController {
 		} else {
 			// Else save it with its original name
 
-			logStorage.saveLog(id, name, is);
+			logStorage.saveLog(id, name, is,datalogsPath);
 		}
 		
 		response.setStatus(HttpServletResponse.SC_CREATED);
@@ -94,7 +100,12 @@ public class LogController {
 			HttpServletRequest request,
 			@PathVariable("testMethodId") long id) throws IOException {
 		
-			InputStream is = logStorage.getLog(id, "index.xml");
+			ServletContext sc = request.getSession().getServletContext();
+		
+		// geting parameter from context.xml stored under META-INF folder . Default value will be /var/lib/tomcat6/data/logs
+			String datalogsPath = sc.getInitParameter("datalogsPath");
+		
+			InputStream is = logStorage.getLog(id, "index.xml",datalogsPath);
 			model.addAttribute(is);
 			
 			// add return URL for 'Back' button
@@ -119,7 +130,12 @@ public class LogController {
 			String[] parts = uri.split("/");
 			String name = parts[parts.length - 1];
 			
-			InputStream is = logStorage.getLog(id, name);
+			ServletContext sc = request.getSession().getServletContext();
+			
+			// geting parameter from context.xml stored under META-INF folder . Default value will be /var/lib/tomcat6/data/logs
+			String datalogsPath = sc.getInitParameter("datalogsPath");
+			
+			InputStream is = logStorage.getLog(id, name,datalogsPath);
 			
 			OutputStream os = response.getOutputStream();
 			

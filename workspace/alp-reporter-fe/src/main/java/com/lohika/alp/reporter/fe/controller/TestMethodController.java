@@ -177,6 +177,8 @@ public class TestMethodController {
 		model.addAttribute("testMethodFilter", filter);
 		model.addAttribute("testMethods", list);
 		model.addAttribute("testInstanceId", testInstanceId);
+		model.addAttribute("testName",testInstance.getTest().getName());
+		
 		return "test-method";
 	}
 	
@@ -195,6 +197,7 @@ public class TestMethodController {
 		model.addAttribute("testMethodFilter", filter);
 		model.addAttribute("testMethods", list);
 		model.addAttribute("suiteId", suiteId);
+		model.addAttribute("suiteName",suite.getName());
 		return "test-method";
 	}
 
@@ -214,6 +217,7 @@ public class TestMethodController {
 		model.addAttribute("testMethodFilter", filter);
 		model.addAttribute("testMethods", list);
 		model.addAttribute("testId", testId);
+		model.addAttribute("testName",test.getName());
 		return "test-method";
 	}
 
