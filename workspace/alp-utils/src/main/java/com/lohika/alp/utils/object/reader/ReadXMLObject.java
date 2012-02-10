@@ -8,22 +8,28 @@ import java.net.URL;
 
 import com.thoughtworks.xstream.XStream;
 
+/**
+ * The Class ReadXMLObject.
+ */
 public class ReadXMLObject {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
+	/** The xstream used to Unmarshal objects. */
 	private XStream	xstream;
 
+	/**
+	 * Instantiates a new read xml object.
+	 */
 	public ReadXMLObject() {
 		xstream = new XStream();
 	}
 
+	/**
+	 * Unmarshal the object.
+	 *
+	 * @param XML file 
+	 * @return the Object
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public Object getObject(String XMLfile) throws IOException {
 
 		URL url = this.getClass().getClassLoader().getResource(XMLfile);

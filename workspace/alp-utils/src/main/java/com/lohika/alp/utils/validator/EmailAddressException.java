@@ -18,22 +18,38 @@ package com.lohika.alp.utils.validator;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * The Class EmailAddressException.
+ */
 public class EmailAddressException extends Exception {
 
+	/** The emails. */
 	private List<String> emails;
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Instantiates a new email address exception.
+	 *
+	 * @param emails the emails
+	 */
 	public EmailAddressException(List<String> emails) {
 		this.emails = emails;
 	}
 	
+	/**
+	 * Instantiates a new email address exception.
+	 *
+	 * @param email the email
+	 */
 	public EmailAddressException(String email) {
 		this.emails = Arrays.asList(email);
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Throwable#getMessage()
+	 */
 	public String getMessage() {
 		String message = "Invalie email adresses: ";
 		if (emails!=null)

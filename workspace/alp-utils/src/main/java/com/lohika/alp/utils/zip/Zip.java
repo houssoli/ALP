@@ -14,27 +14,47 @@ import java.util.zip.ZipOutputStream;
 
 import org.apache.log4j.Logger;
 
+
 /**
- * This class is uses for archive files and folder to zip
- * @author Dmitry Irzhov
+ * This class is uses for archive files and folder to zip.
  *
+ * @author Dmitry Irzhov
  */
 
 public class Zip {
 	
+	/** The log4j logger. */
 	private Logger logger = Logger.getLogger(this.getClass());
 	
+	/** The Constant BUFFER.  */
 	static final int BUFFER = 2048;	
+	
+	/** The destination file. */
 	private FileOutputStream dest;
+	
+	/** The checksum. */
 	private CheckedOutputStream checksum;
+	
+	/** The ZipOutputStream. */
 	private ZipOutputStream out;
 	
+	/** The zip file location. */
 	private String zipFileLocation;
 	
+	/**
+	 * Gets the zip file location.
+	 *
+	 * @return the zip file location
+	 */
 	public String getZipFileLocation() {
 		return zipFileLocation;
 	}
 
+	/**
+	 * Instantiates a new zip.
+	 *
+	 * @param in_zipFileLocation the in_zip file location
+	 */
 	public Zip(String in_zipFileLocation) {
 		
 			zipFileLocation = in_zipFileLocation;
@@ -50,6 +70,12 @@ public class Zip {
 		
 	}
 	
+	/**
+	 * Adds file to Zip.
+	 *
+	 * @param filePath the file path
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void add(String filePath) throws IOException {
 		
 		byte data[] = new byte[BUFFER];
@@ -79,6 +105,9 @@ public class Zip {
 		logger.debug("checksum: "+checksum.getChecksum().getValue());
 	}
 
+	/**
+	 * Close output stream.
+	 */
 	public void close() {
 		if (out != null)
 			try {
@@ -86,6 +115,12 @@ public class Zip {
 			} catch (IOException e){}
 	}
 
+	/**
+	 * Read file as bytes.
+	 *
+	 * @param filePath the file path
+	 * @return the byte[]
+	 */
 	public static byte[] readFileAsBytes(String filePath) {
 	    byte[] buffer = new byte[(int) new File(filePath).length()];
 	    BufferedInputStream f = null;	    

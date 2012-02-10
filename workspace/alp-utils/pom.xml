@@ -5,7 +5,66 @@
   <artifactId>alp-utils</artifactId>
   <version>0.2</version>
   <name>ALP Utils</name>
+  <packaging>jar</packaging>
+  <description>Set of little helpers used by ALP Framework . Helpers designed for stand-alone usage also</description>
+  <url>https://github.com/lohika/ALP/wiki</url>
+  <licenses>
+  <license>
+  <distribution>repo</distribution>
+  <name>GPLv3</name>
+  <url>http://www.gnu.org/licenses</url>
+    </license>
+  </licenses>
+	<scm>
+	<url>https://github.com/lohika/ALP</url>
+	<connection>scm:git://github.com/lohika/ALP.git</connection>
+	</scm>
 
+	<developers>
+	<developer>
+		<id>asmorodskiy</id>
+		<name>Anton Smorodskiy</name>
+		<email>asmorodskiy@lohika.com</email>
+		<organization>Lohika</organization>
+		<organizationUrl>http://www.lohika.com/</organizationUrl>
+	</developer>
+	<developer>
+		<id>dirzhov</id>
+		<name>Dmitry Irzhov</name>
+		<email>dirzhov@lohika.com</email>
+		<organization>Lohika</organization>
+		<organizationUrl>http://www.lohika.com/</organizationUrl>
+	</developer>
+	</developers>
+
+	<build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.4</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.1.2</version>        
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.8.1</version>        
+      </plugin>
+    </plugins>
+  </build>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -29,9 +88,9 @@
 			<version>1.8.0</version>
 	</dependency>
 	<dependency>
-		<groupId>xstream</groupId>
+		<groupId>com.thoughtworks.xstream</groupId>
 		<artifactId>xstream</artifactId>
-		<version>1.2.2</version>
+		<version>1.4.2</version>
     </dependency>
   </dependencies>
   

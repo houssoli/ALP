@@ -34,28 +34,42 @@ import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonToken;
 import org.codehaus.jackson.map.ObjectMapper;
 
+
 /**
- * 
+ * The Class ALPJSONValidator.
+ *
  * @author "Anton Smorodsky" Validate JSON data against given JSON Schema
  */
 
 public class ALPJSONValidator {
 
-	private boolean				first_try;		// holds us from dig into JSON schema dipper then	
-	private File[]				schemasList;	// Array of all JSON schemas 
-	private LinkedList<String>	JSONStack;		// List of all JSON objects that stand before current object  
-	private LinkedList<String>	ErrorsStack;	// Collect found errors at this List  
+	/** Holds us from dig into JSON schema dipper then */
+	private boolean				first_try;	
+	
+	/** Array of all JSON schemas */
+	private File[]				schemasList;	  
+	
+	/** List of all JSON objects that stand before current object. */
+	private LinkedList<String>	JSONStack;		  
+	
+	/** Collect found errors at this List. */
+	private LinkedList<String>	ErrorsStack;	  
+	
+	/** The Jackson's JSON factory. */
 	private JsonFactory			JSONFactory;
+	
+	/** The Kackson's JSON Object Mapper. */
 	private ObjectMapper		JSONMapper;
+	
+	/** The schema name. */
 	private String				schemaName;
 
 	/**
-	 * 
-	 * @param JSONSchemasPath
-	 *            - represent path to folder with all schemas
-	 * @param schemaName
-	 *            - schema from which validation should start
-	 * @throws IOException
+	 * Instantiates a new ALPJSON validator.
+	 *
+	 * @param JSONSchemasPath - represent path to folder with all schemas
+	 * @param in_schemaName the in_schema name
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public ALPJSONValidator(String JSONSchemasPath, String in_schemaName) throws IOException {
 		schemaName = in_schemaName;
@@ -74,6 +88,11 @@ public class ALPJSONValidator {
 	}
 
 	// TODO - Need to think how better output found problems . This not expected way for sure
+	/**
+	 * Combine all errors from ErrorsStack to one string.
+	 *
+	 * @return the string
+	 */
 	public String ErrorsToString() {
 		String buf = "";
 		for (int i = 0; i < ErrorsStack.size(); i++) {
@@ -83,23 +102,32 @@ public class ALPJSONValidator {
 		return buf;
 	}
 
+	/**
+	 * Write errors from ErrorsStack to log.
+	 *
+	 * @param lg the lg
+	 * @param lvl the lvl
+	 */
 	public void WriteToLog(Logger lg, Level lvl) {
 		for (int i = 0; i < ErrorsStack.size(); i++)
 			lg.log(lvl, ErrorsStack.get(i));
 	}
 
+	/**
+	 * Gets the errors list.
+	 *
+	 * @return ErrorsStack (LinkedList<String>)
+	 */
 	public LinkedList<String> getErrorsList() {
 		return ErrorsStack;
 	}
 
 	/**
-	 * 
-	 * Main function used for validations
-	 * 
-	 * @param pathToJSON
-	 *            - where to find file with json to validate
+	 * Main function used for validations.
+	 *
+	 * @param pathToJSON - where to find file with json to validate
 	 * @return true if schema valid and false if wrong
-	 * @throws IOException
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public boolean ValidateJSON(String pathToJSON) throws IOException {
 
@@ -113,6 +141,13 @@ public class ALPJSONValidator {
 		return validateObject(rootObj, "JSON", schemaStack);
 	}
 
+	/**
+	 * Validate json.
+	 *
+	 * @param JSONFile the jSON file
+	 * @return true, if successful
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public boolean ValidateJSON(File JSONFile) throws IOException {
 
 		JSONStack.clear();
@@ -126,20 +161,16 @@ public class ALPJSONValidator {
 	}
 
 	/**
-	 * 
 	 * This function recursively goes over all elements in JSON and answer if
 	 * each one is correct.
-	 * 
-	 * @param feedObj
-	 *            - JsonNode object that currently under verification
-	 * @param parentName
-	 *            - name of parent of current element
-	 * @param schemaStack
-	 *            - Linked List that store list of currently read schemas
-	 * @return
-	 * @throws JsonParseException
-	 * @throws FileNotFoundException
-	 * @throws IOException
+	 *
+	 * @param feedObj - JsonNode object that currently under verification
+	 * @param parentName - name of parent of current element
+	 * @param schemaStack - Linked List that store list of currently read schemas
+	 * @return true, if successful
+	 * @throws JsonParseException the json parse exception
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	private boolean validateObject(JsonNode feedObj, String parentName,
 			LinkedList<String> schemaStack) throws JsonParseException, FileNotFoundException,
@@ -176,6 +207,13 @@ public class ALPJSONValidator {
 			return false;
 	}
 
+	/**
+	 * Detect type.
+	 *
+	 * @param JSONTypeList the jSON type list
+	 * @param nod the nod
+	 * @return the jSON types
+	 */
 	private JSONTypes detectType(LinkedList<JSONTypes> JSONTypeList, JsonNode nod) {
 		for (int i = 0; i < JSONTypeList.size(); i++) {
 			JSONTypes type = JSONTypeList.get(i);
@@ -205,6 +243,12 @@ public class ALPJSONValidator {
 		return null;
 	}
 
+	/**
+	 * JSON types to string.
+	 *
+	 * @param JSONTypeList the jSON type list
+	 * @return the string
+	 */
 	private String JSONTypesToString(LinkedList<JSONTypes> JSONTypeList) {
 		String str = "";
 		for (int i = 0; i < JSONTypeList.size(); i++)
@@ -214,25 +258,28 @@ public class ALPJSONValidator {
 		return str;
 	}
 
+	/**
+	 * Adds the error.
+	 *
+	 * @param nod the nod
+	 * @param realType the real type
+	 */
 	private void addError(JsonNode nod, String realType) {
 		ErrorsStack.add("'" + GeneratePath() + "' should be " + realType + "  but nod is -'"
 				+ nod.asToken().name() + "' in a fact.");
 	}
 
 	/**
-	 * 
-	 * @param elementName
-	 *            - name of element to find in JSON Schema
-	 * @param parentName
-	 *            - name of parent of element to find in JSON Schema
-	 * @param schemaObjects
-	 *            - List of object that was verified before
-	 * @param schemaStack
-	 *            - List of schemas that was read before
+	 * Gets the item type from schema.
+	 *
+	 * @param elementName - name of element to find in JSON Schema
+	 * @param parentName - name of parent of element to find in JSON Schema
+	 * @param schemaObjects - List of object that was verified before
+	 * @param schemaStack - List of schemas that was read before
 	 * @return null if object not found in schema and List of types if found
-	 * @throws JsonParseException
-	 * @throws FileNotFoundException
-	 * @throws IOException
+	 * @throws JsonParseException the json parse exception
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 
 	private LinkedList<JSONTypes> getItemTypeFromSchema(String elementName, String parentName,
@@ -327,6 +374,11 @@ public class ALPJSONValidator {
 		return null;
 	}
 
+	/**
+	 * Generate path.
+	 *
+	 * @return the string
+	 */
 	private String GeneratePath() {
 		String out = "/";
 		for (int i = 0; i < JSONStack.size(); i++)
@@ -334,6 +386,16 @@ public class ALPJSONValidator {
 		return out;
 	}
 
+	/**
+	 * Validate array.
+	 *
+	 * @param feedArray the feed array
+	 * @param parentName the parent name
+	 * @param schemaStack the schema stack
+	 * @throws JsonParseException the json parse exception
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void validateArray(JsonNode feedArray, String parentName, LinkedList<String> schemaStack)
 			throws JsonParseException, FileNotFoundException, IOException {
 		Iterator<JsonNode> Inode = feedArray.getElements();
@@ -345,12 +407,12 @@ public class ALPJSONValidator {
 	}
 
 	/**
-	 * 
-	 * @param parserName
-	 *            - name of certain json schema without '.json'
+	 * Gets the parser.
+	 *
+	 * @param parserName - name of certain json schema without '.json'
 	 * @return - object JsonParser
-	 * @throws JsonParseException
-	 * @throws IOException
+	 * @throws JsonParseException the json parse exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public JsonParser getParser(String parserName) throws JsonParseException, IOException {
 		for (int i = 0; i < schemasList.length; i++)

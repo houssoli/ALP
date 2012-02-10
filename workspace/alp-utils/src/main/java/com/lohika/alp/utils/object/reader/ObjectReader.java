@@ -16,21 +16,56 @@ package com.lohika.alp.utils.object.reader;
 
 import java.util.List;
 
+/**
+ * The Interface ObjectReader.
+ */
 public interface ObjectReader {
 	
 	// open a file with data
+	/**
+	 * Open file from which object will be read .
+	 *
+	 * @param fileName the file name
+	 * @throws Exception the exception
+	 */
 	public void open(String fileName) throws Exception;
 	
 	// read object of specific type with the index
+	/**
+	 * Read object.
+	 *
+	 * @param type the type
+	 * @param index the index
+	 * @return the object
+	 * @throws ObjectReaderException the object reader exception
+	 */
 	public Object readObject(Class<?> type, int index) throws ObjectReaderException;
 	
 	// read object of specific type with the index
+	/**
+	 * Read object.
+	 *
+	 * @param type the type
+	 * @param index the index
+	 * @return the object
+	 * @throws ObjectReaderException the object reader exception
+	 */
 	public Object readObject(Class<?> type, String index) throws ObjectReaderException;
 	
 	// read all objects of specific type
+	/**
+	 * Read all objects.
+	 *
+	 * @param type the type
+	 * @return the list
+	 * @throws Exception the exception
+	 */
 	public List<?> readAllObjects(Class<?> type) throws Exception;
 	
 	// close file
+	/**
+	 * Close file from which object was read.
+	 */
 	public void close();
 
 }

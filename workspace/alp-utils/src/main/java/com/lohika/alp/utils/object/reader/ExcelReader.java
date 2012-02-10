@@ -27,35 +27,84 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
+
+/**
+ * The Class ExcelReader.
+ */
 public class ExcelReader implements ObjectReader {
 
+	/** The file name. */
 	protected String fileName;
+	
+	/** The workbook. */
 	private Workbook workbook;
+	
+	/** The sheet. */
 	private Sheet sheet;
+	
+	/** Signals if should reads class fields from Horiz /Vertical. */
 	protected boolean columnsHorizontal = true;
+	
+	/** The named index. */
 	protected boolean namedIndex = false;
 	
+	/**
+	 * Checks if is columns horizontal.
+	 *
+	 * @return true, if is columns horizontal
+	 */
 	public boolean isColumnsHorizontal() {
 		return columnsHorizontal;
 	}
 
+	/**
+	 * Sets the columns horizontal.
+	 *
+	 * @param columnsHorizontal the new columns horizontal
+	 */
 	public void setColumnsHorizontal(boolean columnsHorizontal) {
 		this.columnsHorizontal = columnsHorizontal;
 	}
 	
+	/**
+	 * Checks if is named index.
+	 *
+	 * @return true, if is named index
+	 */
 	public boolean isNamedIndex() {
 		return namedIndex;
 	}
 
+	/**
+	 * Sets the named index.
+	 *
+	 * @param namedIndex the new named index
+	 */
 	public void setNamedIndex(boolean namedIndex) {
 		this.namedIndex = namedIndex;
 	}
 	
+	/**
+	 * Instantiates a new excel reader.
+	 *
+	 * @param fileName the file name
+	 * @throws BiffException the biff exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public ExcelReader(String fileName)
 			throws BiffException, IOException {
 		this.open(fileName);
 	}
 	
+	/**
+	 * Instantiates a new excel reader.
+	 *
+	 * @param fileName the file name
+	 * @param columnsHorizontal the columns horizontal
+	 * @param namedIndex the named index
+	 * @throws BiffException the biff exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public ExcelReader(String fileName, boolean columnsHorizontal, boolean namedIndex)
 			throws BiffException, IOException {
 		URL url = getClass().getClassLoader().getResource(fileName);
@@ -65,6 +114,11 @@ public class ExcelReader implements ObjectReader {
 		setNamedIndex(namedIndex);
 	}
 	
+	/**
+	 * Gets the columns.
+	 *
+	 * @return the columns
+	 */
 	protected Cell[] getColumns() {
 		if (sheet==null)
 			return null;
@@ -74,6 +128,12 @@ public class ExcelReader implements ObjectReader {
 			return sheet.getColumn(0);
 	}
 	
+	/**
+	 * Gets the record.
+	 *
+	 * @param index the index
+	 * @return the record
+	 */
 	protected Cell[] getRecord(int index) {
 		if (sheet==null)
 			return null;
@@ -83,10 +143,21 @@ public class ExcelReader implements ObjectReader {
 			return sheet.getColumn(getIndex(index));
 	}
 	
+	/**
+	 * Gets the index.
+	 *
+	 * @param index the index
+	 * @return the index
+	 */
 	private int getIndex(int index) {
 		return index+1;
 	}
 	
+	/**
+	 * Gets the indexes.
+	 *
+	 * @return the indexes
+	 */
 	public Cell[] getIndexes() {
 		if (!isNamedIndex() || sheet==null)
 			return null;
@@ -96,6 +167,9 @@ public class ExcelReader implements ObjectReader {
 			return sheet.getRow(0);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.utils.object.reader.ObjectReader#readObject(java.lang.Class, int)
+	 */
 	public Object readObject(Class<?> type, int index) throws ObjectReaderException {
 		sheet = workbook.getSheet(type.getSimpleName());
 		if (sheet == null)
@@ -138,6 +212,9 @@ public class ExcelReader implements ObjectReader {
 		return item;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.utils.object.reader.ObjectReader#readAllObjects(java.lang.Class)
+	 */
 	public List<?> readAllObjects(Class<?> type) throws Exception {
 		sheet = workbook.getSheet(type.getSimpleName());
 		if (sheet == null)
@@ -171,20 +248,27 @@ public class ExcelReader implements ObjectReader {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.utils.object.reader.ObjectReader#open(java.lang.String)
+	 */
 	public void open(String fileName) throws BiffException, IOException {
 		workbook = Workbook.getWorkbook(new File(fileName));
 		this.fileName = fileName;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.utils.object.reader.ObjectReader#close()
+	 */
 	public void close() {
 		workbook.close();
 	}
 
 	/**
-	 * check if the excel columns contain fieldName
-	 * @param cell
-	 * @param fieldName
-	 * @return
+	 * check if the excel columns contain fieldName.
+	 *
+	 * @param cell the cell
+	 * @param fieldName the field name
+	 * @return true, if successful
 	 */
 	private boolean fieldInArray(Cell[] cell, String fieldName) {
 		for (int i=0; i<cell.length; i++) 
@@ -193,6 +277,9 @@ public class ExcelReader implements ObjectReader {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.utils.object.reader.ObjectReader#readObject(java.lang.Class, java.lang.String)
+	 */
 	public Object readObject(Class<?> type, String index) throws ObjectReaderException {
 		if (index==null || type==null)
 			throw new ObjectReaderException("Parameters should not be null");
