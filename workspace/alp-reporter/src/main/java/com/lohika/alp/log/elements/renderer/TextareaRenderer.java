@@ -18,8 +18,16 @@ import org.apache.log4j.or.ObjectRenderer;
 
 import com.lohika.alp.log.elements.schema.Textarea;
 
+
+
+/**
+ * The Class TextareaRenderer.
+ */
 public class TextareaRenderer implements ObjectRenderer {
 
+	/* (non-Javadoc)
+	 * @see org.apache.log4j.or.ObjectRenderer#doRender(java.lang.Object)
+	 */
 	@Override
 	public String doRender(Object o) {
 		

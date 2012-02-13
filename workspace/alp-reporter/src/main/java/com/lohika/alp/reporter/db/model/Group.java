@@ -28,46 +28,81 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+
+
+
 /**
- * TestNG groups representation
- *
+ * TestNG groups representation.
  */
 @Entity
 @Table(name = "GROUPS")
 public class Group {
 
+	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	Long id;
 
+	/** The name. */
 	@Column(name = "NAME")
 	String name;
 	
+	/** The groups. */
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "METHOD_GROUP", joinColumns = { @JoinColumn(name = "GROUP_ID") }, inverseJoinColumns = { @JoinColumn(name = "TEST_METHOD_ID") })
 	private Set<TestMethod> groups = new HashSet<TestMethod>();
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the new name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Gets the groups.
+	 *
+	 * @return the groups
+	 */
 	public Set<TestMethod> getGroups() {
 		return groups;
 	}
 
+	/**
+	 * Sets the groups.
+	 *
+	 * @param groups the new groups
+	 */
 	public void setGroups(Set<TestMethod> groups) {
 		this.groups = groups;
 	}

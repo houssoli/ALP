@@ -18,14 +18,31 @@ import java.io.File;
 
 import org.testng.ITestResult;
 
+
+/**
+ * The Class LogFileAttribute.
+ */
 public class LogFileAttribute {
 
+	/** The Constant NAME. */
 	public static final String NAME = "log4j.file";
 
+	/**
+	 * Gets the log file.
+	 *
+	 * @param tr the tr
+	 * @return the log file
+	 */
 	public static File getLogFile(ITestResult tr) {
 		return (File) tr.getAttribute(NAME);
 	}
 
+	/**
+	 * Sets the log file.
+	 *
+	 * @param tr the tr
+	 * @param file the file
+	 */
 	public static void setLogFile(ITestResult tr, File file) {
 		tr.setAttribute(NAME, file);
 	}

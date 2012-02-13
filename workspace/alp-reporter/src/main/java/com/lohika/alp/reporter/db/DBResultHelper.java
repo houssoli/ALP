@@ -48,32 +48,43 @@ import com.lohika.alp.reporter.db.model.TestMethod;
 import com.lohika.alp.reporter.db.model.TestMethodException;
 import com.lohika.alp.reporter.helpers.ResultsHelper;
 
+
 /**
  * Helper class to save test method result into database.
  * 
  */
 public class DBResultHelper {
 
+	/** The factory. */
 	private final SessionFactory factory;
 
 	// TODO clear values after test run
+	/** The test instances. */
 	private final Map<Object, TestInstance> testInstances = Collections
 			.synchronizedMap(new HashMap<Object, TestInstance>());
 
+	/** The groups. */
 	private final Map<String, Group> groups = Collections
 			.synchronizedMap(new HashMap<String, Group>());
 
+	/** The suites. */
 	private final Map<XmlSuite, Suite> suites = Collections
 			.synchronizedMap(new HashMap<XmlSuite, Suite>());
 
+	/** The tests. */
 	private final Map<XmlTest, Test> tests = Collections
 			.synchronizedMap(new HashMap<XmlTest, Test>());
 
+	/** The helper. */
 	private final ResultsHelper helper = new ResultsHelper();
 
 	// TODO Use LogUploader with client of results web services
+	/** The log uploader. */
 	private final LogUploader logUploader = new LogUploader();
 
+	/**
+	 * Instantiates a new DBResultHelper.
+	 */
 	public DBResultHelper() {
 		AnnotationConfiguration conf = new AnnotationConfiguration()
 				.addAnnotatedClass(TestClass.class)
@@ -90,6 +101,12 @@ public class DBResultHelper {
 		factory = conf.buildSessionFactory();
 	}
 
+	/**
+	 * Save log.
+	 *
+	 * @param methodResult the method result
+	 * @param testMethod the test method
+	 */
 	private void saveLog(ITestResult methodResult, TestMethod testMethod) {
 		// TODO Use saveLog with client of results web services
 		File logFile = LogFileAttribute.getLogFile(methodResult);
@@ -121,10 +138,10 @@ public class DBResultHelper {
 
 	/**
 	 * The main function which saves method and all the depended entities into
-	 * database
-	 * 
-	 * @param methodResult
-	 * @param status
+	 * database.
+	 *
+	 * @param methodResult the method result
+	 * @param status the status
 	 */
 	public void saveMethodResult(ITestResult methodResult, EMethodStatus status) {
 		Suite suite = saveSuite(methodResult);
@@ -145,12 +162,13 @@ public class DBResultHelper {
 	}
 
 	/**
-	 * Save test method
-	 * 
-	 * @param methodResult
-	 * @param testInstance
-	 * @param status
-	 * @return
+	 * Save test method.
+	 *
+	 * @param methodResult the method result
+	 * @param testInstance the test instance
+	 * @param status the status
+	 * @param exception the exception
+	 * @return the test method
 	 */
 	protected TestMethod saveTestMethod(ITestResult methodResult,
 			TestInstance testInstance, EMethodStatus status,
@@ -193,10 +211,10 @@ public class DBResultHelper {
 
 	/**
 	 * If suite is already created (is present in hashmap) return it; otherwise
-	 * create the suite object, save it in DB and save it into hashmap
-	 * 
-	 * @param methodResult
-	 * @return
+	 * create the suite object, save it in DB and save it into hashmap.
+	 *
+	 * @param methodResult the method result
+	 * @return the suite
 	 */
 	protected Suite saveSuite(ITestResult methodResult) {
 		synchronized (suites) {
@@ -217,10 +235,10 @@ public class DBResultHelper {
 
 	/**
 	 * If test is already created (is present in hashmap) return it; otherwise
-	 * create the test object, save it in DB and save it into hashmap
-	 * 
-	 * @param methodResult
-	 * @param suite
+	 * create the test object, save it in DB and save it into hashmap.
+	 *
+	 * @param methodResult the method result
+	 * @param suite the suite
 	 * @return Test
 	 */
 	protected Test saveTest(ITestResult methodResult, Suite suite) {
@@ -245,10 +263,10 @@ public class DBResultHelper {
 	 * Save test instance into database: If test instance is already created,
 	 * get it; othewise create testinstance (create testClass if needed)
 	 * 
-	 * then save test-to-testinstance mapping
-	 * 
-	 * @param methodResult
-	 * @param test
+	 * then save test-to-testinstance mapping.
+	 *
+	 * @param methodResult the method result
+	 * @param test the test
 	 * @return TestInstance
 	 */
 	protected TestInstance saveTestInstance(ITestResult methodResult, Test test) {
@@ -292,10 +310,10 @@ public class DBResultHelper {
 	}
 
 	/**
-	 * If a testmethod has exception create it and link to testmethod
-	 * 
-	 * @param methodResult
-	 * @param testMethod
+	 * If a testmethod has exception create it and link to testmethod.
+	 *
+	 * @param methodResult the method result
+	 * @return the test method exception
 	 */
 	protected TestMethodException saveException(ITestResult methodResult) {
 		TestMethodException exception = null;
@@ -317,10 +335,10 @@ public class DBResultHelper {
 	}
 
 	/**
-	 * Create TestClass by classname
-	 * 
-	 * @param className
-	 * @return
+	 * Create TestClass by classname.
+	 *
+	 * @param className the class name
+	 * @return the test class
 	 */
 	protected TestClass getTestClass(String className) {
 		Session session = factory.openSession();
@@ -330,7 +348,7 @@ public class DBResultHelper {
 		try {
 			tx = session.beginTransaction();
 
-			@SuppressWarnings("unchecked")
+			
 			List<TestClass> list = session.createCriteria(TestClass.class)
 					.add(Expression.eq("name", className)).list();
 
@@ -347,10 +365,10 @@ public class DBResultHelper {
 	}
 
 	/**
-	 * Detect and save all test method types
-	 * 
-	 * @param method
-	 * @param methodResult
+	 * Detect and save all test method types.
+	 *
+	 * @param method the method
+	 * @param methodResult the method result
 	 */
 	protected void saveMethodTypes(TestMethod method, ITestResult methodResult) {
 		ITestNGMethod m = methodResult.getMethod();
@@ -387,10 +405,10 @@ public class DBResultHelper {
 	}
 
 	/**
-	 * Save method type
-	 * 
-	 * @param testMethod
-	 * @param type
+	 * Save method type.
+	 *
+	 * @param testMethod the test method
+	 * @param type of TestMethod
 	 */
 	protected void saveMethodType(TestMethod testMethod, EMethodType type) {
 		MethodType methodType = new MethodType();
@@ -400,9 +418,9 @@ public class DBResultHelper {
 	}
 
 	/**
-	 * Save Hibernate persistent object
-	 * 
-	 * @param obj
+	 * Save Hibernate persistent object.
+	 *
+	 * @param object to save
 	 */
 	protected void saveObject(Object obj) {
 		Session session = factory.openSession();
@@ -423,9 +441,9 @@ public class DBResultHelper {
 	}
 
 	/**
-	 * Save Hibernate persistent object
-	 * 
-	 * @param obj
+	 * Update Hibernate persistent object.
+	 *
+	 * @param object to update
 	 */
 	protected void updateObject(Object obj) {
 		Session session = factory.openSession();

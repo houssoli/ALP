@@ -23,47 +23,80 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
 /**
- * Test instance representation
- *
+ * Test instance representation.
  */
 @Entity
 @Table(name = "TEST_INSTANCES")
 public class TestInstance {
 
+	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	Long id;
 
+	/** The test class. */
 	@ManyToOne
 	@JoinColumn(name = "CLASS_ID")
 	TestClass testClass;
 	
+	/** The test. */
 	@ManyToOne
 	@JoinColumn(name = "TEST_ID")
 	Test test;
 
+	/**
+	 * Gets the test.
+	 *
+	 * @return the test
+	 */
 	public Test getTest() {
 		return test;
 	}
 
+	/**
+	 * Sets the test.
+	 *
+	 * @param test the new test
+	 */
 	public void setTest(Test test) {
 		this.test = test;
 	}
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+	/**
+	 * Gets the test class.
+	 *
+	 * @return the test class
+	 */
 	public TestClass getTestClass() {
 		return testClass;
 	}
 
+	/**
+	 * Sets the test class.
+	 *
+	 * @param testClass the new test class
+	 */
 	public void setTestClass(TestClass testClass) {
 		this.testClass = testClass;
 	}

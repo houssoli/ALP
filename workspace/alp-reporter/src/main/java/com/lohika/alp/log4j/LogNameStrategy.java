@@ -16,6 +16,8 @@ package com.lohika.alp.log4j;
 
 import org.testng.ITestResult;
 
+
+
 /**
  * Declares interface of an algorithm to give unique name prefixes for test
  * method logs.
@@ -26,10 +28,9 @@ import org.testng.ITestResult;
 public interface LogNameStrategy {
 
 	/**
-	 * Provides a unique name prefix of log file for the given test result
-	 * 
-	 * @param tr
-	 *            result of test to be logged
+	 * Provides a unique name prefix of log file for the given test result.
+	 *
+	 * @param tr result of test to be logged
 	 * @return unique name prefix of log file
 	 */
 	public String getName(ITestResult tr);

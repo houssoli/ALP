@@ -27,6 +27,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+
 /**
  * testng.xml suite section
  *
@@ -35,62 +36,116 @@ import javax.persistence.TemporalType;
 @Table(name = "SUITES")
 public class Suite {
 
+	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	Long id;
 
+	/** The name. */
 	@Column(name = "NAME")
 	String name;
 	
+	/** The start date. */
 	@Temporal(value = TemporalType.TIMESTAMP)
 	@Column(name = "START_DATE")
 	Date startDate;
 
+	/** The finish date. */
 	@Temporal(value = TemporalType.TIMESTAMP)
 	@Column(name = "FINISH_DATE")
 	Date finishDate;
 	
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the new name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 	
+	/**
+	 * Gets the start date.
+	 *
+	 * @return the start date
+	 */
 	public Date getStartDate() {
 		return startDate;
 	}
 
+	/**
+	 * Sets the start date.
+	 *
+	 * @param startDate the new start date
+	 */
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
+	/**
+	 * Gets the finish date.
+	 *
+	 * @return the finish date
+	 */
 	public Date getFinishDate() {
 		return finishDate;
 	}
 	
+	/**
+	 * Gets the formatedfinish.
+	 *
+	 * @return the formatedfinish
+	 */
 	public String getFormatedfinish()
 	{
 		DateFormat format = new SimpleDateFormat("HH:mm:ss");
 		return format.format(finishDate);
 	}
 	
+	/**
+	 * Gets the formatedstart.
+	 *
+	 * @return the formatedstart
+	 */
 	public String getFormatedstart()
 	{
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return format.format(startDate);
 	}
 
+	/**
+	 * Sets the finish date.
+	 *
+	 * @param finishDate the new finish date
+	 */
 	public void setFinishDate(Date finishDate) {
 		this.finishDate = finishDate;
 	}

@@ -18,8 +18,16 @@ import org.apache.log4j.or.ObjectRenderer;
 
 import com.lohika.alp.log.elements.schema.Link;
 
+
+
+/**
+ * The Class LinkRenderer.
+ */
 public class LinkRenderer implements ObjectRenderer {
 
+	/* (non-Javadoc)
+	 * @see org.apache.log4j.or.ObjectRenderer#doRender(java.lang.Object)
+	 */
 	@Override
 	public String doRender(Object o) {
 

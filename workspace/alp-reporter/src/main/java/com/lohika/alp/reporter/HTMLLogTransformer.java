@@ -24,25 +24,25 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+
+
 /**
- * Transforms logs from XML to HTML
- * 
+ * Transforms logs from XML to HTML.
  */
 public class HTMLLogTransformer {
 
+	/** The transformer. */
 	private Transformer transformer;
 
 	/**
 	 * Constructs {@link HTMLLogTransformer} with initial XSL template and
-	 * relative path to html log data
-	 * 
-	 * @param xsl
-	 *            initial template file
-	 * @param relative
-	 *            template variable that contains relative path from html log to
-	 *            html data (e.g. '../html-data')
-	 * @throws TransformerConfigurationException
-	 * @throws IOException
+	 * relative path to html log data.
+	 *
+	 * @param xsl initial template file
+	 * @param relative template variable that contains relative path from html log to
+	 * html data (e.g. '../html-data')
+	 * @throws TransformerConfigurationException the transformer configuration exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public HTMLLogTransformer(File xsl, String relative)
 			throws TransformerConfigurationException, IOException {
@@ -59,15 +59,13 @@ public class HTMLLogTransformer {
 	}
 
 	/**
-	 * Transform XML to HTML log
-	 * 
-	 * @param xml
-	 *            source XML log file
-	 * @param html
-	 *            output HTML log file
-	 * @throws TransformerException
-	 * @throws TransformerConfigurationException
-	 * @throws IOException
+	 * Transform XML to HTML log.
+	 *
+	 * @param xml source XML log file
+	 * @param html output HTML log file
+	 * @throws TransformerException the transformer exception
+	 * @throws TransformerConfigurationException the transformer configuration exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void transform(File xml, File html) throws TransformerException,
 			TransformerConfigurationException, IOException {

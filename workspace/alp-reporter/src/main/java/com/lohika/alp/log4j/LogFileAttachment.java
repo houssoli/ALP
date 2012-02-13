@@ -25,10 +25,23 @@ import org.testng.Reporter;
 import com.lohika.alp.log4j.attributes.LogFileAttachmentAttribute;
 import com.lohika.alp.log4j.attributes.LogFileAttribute;
 
+
+
+/**
+ * The Class LogFileAttachment.
+ */
 public class LogFileAttachment {
 
 	// Attachment name should be at least 3 characters length
 	// TODO add arguments check
+	/**
+	 * Gets the attachment file.
+	 *
+	 * @param name the name of attachment
+	 * @param type the type of attachment
+	 * @return the attachment file
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static File getAttachmentFile(String name, String type)
 			throws IOException {
 

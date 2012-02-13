@@ -14,8 +14,22 @@
 //    along with ALP.  If not, see <http://www.gnu.org/licenses/>.
 package com.lohika.alp.log4j;
 
+
+
+/**
+ * The Class LogNameStrategyLookup.
+ */
 public class LogNameStrategyLookup {
 
+	/**
+	 * Gets the log name strategy.
+	 *
+	 * @param className the class name
+	 * @return the log name strategy
+	 * @throws ClassNotFoundException the class not found exception
+	 * @throws InstantiationException the instantiation exception
+	 * @throws IllegalAccessException the illegal access exception
+	 */
 	public static LogNameStrategy getLogNameStrategy(String className)
 			throws ClassNotFoundException, InstantiationException,
 			IllegalAccessException {

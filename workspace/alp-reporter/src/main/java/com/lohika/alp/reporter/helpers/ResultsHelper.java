@@ -22,10 +22,21 @@ import org.testng.IResultMap;
 import org.testng.ISuiteResult;
 import org.testng.ITestResult;
 
+
+/**
+ * The Class ResultsHelper.
+ */
 public class ResultsHelper {
 
+	/** The logger. */
 	private Logger logger = Logger.getLogger(getClass());
 
+	/**
+	 * Gets the all test results.
+	 *
+	 * @param suiteResult the suite result
+	 * @return the all test results
+	 */
 	public List<ITestResult> getAllTestResults(ISuiteResult suiteResult) {
 		List<ITestResult> testResults = new ArrayList<ITestResult>();
 		addAllTestResults(testResults, suiteResult.getTestContext()
@@ -45,6 +56,12 @@ public class ResultsHelper {
 		return testResults;
 	}
 
+	/**
+	 * Adds the all test results.
+	 *
+	 * @param testResults the test results
+	 * @param resultMap the result map
+	 */
 	public void addAllTestResults(List<ITestResult> testResults,
 			IResultMap resultMap) {
 		if (resultMap != null) {
@@ -59,10 +76,9 @@ public class ResultsHelper {
 	 * <p/>
 	 * 
 	 * Workaround doesn't help for factory created instances.
-	 * 
-	 * @param result
-	 *            The test class used this object is a result for
-	 * @return
+	 *
+	 * @param result The test class used this object is a result for
+	 * @return the test instance
 	 */
 	public Object getTestInstance(ITestResult result) {
 		Object instance = result.getInstance();

@@ -17,6 +17,8 @@ package com.lohika.alp.log4j;
 import org.apache.log4j.Appender;
 import org.testng.ITestResult;
 
+
+
 /**
  * Defines interface to create appenders of the same type for given test
  * methods.
@@ -28,10 +30,9 @@ public interface TestAppenderBuilder {
 
 	/**
 	 * Creates a new {@link Appender} to log messages from a test method, which
-	 * is represented by the given {@link ITestResult}
-	 * 
-	 * @param tr
-	 *            test result of the method to be logged
+	 * is represented by the given {@link ITestResult}.
+	 *
+	 * @param tr test result of the method to be logged
 	 * @return appender
 	 */
 	public Appender getAppender(ITestResult tr);

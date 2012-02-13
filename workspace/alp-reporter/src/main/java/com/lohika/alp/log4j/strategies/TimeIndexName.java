@@ -18,17 +18,28 @@ import org.testng.ITestResult;
 
 import com.lohika.alp.log4j.LogNameStrategy;
 
+
+
+/**
+ * The Class TimeIndexName.
+ */
 public class TimeIndexName implements LogNameStrategy {
 
+	/** The index. */
 	private int index = 0;
 
 	/**
+	 * Next index.
+	 *
 	 * @return next log index
 	 */
 	protected synchronized int nextIndex() {
 		return index++;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.log4j.LogNameStrategy#getName(org.testng.ITestResult)
+	 */
 	@Override
 	public String getName(ITestResult result) {
 		// Start milliseconds of test

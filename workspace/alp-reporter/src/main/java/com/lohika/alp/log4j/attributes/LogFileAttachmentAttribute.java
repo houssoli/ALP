@@ -19,15 +19,32 @@ import java.util.List;
 
 import org.testng.ITestResult;
 
+
+/**
+ * The Class LogFileAttachmentAttribute.
+ */
 public class LogFileAttachmentAttribute {
 
+	/** The Constant NAME. */
 	public static final String NAME = "log4j.attachment";
 
+	/**
+	 * Gets the attachment files.
+	 *
+	 * @param tr the ITestResult
+	 * @return the attachment files
+	 */
 	@SuppressWarnings("unchecked")
 	public static List<File> getAttachmentFiles(ITestResult tr) {
 		return (List<File>) tr.getAttribute(NAME);
 	}
 
+	/**
+	 * Sets the attachment files.
+	 *
+	 * @param tr the ITestResult
+	 * @param files the list of Files
+	 */
 	public static void setAttachmentFiles(ITestResult tr, List<File> files) {
 		tr.setAttribute(NAME, files);
 	}

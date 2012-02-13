@@ -22,6 +22,7 @@ import org.testng.Reporter;
 
 import com.lohika.alp.log4j.attributes.AppendersAttribute;
 
+
 /**
  * The {@code TestAppenderDispatcher} class forwards given {@link LoggingEvent},
  * which is issued by currently running test method, to related {@link Appender}
@@ -38,13 +39,14 @@ import com.lohika.alp.log4j.attributes.AppendersAttribute;
  */
 public class TestAppenderDispatcher {
 
+	/** The builder. */
 	private TestAppenderBuilder builder;
 
 	/**
-	 * Initializes a newly created {@code TestAppenderDispatcher} with
+	 * Initializes a newly created {@code TestAppenderDispatcher} with.
+	 *
+	 * @param builder the builder
 	 * {@link TestAppenderBuilder} instance
-	 * 
-	 * @param builder
 	 */
 	public TestAppenderDispatcher(TestAppenderBuilder builder) {
 		this.builder = builder;
@@ -53,8 +55,8 @@ public class TestAppenderDispatcher {
 	/**
 	 * Forwards the event, which is issued by currently running test method, to
 	 * related appender.
-	 * 
-	 * @param event
+	 *
+	 * @param event the event
 	 */
 	public void doAppend(LoggingEvent event) {
 		Appender a = getCurrentAppender();
@@ -81,7 +83,10 @@ public class TestAppenderDispatcher {
 	}
 
 	/**
-	 * Returns {@link Appender} instance that is attached to given
+	 * Returns {@link Appender} instance that is attached to given.
+	 *
+	 * @param tr test result
+	 * @return appender
 	 * {@link ITestResult}
 	 * <p>
 	 * Returns <code>null</code>, if the test result is <code>null</code> or
@@ -89,10 +94,6 @@ public class TestAppenderDispatcher {
 	 * <p>
 	 * Creates a new appender using {@link TestAppenderBuilder}, if the test
 	 * result doesn't have attached appender yet.
-	 * 
-	 * @param tr
-	 *            test result
-	 * @return appender
 	 */
 	private Appender getAppender(ITestResult tr) {
 		if (tr == null)

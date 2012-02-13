@@ -30,17 +30,29 @@ import org.apache.log4j.spi.LoggingEvent;
 
 import com.lohika.alp.log4j.CloneableLayout;
 
+
+
+/**
+ * The Class XMLLayout.
+ */
 public class XMLLayout extends Layout implements CloneableLayout {
 
+	/** The buffer. */
 	private Writer buffer;
 
+	/** The xml writer. */
 	private XMLStreamWriter xmlWriter;
 
+	/** The marshaller. */
 	private Marshaller marshaller;
 
 	// TODO make concatenation of default values and values provided by user
+	/** The context path. */
 	private String contextPath = "com.lohika.alp.log.schema:com.lohika.alp.log.elements.schema";
 
+	/* (non-Javadoc)
+	 * @see org.apache.log4j.Layout#activateOptions()
+	 */
 	@Override
 	public void activateOptions() {
 		buffer = new StringWriter();
@@ -59,19 +71,35 @@ public class XMLLayout extends Layout implements CloneableLayout {
 
 	}
 
+	/**
+	 * Gets the context path.
+	 *
+	 * @return the context path
+	 */
 	public String getContextPath() {
 		return contextPath;
 	}
 
+	/**
+	 * Sets the context path.
+	 *
+	 * @param contextPath the new context path
+	 */
 	public void setContextPath(String contextPath) {
 		this.contextPath = contextPath;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.log4j.Layout#getContentType()
+	 */
 	@Override
 	public String getContentType() {
 		return "text/xml";
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.log4j.Layout#getHeader()
+	 */
 	@Override
 	public String getHeader() {
 		try {
@@ -94,6 +122,9 @@ public class XMLLayout extends Layout implements CloneableLayout {
 		return buffer.toString();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.log4j.Layout#getFooter()
+	 */
 	@Override
 	public String getFooter() {
 		try {
@@ -106,6 +137,9 @@ public class XMLLayout extends Layout implements CloneableLayout {
 		return buffer.toString();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.log4j.Layout#format(org.apache.log4j.spi.LoggingEvent)
+	 */
 	@Override
 	public String format(LoggingEvent event) {
 		try {
@@ -149,11 +183,20 @@ public class XMLLayout extends Layout implements CloneableLayout {
 		return buffer.toString();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.log4j.Layout#ignoresThrowable()
+	 */
 	@Override
 	public boolean ignoresThrowable() {
 		return false;
 	}
 
+	/**
+	 * Checks if is jAXB element.
+	 *
+	 * @param object the object to check 
+	 * @return true, if is jAXB element
+	 */
 	private boolean isJAXBElement(Object object) {
 		if (object == null)
 			return false;
@@ -166,6 +209,9 @@ public class XMLLayout extends Layout implements CloneableLayout {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#clone()
+	 */
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
 		XMLLayout clone = (XMLLayout) super.clone();
@@ -174,6 +220,9 @@ public class XMLLayout extends Layout implements CloneableLayout {
 		return clone;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.log4j.CloneableLayout#cloneLayout()
+	 */
 	@Override
 	public Layout cloneLayout() throws CloneNotSupportedException {
 		return (Layout) clone();

@@ -14,20 +14,34 @@
 //    along with ALP.  If not, see <http://www.gnu.org/licenses/>.
 package com.lohika.alp.reporter.client;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+//import org.springframework.context.ApplicationContext;
+//import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.client.RestOperations;
 
 import com.lohika.alp.testng.results.schema.Suite;
 
+
+
+/**
+ * The Class ReporterClient. Currently not used . Designed to move from writing directly to DB to working throught REST Services. 
+ */
 public class ReporterClient {
 
+	/** The rest template. */
 	private final RestOperations restTemplate;
 
+	/**
+	 * Instantiates a new reporter client.
+	 *
+	 * @param restTemplate the rest template
+	 */
 	public ReporterClient(RestOperations restTemplate) {
 		this.restTemplate = restTemplate;
 	}
 
+	/**
+	 * Adds the suite.
+	 */
 	public void addSuite() {
 
 		String suiteURL = "http://localhost:8080/alp-reporter-fe/results/suite/";
@@ -42,6 +56,11 @@ public class ReporterClient {
 
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	
 	public static void main(String[] args) {
 
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
@@ -52,5 +71,5 @@ public class ReporterClient {
 
 		client.addSuite();
 	}
-
+ */
 }

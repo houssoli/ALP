@@ -47,6 +47,8 @@ import org.testng.TestNG;
 import com.lohika.alp.reporter.HTMLLogTransformer;
 import com.lohika.alp.utils.zip.Zip;
 
+
+// TODO: Auto-generated Javadoc
 /**
  * Listener which send email when tests suite is completed. Recipients cand be
  * adjusted in the "reporter.properties" file or in your custom .properties
@@ -58,16 +60,31 @@ import com.lohika.alp.utils.zip.Zip;
 
 public class Mailer implements ISuiteListener {
 
+	/** The log4j logger. */
 	private Logger logger = Logger.getLogger(this.getClass());
+	
+	/** The mailer configurator. */
 	private MailerConfigurator mailerConfigurator;
+	
+	/** The session instance. */
 	private Session session = null;
 
+	/** The results filename. */
 	private String resultsName = "results.xml";
+	
+	
+	// TODO : value hardcoded in several different places !!!!
+	/** The logs data dir. */
 	private String logsDataDir = "logs-data";
+	
+	/** The instance of html file. */
 	private File htmlFile;
 	
 	// Suite listener implementation
 
+	/* (non-Javadoc)
+	 * @see org.testng.ISuiteListener#onStart(org.testng.ISuite)
+	 */
 	public void onStart(ISuite suite) {
 		mailerConfigurator = MailerConfigurator.getInstance();
 
@@ -80,6 +97,9 @@ public class Mailer implements ISuiteListener {
 		if (mailerConfigurator.getAutoMail()) session = getSession();		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.testng.ISuiteListener#onFinish(org.testng.ISuite)
+	 */
 	public void onFinish(ISuite suite) {
 
 		if (session!=null&& mailerConfigurator.getAutoMail()) {
@@ -151,6 +171,11 @@ public class Mailer implements ISuiteListener {
 		}
 	}
 
+	/**
+	 * Gets the session.
+	 *
+	 * @return the session
+	 */
 	private Session getSession() {
 		Authenticator authenticator = new Authenticator(
 			mailerConfigurator.getSmtpUser(),
@@ -159,13 +184,27 @@ public class Mailer implements ISuiteListener {
 		return Session.getInstance(mailerConfigurator.buildProperties(), authenticator);
 	}
     
+	/**
+	 * The Class Authenticator.
+	 */
 	private class Authenticator extends javax.mail.Authenticator {
+		
+		/** The authentication. */
 		private PasswordAuthentication authentication = null;
 
+		/**
+		 * Instantiates a new authenticator.
+		 *
+		 * @param username the username
+		 * @param password the password
+		 */
 		public Authenticator(String username, String password) {
 			authentication = new PasswordAuthentication(username, password);
 		}
 
+		/* (non-Javadoc)
+		 * @see javax.mail.Authenticator#getPasswordAuthentication()
+		 */
 		protected PasswordAuthentication getPasswordAuthentication() {
 			return authentication;
 		}
@@ -174,16 +213,31 @@ public class Mailer implements ISuiteListener {
     /*
      * Inner class to act as a JAF datasource to send HTML e-mail content
      */
+    /**
+     * The Class HTMLDataSource.
+     */
     static class HTMLDataSource implements DataSource {
-    	private Logger logger = Logger.getLogger(this.getClass());
+    	
+	    /** The logger. */
+	    private Logger logger = Logger.getLogger(this.getClass());
+        
+        /** The html. */
         private String html;
  
+        /**
+         * Instantiates a new hTML data source.
+         *
+         * @param htmlString the html string
+         */
         public HTMLDataSource(String htmlString) {
             html = htmlString;
         }
  
         // Return html string in an InputStream.
         // A new stream must be returned each time.
+        /* (non-Javadoc)
+         * @see javax.activation.DataSource#getInputStream()
+         */
         public InputStream getInputStream() throws IOException {
             //if (html == null) throw new IOException("Null HTML");
         	if (html == null) {
@@ -193,19 +247,36 @@ public class Mailer implements ISuiteListener {
             return new ByteArrayInputStream(html.getBytes("UTF-8"));
         }
  
+        /* (non-Javadoc)
+         * @see javax.activation.DataSource#getOutputStream()
+         */
         public OutputStream getOutputStream() throws IOException {
             throw new IOException("This DataHandler cannot write HTML");
         }
  
+        /* (non-Javadoc)
+         * @see javax.activation.DataSource#getContentType()
+         */
         public String getContentType() {
             return "text/html";
         }
  
+        /* (non-Javadoc)
+         * @see javax.activation.DataSource#getName()
+         */
         public String getName() {
             return "JAF text/html dataSource to send e-mail only";
         }
     }
     
+    /**
+     * Attach file.
+     *
+     * @param file the file
+     * @param newFileName the new file name
+     * @param multipart the multipart
+     * @throws MessagingException the messaging exception
+     */
     private void attachFile(File file, String newFileName, Multipart multipart) throws MessagingException {
     	MimeBodyPart messageBodyPart = new MimeBodyPart();
         DataSource fds = new FileDataSource
@@ -215,6 +286,13 @@ public class Mailer implements ISuiteListener {
         multipart.addBodyPart(messageBodyPart);
     }
     
+    /**
+     * Transform xml.
+     *
+     * @param outputDirectory the output directory
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws TransformerException the transformer exception
+     */
     private void transformXml(String outputDirectory) throws IOException, TransformerException {
 
 		// HTML data output directory

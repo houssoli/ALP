@@ -19,8 +19,15 @@ import org.testng.ITestResult;
 
 import com.lohika.alp.log4j.LogNameStrategy;
 
+
+/**
+ * The Class TimeHashInvocationName.
+ */
 public class TimeHashInvocationName implements LogNameStrategy {
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.log4j.LogNameStrategy#getName(org.testng.ITestResult)
+	 */
 	@Override
 	public String getName(ITestResult result) {
 

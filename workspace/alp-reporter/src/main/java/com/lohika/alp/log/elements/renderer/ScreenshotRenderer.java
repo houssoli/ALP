@@ -18,8 +18,15 @@ import org.apache.log4j.or.ObjectRenderer;
 
 import com.lohika.alp.log.elements.schema.Screenshot;
 
+
+/**
+ * The Class ScreenshotRenderer.
+ */
 public class ScreenshotRenderer implements ObjectRenderer {
 
+	/* (non-Javadoc)
+	 * @see org.apache.log4j.or.ObjectRenderer#doRender(java.lang.Object)
+	 */
 	@Override
 	public String doRender(Object o) {
 		

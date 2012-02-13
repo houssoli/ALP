@@ -22,55 +22,98 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Exception representation
- * 
+ * Exception representation.
  */
 @Entity
 @Table(name = "EXCEPTIONS")
 public class TestMethodException {
 
+	/** The Exception ID. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	Long id;
 
+	/** The Exception class name. */
 	@Column(name = "CLASS_NAME")
 	String className;
 	
+	/** The exception message  . */
 	@Column(name = "MESSAGE", columnDefinition="LONGTEXT")
 	String message;
 	
+	/** The full stacktrace. */
 	@Column(name = "FULL_STACKTRACE", columnDefinition="LONGTEXT")
 	String fullStacktrace;
 	
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+	/**
+	 * Gets the class name.
+	 *
+	 * @return the class name
+	 */
 	public String getClassName() {
 		return className;
 	}
 
+	/**
+	 * Sets the class name.
+	 *
+	 * @param className the new class name
+	 */
 	public void setClassName(String className) {
 		this.className = className;
 	}
 
+	/**
+	 * Gets the message.
+	 *
+	 * @return the message
+	 */
 	public String getMessage() {
 		return message;
 	}
 
+	/**
+	 * Sets the message.
+	 *
+	 * @param message the new message
+	 */
 	public void setMessage(String message) {
 		this.message = message;
 	}
 
+	/**
+	 * Gets the full stacktrace.
+	 *
+	 * @return the full stacktrace
+	 */
 	public String getFullStacktrace() {
 		return fullStacktrace;
 	}
 
+	/**
+	 * Sets the full stacktrace.
+	 *
+	 * @param fullStacktrace the new full stacktrace
+	 */
 	public void setFullStacktrace(String fullStacktrace) {
 		this.fullStacktrace = fullStacktrace;
 	}

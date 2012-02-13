@@ -23,10 +23,18 @@ import com.lohika.alp.log.elements.schema.ObjectFactory;
 import com.lohika.alp.log.elements.schema.Screenshot;
 import com.lohika.alp.log.elements.schema.Textarea;
 
+
+/**
+ * The Class LogElementsFactoryJAXB.
+ */
 public class LogElementsFactoryJAXB implements LogElementsFactory {
 
+	/** The Object factory. */
 	protected ObjectFactory factory = new ObjectFactory();
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.log.elements.LogElementsFactory#textArea(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public Object textArea(String name, String content) {
 		Textarea textarea = factory.createTextarea();
@@ -35,11 +43,17 @@ public class LogElementsFactoryJAXB implements LogElementsFactory {
 		return textarea;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.log.elements.LogElementsFactory#link(java.lang.String)
+	 */
 	@Override
 	public Object link(String url) {
 		return link(url, null);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.log.elements.LogElementsFactory#link(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public Object link(String url, String description) {
 		Link link = factory.createLink();
@@ -48,6 +62,9 @@ public class LogElementsFactoryJAXB implements LogElementsFactory {
 		return link;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.log.elements.LogElementsFactory#screenshot(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public Object screenshot(String url, String description) {
 		Screenshot screenshot = factory.createScreenshot();
@@ -56,6 +73,9 @@ public class LogElementsFactoryJAXB implements LogElementsFactory {
 		return screenshot;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.log.elements.LogElementsFactory#comment(java.lang.String)
+	 */
 	@Override
 	public Object comment(String comment) {
 		Comment simpleComment = factory.createComment();
@@ -64,6 +84,9 @@ public class LogElementsFactoryJAXB implements LogElementsFactory {
 		return simpleComment;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.log.elements.LogElementsFactory#comment(java.lang.String, com.lohika.alp.log.elements.LogStyle)
+	 */
 	@Override
 	public Object comment(String comment, LogStyle style) {
 		Comment simpleComment = factory.createComment();
@@ -75,6 +98,9 @@ public class LogElementsFactoryJAXB implements LogElementsFactory {
 		return simpleComment;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.log.elements.LogElementsFactory#comment(java.util.List)
+	 */
 	@Override
 	public Object comment(List<Object> comment) {
 		Comment complexComment = factory.createComment();
@@ -85,6 +111,9 @@ public class LogElementsFactoryJAXB implements LogElementsFactory {
 		return complexComment;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.log.elements.LogElementsFactory#comment(java.lang.Object[])
+	 */
 	@Override
 	public Object comment(Object... comment) {
 		Comment complexComment = factory.createComment();
@@ -95,6 +124,9 @@ public class LogElementsFactoryJAXB implements LogElementsFactory {
 		return complexComment;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.log.elements.LogElementsFactory#comment(java.util.List, com.lohika.alp.log.elements.LogStyle)
+	 */
 	@Override
 	public Object comment(List<Object> comment, LogStyle style) {
 		Comment complexComment = factory.createComment();

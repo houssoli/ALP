@@ -18,15 +18,32 @@ import org.testng.ITestResult;
 
 import com.lohika.alp.log4j.Appenders;
 
+
+/**
+ * The Class AppendersAttribute.
+ */
 public class AppendersAttribute {
 
+	/** The Constant NAME. */
 	public static final String NAME = "log4j.appenders";
 
+	/**
+	 * Gets the appenders.
+	 *
+	 * @param tr the ITestResult
+	 * @return the appenders
+	 */
 	public static Appenders getAppenders(ITestResult tr) {
 		Appenders appenders = (Appenders) tr.getAttribute(NAME);
 		return appenders;
 	}
 
+	/**
+	 * Sets the appenders.
+	 *
+	 * @param tr the ITestresult
+	 * @param appenders the appenders
+	 */
 	public static void setAppenders(ITestResult tr, Appenders appenders) {
 		tr.setAttribute(NAME, appenders);
 	}

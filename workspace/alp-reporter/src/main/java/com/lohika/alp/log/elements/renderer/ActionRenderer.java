@@ -19,8 +19,15 @@ import org.apache.log4j.or.ObjectRenderer;
 import com.lohika.alp.log.elements.schema.Action;
 import com.lohika.alp.log.elements.schema.Webelement;
 
+
+/**
+ * The Class ActionRenderer.
+ */
 public class ActionRenderer implements ObjectRenderer {
 
+	/* (non-Javadoc)
+	 * @see org.apache.log4j.or.ObjectRenderer#doRender(java.lang.Object)
+	 */
 	@Override
 	public String doRender(Object o) {
 		if (!(o instanceof Action))

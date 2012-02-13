@@ -29,56 +29,91 @@ import org.testng.xml.XmlSuite;
 
 import com.lohika.alp.log4j.AppendersCloser;
 
+
+
+/**
+ * The Class Reporter.
+ */
 public class Reporter implements ISuiteListener, ITestListener,
 		IReporter, IResultListener {
 
+	/** The log4j logger. */
 	private Logger logger = Logger.getLogger(getClass());
 
+	/** The log4j configurer. */
 	private Log4jConfigurer log4jc = new Log4jConfigurer();
 	
+	/** The appenders closer. */
 	private AppendersCloser appendersCloser = new AppendersCloser();
 
 	// Suite listener implementation
 
+	/* (non-Javadoc)
+	 * @see org.testng.ISuiteListener#onStart(org.testng.ISuite)
+	 */
 	@Override
 	public void onStart(ISuite suite) {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.testng.ISuiteListener#onFinish(org.testng.ISuite)
+	 */
 	@Override
 	public void onFinish(ISuite suite) {
 	}
 
 	// Test listener implementation
 
+	/* (non-Javadoc)
+	 * @see org.testng.ITestListener#onStart(org.testng.ITestContext)
+	 */
 	@Override
 	public void onStart(ITestContext context) {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.testng.ITestListener#onFinish(org.testng.ITestContext)
+	 */
 	@Override
 	public void onFinish(ITestContext context) {
 	}
 
 	// Method listener implementation
 
+	/* (non-Javadoc)
+	 * @see org.testng.ITestListener#onTestStart(org.testng.ITestResult)
+	 */
 	@Override
 	public void onTestStart(ITestResult itr) {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.testng.ITestListener#onTestSuccess(org.testng.ITestResult)
+	 */
 	@Override
 	public void onTestSuccess(ITestResult itr) {
 		appendersCloser.close(itr);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.testng.ITestListener#onTestFailedButWithinSuccessPercentage(org.testng.ITestResult)
+	 */
 	@Override
 	public void onTestFailedButWithinSuccessPercentage(ITestResult itr) {
 		appendersCloser.close(itr);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.testng.ITestListener#onTestFailure(org.testng.ITestResult)
+	 */
 	@Override
 	public void onTestFailure(ITestResult itr) {
 		appendersCloser.close(itr);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.testng.ITestListener#onTestSkipped(org.testng.ITestResult)
+	 */
 	@Override
 	public void onTestSkipped(ITestResult itr) {
 		appendersCloser.close(itr);
@@ -86,21 +121,33 @@ public class Reporter implements ISuiteListener, ITestListener,
 
 	// Configuration listener implementation
 
+	/* (non-Javadoc)
+	 * @see org.testng.IConfigurationListener#onConfigurationSuccess(org.testng.ITestResult)
+	 */
 	@Override
 	public void onConfigurationSuccess(ITestResult itr) {
 		appendersCloser.close(itr);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.testng.IConfigurationListener#onConfigurationFailure(org.testng.ITestResult)
+	 */
 	@Override
 	public void onConfigurationFailure(ITestResult itr) {
 		appendersCloser.close(itr);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.testng.IConfigurationListener#onConfigurationSkip(org.testng.ITestResult)
+	 */
 	@Override
 	public void onConfigurationSkip(ITestResult itr) {
 		appendersCloser.close(itr);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.testng.IReporter#generateReport(java.util.List, java.util.List, java.lang.String)
+	 */
 	@Override
 	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites,
 			String outputDirectory) {

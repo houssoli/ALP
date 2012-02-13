@@ -32,6 +32,8 @@ import com.lohika.alp.log4j.attributes.LogFileAttribute;
 import com.lohika.alp.reporter.helpers.Resources;
 import com.lohika.alp.reporter.helpers.ResultsHelper;
 
+
+
 /**
  * The <code>ResultsXML2HTML</code> class generates HTML file from XML results
  * file according to {@link http://alp.lohika.com/testng/results/schema}
@@ -39,17 +41,37 @@ import com.lohika.alp.reporter.helpers.ResultsHelper;
  */
 public class ResultsXML2HTML {
 
+	/** The log4j logger. */
 	private final Logger logger = Logger.getLogger(getClass());
 
+	/** The helper. */
 	private final ResultsHelper helper = new ResultsHelper();
 
+	/** The results html xsl name. */
 	private String resultsHtmlXslName = "results.xsl";
+	
+	/** The results name. */
 	private String resultsName = "results.xml";
+	
+	/** The results html name. */
 	private String resultsHtmlName = "results.html";
+	
+	/** The logs html dir. */
 	private String logsHtmlDir = "logs-html";
+	
+	/** The logs data dir. */
 	private String logsDataDir = "logs-data";
+	
+	/** The log html xsl name. */
 	private String logHtmlXslName = "log.xsl";
 
+	/**
+	 * Generate report.
+	 *
+	 * @param xmlSuites - list of xml suites
+	 * @param suites list of  ISuites
+	 * @param outputDirectory -  where to generate logs 
+	 */
 	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites,
 			String outputDirectory) {
 
@@ -68,6 +90,14 @@ public class ResultsXML2HTML {
 		}
 	}
 
+	/**
+	 * Transform logs.
+	 *
+	 * @param suites list of  ISuites
+	 * @param outputDirectory -  where to generate logs 
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws TransformerException the transformer exception
+	 */
 	protected void transformLogs(List<ISuite> suites, String outputDirectory)
 			throws IOException, TransformerException {
 
@@ -130,6 +160,13 @@ public class ResultsXML2HTML {
 		}
 	}
 
+	/**
+	 * Transform results.
+	 *
+	 * @param outputDirectory the output directory
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws TransformerException the transformer exception
+	 */
 	protected void transformResults(String outputDirectory) throws IOException,
 			TransformerException {
 		// HTML data output directory

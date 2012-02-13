@@ -28,29 +28,34 @@ import org.testng.ITestResult;
 import com.lohika.alp.log4j.attributes.LogFileAttribute;
 import com.lohika.alp.log4j.strategies.TimeIndexName;
 
+
 /**
+ * The Class TestFileAppender.
+ *
  * {@code TestFileAppender} appends log events of test methods into separate
  * files.
- * 
  * @author Mikhail Holovaty
- * 
  */
 public class TestFileAppender extends AppenderSkeleton implements
 		TestAppenderBuilder {
 
+	/** The directory. */
 	private String directory = "test-output" + File.separator + "logs";
 
 	// Set default strategy
+	/** The name strategy. */
 	private String nameStrategy = TimeIndexName.class.getName();
 
+	/** The name strategy impl. */
 	private LogNameStrategy nameStrategyImpl;
 
+	/** The dispatcher. */
 	protected TestAppenderDispatcher dispatcher = new TestAppenderDispatcher(
 			this);
 
 	/**
-	 * Returns value of directory property
-	 * 
+	 * Returns value of directory property.
+	 *
 	 * @return directory of output log files
 	 */
 	public String getDirectory() {
@@ -58,19 +63,18 @@ public class TestFileAppender extends AppenderSkeleton implements
 	}
 
 	/**
-	 * Sets directory property where log files should be created
-	 * 
-	 * @param directory
-	 *            of output log files
+	 * Sets directory property where log files should be created.
+	 *
+	 * @param directory of output log files
 	 */
 	public void setDirectory(String directory) {
 		this.directory = directory;
 	}
 
 	/**
-	 * Returns value nameStrategy property
-	 * 
-	 * @return
+	 * Returns value nameStrategy property.
+	 *
+	 * @return the name strategy
 	 */
 	public String getNameStrategy() {
 		return nameStrategy;
@@ -78,19 +82,25 @@ public class TestFileAppender extends AppenderSkeleton implements
 
 	/**
 	 * Sets nameStrategy property, which defines algorithm of unique log file
-	 * names
-	 * 
-	 * @param nameStrategy
+	 * names.
+	 *
+	 * @param nameStrategy the new name strategy
 	 */
 	public void setNameStrategy(String nameStrategy) {
 		this.nameStrategy = nameStrategy;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.log4j.AppenderSkeleton#requiresLayout()
+	 */
 	@Override
 	public boolean requiresLayout() {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.log4j.AppenderSkeleton#activateOptions()
+	 */
 	@Override
 	public void activateOptions() {
 		try {
@@ -102,17 +112,26 @@ public class TestFileAppender extends AppenderSkeleton implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.log4j.AppenderSkeleton#close()
+	 */
 	@Override
 	public void close() {
 		// No need to close here because appenders are closed from test listener
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.log4j.AppenderSkeleton#append(org.apache.log4j.spi.LoggingEvent)
+	 */
 	@Override
 	protected void append(LoggingEvent event) {
 		// Forwards log event to proper test method appender
 		dispatcher.doAppend(event);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.log4j.TestAppenderBuilder#getAppender(org.testng.ITestResult)
+	 */
 	@Override
 	public Appender getAppender(ITestResult tr) {
 		String filename = nameStrategyImpl.getName(tr);
@@ -149,8 +168,18 @@ public class TestFileAppender extends AppenderSkeleton implements
 		}
 	}
 
+	/**
+	 * The Class UTFFileAppender.
+	 */
 	class UTFFileAppender extends FileAppender {
 
+		/**
+		 * Instantiates a new UTF file appender.
+		 *
+		 * @param layout the layout
+		 * @param filename the filename
+		 * @throws IOException Signals that an I/O exception has occurred.
+		 */
 		public UTFFileAppender(Layout layout, String filename)
 				throws IOException {
 			super(layout, filename);

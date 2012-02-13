@@ -15,21 +15,29 @@
 
 package com.lohika.alp.mailer;
 
+
+
 /**
- * 
- * @author Dmitry Irzhov
+ * The Class MailerException.
  *
+ * @author Dmitry Irzhov
  */
 public class MailerException extends Exception{
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -7687550514677295162L;
 
+	/**
+	 * Instantiates a new mailer exception.
+	 */
 	public MailerException() {
 	}
 	
+	/**
+	 * Instantiates a new mailer exception.
+	 *
+	 * @param msg the exception message
+	 */
 	public MailerException(String msg) {
 		super(msg);
 	}

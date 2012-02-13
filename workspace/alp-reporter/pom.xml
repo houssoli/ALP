@@ -5,12 +5,68 @@
 	<artifactId>alp-reporter</artifactId>
 	<version>0.7</version>
 	<name>ALP TestNG Reporter</name>
+	<packaging>jar</packaging>
+	<description>Tests Logging framework that uses log4j for logging and TestNG for tests execution. Currently have 3 TestNg listeners : for FS , DB and mails </description>
+	<url>https://github.com/lohika/ALP/wiki</url>
+	<licenses>
+		<license>
+			<distribution>repo</distribution>
+			<name>GPLv3</name>
+			<url>http://www.gnu.org/licenses</url>
+		</license>
+	</licenses>
+	<scm>
+		<url>https://github.com/lohika/ALP</url>
+		<connection>scm:git://github.com/lohika/ALP.git</connection>
+	</scm>
 	<properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-	
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<developers>
+		<developer>
+			<id>asmorodskiy</id>
+			<name>Anton Smorodskiy</name>
+			<email>asmorodskiy@lohika.com</email>
+			<organization>Lohika</organization>
+			<organizationUrl>http://www.lohika.com/</organizationUrl>
+		</developer>
+		<developer>
+			<id>dirzhov</id>
+			<name>Dmitry Irzhov</name>
+			<email>dirzhov@lohika.com</email>
+			<organization>Lohika</organization>
+			<organizationUrl>http://www.lohika.com/</organizationUrl>
+		</developer>
+	</developers>
+
+
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.8.1</version>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -35,18 +91,6 @@
 				<configuration>
 					<generateDirectory>src/main/java</generateDirectory>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>2.1.2</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>

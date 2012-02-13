@@ -20,8 +20,15 @@ import com.lohika.alp.log.elements.schema.Comment;
 import com.lohika.alp.log.elements.schema.Screenshot;
 import com.lohika.alp.log.elements.schema.Textarea;
 
+
+/**
+ * The Class CommentRenderer.
+ */
 public class CommentRenderer implements ObjectRenderer {
 
+	/* (non-Javadoc)
+	 * @see org.apache.log4j.or.ObjectRenderer#doRender(java.lang.Object)
+	 */
 	@Override
 	public String doRender(Object o) {
 		

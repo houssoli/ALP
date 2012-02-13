@@ -27,10 +27,19 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.lohika.alp.configuration.ReporterPropertiesReader;
 
+
+
+/**
+ * The Class LogUploader.
+ */
 public class LogUploader {
 
+	/** URL where to upload logs. */
 	private String server;
 	
+	/**
+	 * Instantiates a new log uploader.
+	 */
 	public LogUploader() {
 		
 		ReporterPropertiesReader props = new ReporterPropertiesReader();
@@ -38,6 +47,14 @@ public class LogUploader {
 		server = props.getStringProperty("server","http://localhost:8080/alp-reporter-fe");
 	}
 
+	/**
+	 * Upload certain log to server.
+	 *
+	 * @param testMethodId the ID of test method which log will be uploaded 
+	 * @param logFile - instance of file to upload 
+	 * @throws ClientProtocolException the client protocol exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void upload(long testMethodId, File logFile)
 			throws ClientProtocolException, IOException {
 		String url = server + "/results/test-method/" + testMethodId + "/log";

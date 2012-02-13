@@ -37,8 +37,11 @@ import com.lohika.alp.log.elements.schema.Textarea;
 import com.lohika.alp.log4j.TestFileAppender;
 import com.lohika.alp.log4j.xml.XMLLayout;
 
+
+
 /**
- * Configures Log4j programmatically to use {@link XMLLayout} and
+ * Configures Log4j programmatically to use {@link XMLLayout} and.
+ *
  * {@link TestFileAppender}, if they aren't already configured in
  * log4j.properties
  * <p>
@@ -49,12 +52,17 @@ public class Log4jConfigurer {
 
 	// Invocation of getLogger method before configuring Log4j programmatically
 	// allows log4j.properties file to be loaded properly
+	/** The log4j logger. */
 	private Logger logger = Logger.getLogger(getClass());
 
 	// Default value can be overwritten with TestFileAppender 'directory'
 	// parameter in log4j.properties file
+	/** The output directory. */
 	private String outputDirectory = "test-output";
 
+	/**
+	 * Instantiates a new log4j configurer.
+	 */
 	public Log4jConfigurer() {
 		Logger rootLogger = Logger.getRootLogger();
 
@@ -122,11 +130,26 @@ public class Log4jConfigurer {
 		}
 	}
 
+	/**
+	 * Gets the output directory.
+	 *
+	 * @return the output directory
+	 */
 	public String getOutputDirectory() {
 		return outputDirectory;
 	}
 
+	/**
+	 * The Interface RendererHelper.
+	 */
 	private interface RendererHelper {
+		
+		/**
+		 * Put.
+		 *
+		 * @param clazz the clazz
+		 * @param renderer the renderer
+		 */
 		void put(Class<?> clazz, ObjectRenderer renderer);
 
 	}
