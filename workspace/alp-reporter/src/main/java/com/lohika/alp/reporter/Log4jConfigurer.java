@@ -49,15 +49,23 @@ import com.lohika.alp.log4j.xml.XMLLayout;
  * <code>com.lohika.alp.log.elements</code> package
  */
 public class Log4jConfigurer {
-
-	// Invocation of getLogger method before configuring Log4j programmatically
-	// allows log4j.properties file to be loaded properly
-	/** The log4j logger. */
+	 
+	/** 
+	 * 
+	 * The log4j logger.
+	 * Invocation of getLogger method before configuring Log4j programmatically
+	 * allows log4j.properties file to be loaded properly 
+	 *  
+	 *  */
 	private Logger logger = Logger.getLogger(getClass());
 
-	// Default value can be overwritten with TestFileAppender 'directory'
-	// parameter in log4j.properties file
-	/** The output directory. */
+ 
+	/** 
+	 * 
+	 * The output directory. 
+	 * Default value can be overwritten with TestFileAppender 'directory'
+	 * parameter in log4j.properties file
+	 * */
 	private String outputDirectory = "test-output";
 
 	/**
