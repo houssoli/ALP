@@ -14,6 +14,10 @@
 //    along with ALP.  If not, see <http://www.gnu.org/licenses/>.
 package com.lohika.alp.selenium.log;
 
+
+/**
+ * The Class LoggingTimeouts.
+ */
 public class LoggingTimeouts {
 
 }

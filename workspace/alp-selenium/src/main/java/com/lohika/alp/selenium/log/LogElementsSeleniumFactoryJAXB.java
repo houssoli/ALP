@@ -28,11 +28,22 @@ import com.lohika.alp.log.elements.schema.Screenshot;
 import com.lohika.alp.log.elements.schema.Webelement;
 import com.lohika.alp.log4j.LogFileAttachment;
 
+/**
+ * The Class that implements LogElementsSeleniumFactory with JAXB.
+ */
 public class LogElementsSeleniumFactoryJAXB implements
 		LogElementsSeleniumFactory {
 
+	/** The ALP Object factory. */
 	protected ObjectFactory factory = new ObjectFactory();
 
+	/**
+	 * Create action with specified name for webelement self.
+	 *
+	 * @param self - instance of class that support DescribedElement 
+	 * @param name - name of returned Action
+	 * @return created Action instance
+	 */
 	protected Action getAction(DescribedElement self, String name) {
 		Action action = factory.createAction();
 
@@ -42,6 +53,9 @@ public class LogElementsSeleniumFactoryJAXB implements
 		return action;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.selenium.log.LogElementsSeleniumFactory#element(com.lohika.alp.selenium.log.DescribedElement)
+	 */
 	@Override
 	public Object element(DescribedElement element) {
 		Webelement webelement = factory.createWebelement();
@@ -54,6 +68,9 @@ public class LogElementsSeleniumFactoryJAXB implements
 		return webelement;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.selenium.log.LogElementsSeleniumFactory#get(com.lohika.alp.selenium.log.DescribedElement, java.lang.String)
+	 */
 	@Override
 	public Object get(DescribedElement self, String url) {
 		Action action = getAction(self, "get");
@@ -62,26 +79,41 @@ public class LogElementsSeleniumFactoryJAXB implements
 		return action;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.selenium.log.LogElementsSeleniumFactory#close(com.lohika.alp.selenium.log.DescribedElement)
+	 */
 	@Override
 	public Object close(DescribedElement self) {
 		return getAction(self, "close");
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.selenium.log.LogElementsSeleniumFactory#quit(com.lohika.alp.selenium.log.DescribedElement)
+	 */
 	@Override
 	public Object quit(DescribedElement self) {
 		return getAction(self, "quit");
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.selenium.log.LogElementsSeleniumFactory#click(com.lohika.alp.selenium.log.DescribedElement)
+	 */
 	@Override
 	public Object click(DescribedElement self) {
 		return getAction(self, "click");
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.selenium.log.LogElementsSeleniumFactory#submit(com.lohika.alp.selenium.log.DescribedElement)
+	 */
 	@Override
 	public Object submit(DescribedElement self) {
 		return getAction(self, "click");
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.selenium.log.LogElementsSeleniumFactory#sendKeys(com.lohika.alp.selenium.log.DescribedElement, java.lang.CharSequence[])
+	 */
 	@Override
 	public Object sendKeys(DescribedElement self, CharSequence... keysToSend) {
 		Action action = getAction(self, "send keys");
@@ -96,26 +128,41 @@ public class LogElementsSeleniumFactoryJAXB implements
 		return action;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.selenium.log.LogElementsSeleniumFactory#clear(com.lohika.alp.selenium.log.DescribedElement)
+	 */
 	@Override
 	public Object clear(DescribedElement self) {
 		return getAction(self, "clear");
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.selenium.log.LogElementsSeleniumFactory#toggle(com.lohika.alp.selenium.log.DescribedElement)
+	 */
 	@Override
 	public Object toggle(DescribedElement self) {
 		return getAction(self, "toggle");
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.selenium.log.LogElementsSeleniumFactory#setSelected(com.lohika.alp.selenium.log.DescribedElement)
+	 */
 	@Override
 	public Object setSelected(DescribedElement self) {
 		return getAction(self, "set selected");
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.selenium.log.LogElementsSeleniumFactory#hover(com.lohika.alp.selenium.log.DescribedElement)
+	 */
 	@Override
 	public Object hover(DescribedElement self) {
 		return getAction(self, "hover");
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.selenium.log.LogElementsSeleniumFactory#dragAndDropBy(com.lohika.alp.selenium.log.DescribedElement, int, int)
+	 */
 	@Override
 	public Object dragAndDropBy(DescribedElement self, int moveRightBy,
 			int moveDownBy) {
@@ -127,6 +174,9 @@ public class LogElementsSeleniumFactoryJAXB implements
 		return action;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.selenium.log.LogElementsSeleniumFactory#dragAndDropOn(com.lohika.alp.selenium.log.DescribedElement, com.lohika.alp.selenium.log.DescribedElement)
+	 */
 	@Override
 	public Object dragAndDropOn(DescribedElement self, DescribedElement element) {
 		Action action = getAction(self, "drag and drop by");
@@ -136,6 +186,9 @@ public class LogElementsSeleniumFactoryJAXB implements
 		return action;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.selenium.log.LogElementsSeleniumFactory#screenshot(org.openqa.selenium.TakesScreenshot, java.lang.String)
+	 */
 	@Override
 	public Object screenshot(TakesScreenshot takesScreenshot, String description) {
 
@@ -158,6 +211,9 @@ public class LogElementsSeleniumFactoryJAXB implements
 		return screenshot;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.selenium.log.LogElementsSeleniumFactory#screenshot(org.openqa.selenium.WebDriver, java.lang.String)
+	 */
 	@Override
 	public Object screenshot(WebDriver driver, String description) {
 

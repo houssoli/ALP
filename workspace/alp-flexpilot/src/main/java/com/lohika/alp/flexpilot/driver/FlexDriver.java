@@ -17,16 +17,22 @@ package com.lohika.alp.flexpilot.driver;
 import com.lohika.alp.flexpilot.SearchContext;
 
 
+
+/**
+ * The Interface FlexDriver.
+ */
 public interface FlexDriver extends SearchContext {
 
 	/**
-	 * get version of flex pilot driver
+	 * get version of flex pilot driver.
+	 *
 	 * @return String
 	 */
 	public String getVersion();
 	
 	/**
-	 * check if a flex/flash object is loaded and rendered in a browser
+	 * check if a flex/flash object is loaded and rendered in a browser.
+	 *
 	 * @return boolean
 	 */
 	public boolean isFlexLoaded();

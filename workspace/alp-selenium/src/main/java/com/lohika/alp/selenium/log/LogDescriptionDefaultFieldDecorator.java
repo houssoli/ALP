@@ -24,12 +24,23 @@ import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
+/**
+ * The Class LogDescriptionDefaultFieldDecorator.
+ */
 public class LogDescriptionDefaultFieldDecorator extends DefaultFieldDecorator {
 
+	/**
+	 * Instantiates a new log description default field decorator.
+	 *
+	 * @param factory the factory
+	 */
 	public LogDescriptionDefaultFieldDecorator(ElementLocatorFactory factory) {
 		super(factory);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.support.pagefactory.DefaultFieldDecorator#proxyForLocator(java.lang.ClassLoader, org.openqa.selenium.support.pagefactory.ElementLocator)
+	 */
 	@Override
 	protected WebElement proxyForLocator(ClassLoader loader,
 			ElementLocator locator) {

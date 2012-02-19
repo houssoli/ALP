@@ -24,11 +24,21 @@ import com.lohika.alp.selenium.log.LogDescriptionBean;
 public class NoSuchElementException extends
 		org.openqa.selenium.NoSuchElementException {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -4410688378679905439L;
 
+	/** The description. */
 	private final LogDescriptionBean description;
+	
+	/** The element locator. */
 	private final String locator;
 
+	/**
+	 * Instantiates a new no such element exception.
+	 *
+	 * @param description the description
+	 * @param cause the cause
+	 */
 	public NoSuchElementException(LogDescriptionBean description,
 			org.openqa.selenium.NoSuchElementException cause) {
 		super(null, cause);
@@ -37,6 +47,12 @@ public class NoSuchElementException extends
 		this.locator = parseLocator(cause.getMessage());
 	}
 
+	/**
+	 * Parses the locator.
+	 *
+	 * @param originalMessage the original message
+	 * @return the string
+	 */
 	private String parseLocator(String originalMessage) {
 		// TODO add handling of 'link test' and other locators or get locator
 		// info from element directly
@@ -49,6 +65,9 @@ public class NoSuchElementException extends
 		return originalMessage.substring(begin + 1, end);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.WebDriverException#getMessage()
+	 */
 	@Override
 	public String getMessage() {
 		String reason = "Unable to locate element: {" + "\"type\":\""

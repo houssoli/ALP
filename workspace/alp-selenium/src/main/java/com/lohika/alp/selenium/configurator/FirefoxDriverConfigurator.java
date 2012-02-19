@@ -20,14 +20,17 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.lohika.alp.selenium.jscatcher.JsErrorCatcherConfiguration;
 
+
 /**
- * Java class which configures Firefox browser with custom profile
- * 
- * @author Dmitry Irzhov
+ * Java class which configures Firefox browser with custom profile.
  *
+ * @author Dmitry Irzhov
  */
 public class FirefoxDriverConfigurator implements IWebDriverConfigurator {
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.selenium.configurator.IWebDriverConfigurator#configure(org.openqa.selenium.remote.DesiredCapabilities)
+	 */
 	public DesiredCapabilities configure(DesiredCapabilities capabilities) {
 
         String[] domains = JsErrorCatcherConfiguration.getInstance().getAllowDomains();

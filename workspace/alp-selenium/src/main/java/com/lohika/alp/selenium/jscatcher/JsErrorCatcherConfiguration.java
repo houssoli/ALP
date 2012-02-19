@@ -34,29 +34,59 @@ import com.lohika.alp.mailer.MailerConfigurator;
  */
 public class JsErrorCatcherConfiguration extends ReporterPropertiesReader {	
 	
+	/** The log4j logger. */
 	private Logger logger = Logger.getLogger(MailerConfigurator.class);
 
+	/** The instance. */
 	private static JsErrorCatcherConfiguration instance = null;
 	
+	/** If JS Error logging enabled  */
 	private Boolean jsErrorAutolog = false;
+	
+	/** List of domains which will have special security restricts within Mozilla browser. */
 	private String[] allowDomains;	
 		
+	/**
+	 * Getter for allowDomains.
+	 *
+	 * @return array of Strings each one is allowed domain
+	 */
 	public String[] getAllowDomains() {
 		return allowDomains;
 	}
 
+	/**
+	 * Setter for allowDomains.
+	 *
+	 * @param allowDomains new array that will replace this.allowDomains
+	 */
 	public void setAllowDomains(String[] allowDomains) {
 		this.allowDomains = allowDomains;
 	}
 
+	/**
+	 * Getter for jsErrorAutolog 
+	 *
+	 * @return the js error autolog
+	 */
 	public Boolean getJsErrorAutolog() {
 		return jsErrorAutolog;
 	}
 
+	/**
+	 * Setter for jsErrorAutolog.
+	 *
+	 * @param jsErrorAutolog the new value for this.jsErrorAutolog
+	 */
 	public void setJsErrorAutolog(Boolean jsErrorAutolog) {
 		this.jsErrorAutolog = jsErrorAutolog;
 	}	
 	
+	/**
+	 * Gets the single instance of JsErrorCatcherConfiguration.
+	 *
+	 * @return single instance of JsErrorCatcherConfiguration
+	 */
 	public static JsErrorCatcherConfiguration getInstance() {
 		if (instance==null)
 			instance = new JsErrorCatcherConfiguration();
@@ -64,6 +94,9 @@ public class JsErrorCatcherConfiguration extends ReporterPropertiesReader {
 	}	
 	
 	
+	/**
+	 * Instantiates a new js error catcher configuration.
+	 */
 	public JsErrorCatcherConfiguration() {		
 		
 		Boolean b = Boolean.parseBoolean(getProperty("jserrcatcher.autolog"));

@@ -19,18 +19,36 @@ import java.util.List;
 
 import org.openqa.selenium.NoSuchElementException;
 
-public class ByIdOrName extends By {
-	  private By idFinder;
-	  private By nameFinder;
-	  private String idOrName;
 
-	  public ByIdOrName(String idOrName) {
+/**
+ * The Class ByIdOrName.
+ */
+public class ByIdOrName extends By {
+	  
+  	/** The id finder. */
+  	private By idFinder;
+	  
+  	/** The name finder. */
+  	private By nameFinder;
+	  
+  	/** The id or name. */
+  	private String idOrName;
+
+	  /**
+  	 * Instantiates a new by id or name.
+  	 *
+  	 * @param idOrName the id or name
+  	 */
+  	public ByIdOrName(String idOrName) {
 	    this.idOrName = idOrName;
 	    idFinder = By.id(idOrName);
 	    nameFinder = By.name(idOrName);
 	  }
 
-	  @Override
+	  /* (non-Javadoc)
+  	 * @see com.lohika.alp.flexpilot.By#findElement(com.lohika.alp.flexpilot.SearchContext)
+  	 */
+  	@Override
 	  public FlexElement findElement(SearchContext context) {
 	    try {
 	      // First, try to locate by id
@@ -41,7 +59,10 @@ public class ByIdOrName extends By {
 	    }
 	  }
 
-	  @Override
+	  /* (non-Javadoc)
+  	 * @see com.lohika.alp.flexpilot.By#findElements(com.lohika.alp.flexpilot.SearchContext)
+  	 */
+  	@Override
 	  public List<FlexElement> findElements(SearchContext context) {
 	    List<FlexElement> elements = new ArrayList<FlexElement>();
 
@@ -53,7 +74,10 @@ public class ByIdOrName extends By {
 	    return elements;
 	  }
 
-	  @Override
+	  /* (non-Javadoc)
+  	 * @see java.lang.Object#toString()
+  	 */
+  	@Override
 	  public String toString() {
 	    return "by id or name \"" + idOrName + '"';
 	  }

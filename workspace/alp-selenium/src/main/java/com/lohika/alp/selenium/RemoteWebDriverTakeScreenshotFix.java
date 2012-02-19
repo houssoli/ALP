@@ -25,21 +25,35 @@ import org.openqa.selenium.remote.DriverCommand;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
- * Fixing issue that RemoteWebDriver not implement
- * 
+ * Fixing issue that RemoteWebDriver not implemented.
  */
 public class RemoteWebDriverTakeScreenshotFix extends RemoteWebDriver implements
 		TakesScreenshot {
 
+	/**
+	 * Instantiates a new remote web driver take screenshot fix.
+	 *
+	 * @param remoteAddress - address that will be passed to RemoteWebDriver 
+	 * @param capabilities - DesiredCapabilities that will be passed to RemoteWebDriver
+	 */
 	public RemoteWebDriverTakeScreenshotFix(URL remoteAddress, DesiredCapabilities capabilities) {
 		super(remoteAddress, capabilities);
 	}
 	
+	/**
+	 * Instantiates a new remote web driver take screenshot fix.
+	 *
+	 * @param commandExecutor - CommandExecutor that will be passed to RemoteWebDriver 
+	 * @param capabilities - DesiredCapabilities that will be passed to RemoteWebDriver
+	 */
 	public RemoteWebDriverTakeScreenshotFix(CommandExecutor commandExecutor,
 			DesiredCapabilities capabilities) {
 		super(commandExecutor, capabilities);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.TakesScreenshot#getScreenshotAs(org.openqa.selenium.OutputType)
+	 */
 	@Override
 	public <X> X getScreenshotAs(OutputType<X> target)
 			throws WebDriverException {

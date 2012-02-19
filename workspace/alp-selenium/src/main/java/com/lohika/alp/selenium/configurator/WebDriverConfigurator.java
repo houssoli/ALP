@@ -16,15 +16,28 @@ package com.lohika.alp.selenium.configurator;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+
+/**
+ * The Class WebDriverConfigurator. 
+ */
 public class WebDriverConfigurator implements IWebDriverConfigurator {
 	
+	/** The instance configurator. */
 	private IWebDriverConfigurator configurator;
 
+	/**
+	 * Instantiates a new web driver configurator (currently only "firefox" is supported).
+	 *
+	 * @param browser - represent for which browser we should create configuration 
+	 */
 	public WebDriverConfigurator(String browser) {
 		if (browser.contains("firefox"))
 			configurator = new FirefoxDriverConfigurator();
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.selenium.configurator.IWebDriverConfigurator#configure(org.openqa.selenium.remote.DesiredCapabilities)
+	 */
 	public DesiredCapabilities configure(DesiredCapabilities capabilities) {
 		if (configurator!=null)
 			return configurator.configure(capabilities);

@@ -18,7 +18,22 @@ import java.util.List;
 
 import com.lohika.alp.flexpilot.FlexElement;
 
+/**
+ * The Interface FlexElementLocator.
+ */
 public interface FlexElementLocator {
-	  FlexElement findElement();
-	  List<FlexElement> findElements();
+	  
+  	/**
+  	 * Find element.
+  	 *
+  	 * @return the flex element
+  	 */
+  	FlexElement findElement();
+	  
+  	/**
+  	 * Find elements.
+  	 *
+  	 * @return the list of flex elements 
+  	 */
+  	List<FlexElement> findElements();
 }

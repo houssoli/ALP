@@ -16,8 +16,18 @@ package com.lohika.alp.selenium.jscatcher;
 
 import java.util.ArrayList;
 
+
+/**
+ * The Interface JSErrorCatcher.
+ */
 public interface JSErrorCatcher {
 
+	/**
+	 * Gets all JS errors that JSErrorCatcher was able to collect. 
+	 *
+	 * @return the js errors
+	 * @throws JsErrorCatcherException the js error catcher exception
+	 */
 	public ArrayList<String> getJsErrors() throws JsErrorCatcherException;
 	
 }

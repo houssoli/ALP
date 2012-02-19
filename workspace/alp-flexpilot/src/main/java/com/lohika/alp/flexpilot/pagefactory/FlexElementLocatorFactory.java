@@ -26,7 +26,7 @@ public interface FlexElementLocatorFactory {
 	   * be called.
 	   * 
 	   * @param field
-	   * @return
+	   * @return FlexElementLocator
 	   */
 	  FlexElementLocator createLocator(Field field);
 }

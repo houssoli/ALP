@@ -34,20 +34,43 @@ import com.lohika.alp.flexpilot.FlexElement;
 import com.lohika.alp.flexpilot.pagefactory.FlexPilotFactory;
 import com.lohika.alp.flexpilot.pagefactory.FlexPilotFactoryJAXB;
 
+
+/**
+ * The Class FlexPilotDriver.
+ */
 public class FlexPilotDriver implements FlexDriver,FindsById, FindsByName, FindsByLinkText, FindsByChain, TakesScreenshot {
 	
+	/** The log4j logger . */
 	private Logger log = Logger.getLogger(getClass());
 
+	/** The WebDriver instance. */
 	private WebDriver driver;
+	
+	/** The root flash object name. */
 	private String flashObjectName;
+	
+	/** The factory. */
 	protected final FlexPilotFactory factory;
 	
+	/**
+	 * Instantiates a new flex pilot driver.
+	 *
+	 * @param driver the driver
+	 * @param flashObjectName the flash object name
+	 */
 	public FlexPilotDriver(WebDriver driver, String flashObjectName) {
 		this.driver = driver;
 		this.flashObjectName = flashObjectName;
 		this.factory = new FlexPilotFactoryJAXB();
 	}
 	
+	/**
+	 * Execute command for flex using JavaScriptExecutor .
+	 *
+	 * @param command for execution
+	 * @param args - list of arguments for command execution 
+	 * @return the instance of Object
+	 */
 	protected Object doCommand(String command, Object... args) {
 		String params = arrayToString(args,",");
 		log.debug("COMMAND:"+command+" {"+params+"}");
@@ -65,6 +88,13 @@ public class FlexPilotDriver implements FlexDriver,FindsById, FindsByName, Finds
 		return res;
 	}
 
+	/**
+	 * Execute command .
+	 *
+	 * @param command for execution
+	 * @param parameters - list of parameters 
+	 * @return the instance Object
+	 */
 	protected Object execute(String command, Map<String, ?> parameters) {
 		ArrayList<Object> args = new ArrayList<Object>();
 		
@@ -87,6 +117,13 @@ public class FlexPilotDriver implements FlexDriver,FindsById, FindsByName, Finds
 		return doCommand(command, args.toArray());
 	}
 
+	/**
+	 * Converts Array of Objects to a string.
+	 *
+	 * @param a the array of Objects
+	 * @param separator - char used to separate Objects within result String
+	 * @return the resulting String
+	 */
 	public static String arrayToString(Object[] a, String separator) {
 	    StringBuffer result = new StringBuffer();
 	    if (a.length > 0) {
@@ -101,12 +138,16 @@ public class FlexPilotDriver implements FlexDriver,FindsById, FindsByName, Finds
 	    return result.toString();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.flexpilot.SearchContext#findElement(com.lohika.alp.flexpilot.By)
+	 */
 	public FlexElement findElement(By by) {
 		return by.findElement(this);
 	}
 
     /**
-     * This method is not currently implemented
+     * This method is not currently implemented.
+     *
      * @param by The locating mechanism to use
      * @return null
      */
@@ -114,10 +155,25 @@ public class FlexPilotDriver implements FlexDriver,FindsById, FindsByName, Finds
 		return by.findElements(this);
 	}
 	
+	/**
+	 * Gets the id.
+	 *
+	 * @param by the by
+	 * @param using the using
+	 * @return the id
+	 */
+	// TODO : misunderstanding function name . getId is name for id getter !
 	private String getId(String by, String using) {
 		return "'"+by+"':'"+using+"'";
 	}
 
+	/**
+	 * Find element.
+	 *
+	 * @param by the by
+	 * @param using the using
+	 * @return the flex element
+	 */
 	protected FlexElement findElement(String by, String using) {
 		if (using == null) {
 			throw new IllegalArgumentException("Cannot find elements when the selector is null.");
@@ -127,47 +183,83 @@ public class FlexPilotDriver implements FlexDriver,FindsById, FindsByName, Finds
 		return el;
 	}
 	
-	/** TODO: implement searching elements **/
+	/**
+	 * TODO: implement searching elements *.
+	 *
+	 * @param by the by
+	 * @param using the using
+	 * @return the list
+	 */
 	protected List<FlexElement> findElements(String by, String using) {
 		return null;
 	}
 	  
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.flexpilot.FindsById#findElementById(java.lang.String)
+	 */
 	public FlexElement findElementById(String using) {
 		return findElement("id", using);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.flexpilot.FindsById#findElementsById(java.lang.String)
+	 */
 	public List<FlexElement> findElementsById(String using) {
 		return findElements("id", using);
 	}
 	  
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.flexpilot.FindsByChain#findElementByChain(java.lang.String)
+	 */
 	public FlexElement findElementByChain(String using) {
 		return findElement("chain", using);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.flexpilot.FindsByChain#findElementsByChain(java.lang.String)
+	 */
 	public List<FlexElement> findElementsByChain(String using) {
 		return findElements("chain", using);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.flexpilot.FindsByName#findElementByName(java.lang.String)
+	 */
 	public FlexElement findElementByName(String using) {
 		return findElement("name", using);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.flexpilot.FindsByName#findElementsByName(java.lang.String)
+	 */
 	public List<FlexElement> findElementsByName(String using) {
 		return findElements("name", using);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.flexpilot.FindsByLinkText#findElementByLinkText(java.lang.String)
+	 */
 	public FlexElement findElementByLinkText(String using) {
 		return findElement("link", using);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.flexpilot.FindsByLinkText#findElementsByLinkText(java.lang.String)
+	 */
 	public List<FlexElement> findElementsByLinkText(String using) {
 		return findElements("link", using);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.flexpilot.driver.FlexDriver#getVersion()
+	 */
 	public String getVersion() {
 		return (String)doCommand(DriverCommand.GET_VERSION);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.flexpilot.driver.FlexDriver#isFlexLoaded()
+	 */
 	public boolean isFlexLoaded() {
 		log.debug("COMMAND: isFlexLoaded()");
 		Object result = ((JavascriptExecutor) driver).executeScript("return document.getElementsByName('" +
@@ -179,6 +271,9 @@ public class FlexPilotDriver implements FlexDriver,FindsById, FindsByName, Finds
 		else return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.TakesScreenshot#getScreenshotAs(org.openqa.selenium.OutputType)
+	 */
 	public <X> X getScreenshotAs(OutputType<X> target)
 			throws WebDriverException {
 		return ((TakesScreenshot) driver).getScreenshotAs(target);

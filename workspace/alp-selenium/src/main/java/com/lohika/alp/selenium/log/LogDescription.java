@@ -19,12 +19,25 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * The Interface LogDescription.
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface LogDescription {
 
+	/**
+	 * Name.
+	 *
+	 * @return the string
+	 */
 	String name();
 
+	/**
+	 * Type.
+	 *
+	 * @return the string
+	 */
 	String type() default "element";
 
 }

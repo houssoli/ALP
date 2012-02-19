@@ -16,8 +16,25 @@ package com.lohika.alp.flexpilot;
 
 import java.util.List;
 
-public interface FindsByLinkText {
-	  FlexElement findElementByLinkText(String using);
 
-	  List<FlexElement> findElementsByLinkText(String using);
+/**
+ * The Interface FindsByLinkText.
+ */
+public interface FindsByLinkText {
+	  
+  	/**
+  	 * Find element by link text.
+  	 *
+  	 * @param using 
+  	 * @return founded FlexElement
+  	 */
+  	FlexElement findElementByLinkText(String using);
+
+	  /**
+  	 * Find elements by link text.
+  	 *
+  	 * @param using the using
+  	 * @return list of founded FlexElements
+  	 */
+  	List<FlexElement> findElementsByLinkText(String using);
 }

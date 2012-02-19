@@ -25,15 +25,29 @@ import com.lohika.alp.selenium.log.LoggingWebElement;
 public class ElementNotVisibleException extends
 		org.openqa.selenium.ElementNotVisibleException {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2689379101772386737L;
 
+	/** The LogDescriptionBean. */
 	private final LogDescriptionBean description;
 
+	/**
+	 * Instantiates a new element not visible exception.
+	 *
+	 * @param element the element
+	 * @param cause the cause
+	 */
 	public ElementNotVisibleException(LoggingWebElement element,
 			org.openqa.selenium.ElementNotVisibleException cause) {
 		this(element.getDescription(), cause);
 	}
 
+	/**
+	 * Instantiates a new element not visible exception.
+	 *
+	 * @param description the description
+	 * @param cause the cause
+	 */
 	public ElementNotVisibleException(LogDescriptionBean description,
 			org.openqa.selenium.ElementNotVisibleException cause) {
 		super(null, cause);
@@ -41,6 +55,9 @@ public class ElementNotVisibleException extends
 		this.description = description;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.WebDriverException#getMessage()
+	 */
 	@Override
 	public String getMessage() {
 		// TODO add locator info

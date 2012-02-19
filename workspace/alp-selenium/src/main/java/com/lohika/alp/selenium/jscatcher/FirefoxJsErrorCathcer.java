@@ -19,20 +19,26 @@ import java.util.ArrayList;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-/*
- * Firefox implementation of javascript error catcher. 
- */
 
+/**
+* Firefox implementation of javascript error catcher. 
+*/
 public class FirefoxJsErrorCathcer implements JSErrorCatcher {
 
+	/** The WebDriver. */
 	private WebDriver driver;
 	
+	/**
+	 * Instantiates a new firefox js error cathcer.
+	 *
+	 * @param driver the driver
+	 */
 	public FirefoxJsErrorCathcer(WebDriver driver) {
 		this.driver = driver;
 	}
 	
-	/*
-	 * return list of javascript errors
+	
+	/* (non-Javadoc)
 	 * @see com.lohika.alp.selenium.jscatcher.JSErrorCatcher#getJsErrors()
 	 */
 	@SuppressWarnings("unchecked")

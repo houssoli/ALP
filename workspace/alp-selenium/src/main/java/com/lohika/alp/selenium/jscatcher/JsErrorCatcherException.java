@@ -14,16 +14,26 @@
 //    along with ALP.  If not, see <http://www.gnu.org/licenses/>.
 package com.lohika.alp.selenium.jscatcher;
 
+
+/**
+ * The Class JsErrorCatcherException.
+ */
 public class JsErrorCatcherException extends Exception {
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 3136310260643273926L;
 	
+	/**
+	 * Instantiates a new js error catcher exception.
+	 */
 	public JsErrorCatcherException() {
 	}
 	
+	/**
+	 * Instantiates a new js error catcher exception.
+	 *
+	 * @param msg the msg
+	 */
 	public JsErrorCatcherException(String msg) {
 		super(msg);
 	}

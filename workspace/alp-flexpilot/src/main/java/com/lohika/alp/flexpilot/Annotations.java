@@ -20,18 +20,40 @@ import java.util.Set;
 import org.openqa.selenium.support.CacheLookup;
 import com.lohika.alp.flexpilot.pagefactory.ByChained;
 
-public class Annotations {
-	  private Field field;
 
-	  public Annotations(Field field) {
+
+/**
+ * The Class Annotations.
+ */
+public class Annotations {
+	  
+  	/** The field. */
+  	private Field field;
+
+	  /**
+  	 * Instantiates a new annotations.
+  	 *
+  	 * @param field the field
+  	 */
+  	public Annotations(Field field) {
 	    this.field = field;
 	  }
 
-	  public boolean isLookupCached() {
+	  /**
+  	 * Checks if is lookup cached.
+  	 *
+  	 * @return true, if is lookup cached
+  	 */
+  	public boolean isLookupCached() {
 	    return (field.getAnnotation(CacheLookup.class) != null);
 	  }
 
-	  public By buildBy() {
+	  /**
+  	 * Builds the by.
+  	 *
+  	 * @return the by
+  	 */
+  	public By buildBy() {
 	    assertValidAnnotations();
 
 	    By ans = null;
@@ -49,11 +71,22 @@ public class Annotations {
 	    return ans;
 	  }
 
-	  protected By buildByFromDefault() {
+	  /**
+  	 * Builds the by from default.
+  	 *
+  	 * @return the by
+  	 */
+  	protected By buildByFromDefault() {
 	    return new ByIdOrName(field.getName());
 	  }
 
-	  protected By buildByFromFindBys(FindBys findBys) {
+	  /**
+  	 * Builds the by from find bys.
+  	 *
+  	 * @param findBys the find bys
+  	 * @return the by
+  	 */
+  	protected By buildByFromFindBys(FindBys findBys) {
 	    assertValidFindBys(findBys);
 
 	    FindBy[] findByArray = findBys.value();
@@ -65,7 +98,13 @@ public class Annotations {
 	    return new ByChained(byArray);
 	  }
 
-	  protected By buildByFromFindBy(FindBy findBy) {
+	  /**
+  	 * Builds the by from find by.
+  	 *
+  	 * @param findBy the find by
+  	 * @return the by
+  	 */
+  	protected By buildByFromFindBy(FindBy findBy) {
 	    assertValidFindBy(findBy);
 
 	    By ans = buildByFromShortFindBy(findBy);
@@ -76,7 +115,13 @@ public class Annotations {
 	    return ans;
 	  }
 
-	  protected By buildByFromLongFindBy(FindBy findBy) {
+	  /**
+  	 * Builds the by from long find by.
+  	 *
+  	 * @param findBy the find by
+  	 * @return the by
+  	 */
+  	protected By buildByFromLongFindBy(FindBy findBy) {
 	    How how = findBy.how();
 	    String using = findBy.using();   
 
@@ -104,7 +149,13 @@ public class Annotations {
 	    }
 	  }
 
-	  protected By buildByFromShortFindBy(FindBy findBy) {
+	  /**
+  	 * Builds the by from short find by.
+  	 *
+  	 * @param findBy the find by
+  	 * @return the by
+  	 */
+  	protected By buildByFromShortFindBy(FindBy findBy) {
 
 	    if (!"".equals(findBy.id()))
 	    	return By.id(findBy.id());
@@ -123,7 +174,10 @@ public class Annotations {
 	    return null;
 	  }
 
-	  private void assertValidAnnotations() {
+	  /**
+  	 * Assert valid annotations.
+  	 */
+  	private void assertValidAnnotations() {
 	    FindBys findBys = field.getAnnotation(FindBys.class);
 	    FindBy findBy = field.getAnnotation(FindBy.class);
 	    if (findBys != null && findBy != null) {
@@ -132,13 +186,23 @@ public class Annotations {
 	    }
 	  }
 
-	  private void assertValidFindBys(FindBys findBys) {
+	  /**
+  	 * Assert valid find bys.
+  	 *
+  	 * @param findBys the find bys
+  	 */
+  	private void assertValidFindBys(FindBys findBys) {
 	    for (FindBy findBy : findBys.value()) {
 	      assertValidFindBy(findBy);
 	    }
 	  }
 
-	  private void assertValidFindBy(FindBy findBy) {
+	  /**
+  	 * Assert valid find by.
+  	 *
+  	 * @param findBy the find by
+  	 */
+  	private void assertValidFindBy(FindBy findBy) {
 	    if (findBy.how() != null) {
 	      if (findBy.using() == null) {
 	        throw new IllegalArgumentException(

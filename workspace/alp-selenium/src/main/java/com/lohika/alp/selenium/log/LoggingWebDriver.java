@@ -39,18 +39,34 @@ import com.lohika.alp.selenium.jscatcher.FirefoxJsErrorCathcer;
 import com.lohika.alp.selenium.jscatcher.JSErrorCatcher;
 import com.lohika.alp.selenium.jscatcher.JsErrorCatcherException;
 
+
+
+/**
+ * ALP wrapper over WebDriver for implementing autologging ability.
+ */
 public class LoggingWebDriver implements WebDriver, JavascriptExecutor,
 		HasInputDevices, HasCapabilities, TakesScreenshot, WrapsDriver,
 		DescribedElement {
 
+	/** The log4j logger. */
 	protected final Logger logger = Logger.getLogger(getClass());
 
+	/** The Webdriver instance. */
 	protected final WebDriver driver;
 
+	/** The ALP factory for log elements . */
 	protected final LogElementsSeleniumFactory factory;
 
+	/** The description. */
 	protected LogDescriptionBean description = new LogDescriptionBean();
 
+	/**
+	 * Instantiates a new logging web driver.
+	 *
+	 * @param driver the driver
+	 * @param name the name
+	 * @param factory the factory
+	 */
 	public LoggingWebDriver(WebDriver driver, String name,
 			LogElementsSeleniumFactory factory) {
 
@@ -65,21 +81,33 @@ public class LoggingWebDriver implements WebDriver, JavascriptExecutor,
 		description.setType("driver");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.internal.WrapsDriver#getWrappedDriver()
+	 */
 	@Override
 	public WebDriver getWrappedDriver() {
 		return driver;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.selenium.log.DescribedElement#setDescription(com.lohika.alp.selenium.log.LogDescriptionBean)
+	 */
 	@Override
 	public void setDescription(LogDescriptionBean description) {
 		this.description = description;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.selenium.log.DescribedElement#getDescription()
+	 */
 	@Override
 	public LogDescriptionBean getDescription() {
 		return description;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.WebDriver#get(java.lang.String)
+	 */
 	@Override
 	public void get(String url) {
 		logger.info(factory.get(this, url));
@@ -87,20 +115,35 @@ public class LoggingWebDriver implements WebDriver, JavascriptExecutor,
 		driver.get(url);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.WebDriver#getCurrentUrl()
+	 */
 	@Override
 	public String getCurrentUrl() {
 		return driver.getCurrentUrl();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.WebDriver#getTitle()
+	 */
 	@Override
 	public String getTitle() {
 		return driver.getTitle();
 	}
 
+	/**
+	 * wraps WebElement with logging.
+	 *
+	 * @param from the WebElement for wrap
+	 * @return wrapped instance of WebElement
+	 */
 	protected WebElement createWebElement(WebElement from) {
 		return new LoggingWebElement(from, factory);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.WebDriver#findElements(org.openqa.selenium.By)
+	 */
 	@Override
 	public List<WebElement> findElements(By by) {
 		List<WebElement> elemets = driver.findElements(by);
@@ -114,6 +157,9 @@ public class LoggingWebDriver implements WebDriver, JavascriptExecutor,
 		return loggedElements;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.WebDriver#findElement(org.openqa.selenium.By)
+	 */
 	@Override
 	public WebElement findElement(By by) {
 		WebElement element = driver.findElement(by);
@@ -122,11 +168,17 @@ public class LoggingWebDriver implements WebDriver, JavascriptExecutor,
 		return loggedElement;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.WebDriver#getPageSource()
+	 */
 	@Override
 	public String getPageSource() {
 		return driver.getPageSource();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.WebDriver#close()
+	 */
 	@Override
 	public void close() {
 		logJsErrors();
@@ -135,6 +187,9 @@ public class LoggingWebDriver implements WebDriver, JavascriptExecutor,
 		driver.close();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.WebDriver#quit()
+	 */
 	@Override
 	public void quit() {
 		logJsErrors();
@@ -143,34 +198,52 @@ public class LoggingWebDriver implements WebDriver, JavascriptExecutor,
 		driver.quit();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.WebDriver#getWindowHandles()
+	 */
 	@Override
 	public Set<String> getWindowHandles() {
 		return driver.getWindowHandles();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.WebDriver#getWindowHandle()
+	 */
 	@Override
 	public String getWindowHandle() {
 		return driver.getWindowHandle();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.WebDriver#switchTo()
+	 */
 	@Override
 	public TargetLocator switchTo() {
 		// TODO wrap TargetLocator
 		return driver.switchTo();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.WebDriver#navigate()
+	 */
 	@Override
 	public Navigation navigate() {
 		// TODO wrap Navigation
 		return driver.navigate();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.WebDriver#manage()
+	 */
 	@Override
 	public Options manage() {
 		// TODO wrap Options
 		return driver.manage();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.TakesScreenshot#getScreenshotAs(org.openqa.selenium.OutputType)
+	 */
 	@Override
 	public <X> X getScreenshotAs(OutputType<X> target)
 			throws WebDriverException {
@@ -181,6 +254,9 @@ public class LoggingWebDriver implements WebDriver, JavascriptExecutor,
 				"Underlying driver instance does not support taking screenshots");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object[])
+	 */
 	@Override
 	public Object executeScript(String script, Object... args) {
 		if (driver instanceof JavascriptExecutor) {
@@ -194,6 +270,9 @@ public class LoggingWebDriver implements WebDriver, JavascriptExecutor,
 				"Underlying driver instance does not support executing javascript");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.JavascriptExecutor#executeAsyncScript(java.lang.String, java.lang.Object[])
+	 */
 	@Override
 	public Object executeAsyncScript(String arg0, Object... arg1) {
 		if (driver instanceof JavascriptExecutor) {
@@ -204,6 +283,9 @@ public class LoggingWebDriver implements WebDriver, JavascriptExecutor,
 				"Underlying driver instance does not support executing javascript");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.HasCapabilities#getCapabilities()
+	 */
 	@Override
 	public Capabilities getCapabilities() {
 		// This 'if' handle case when LoggingWebDriver.driver is instanceof EventFiringWebDriver . 
@@ -220,6 +302,9 @@ public class LoggingWebDriver implements WebDriver, JavascriptExecutor,
 				"Underlying driver instance does not support capabilities");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.HasInputDevices#getKeyboard()
+	 */
 	@Override
 	public Keyboard getKeyboard() {
 		if (driver instanceof HasInputDevices) {
@@ -230,6 +315,9 @@ public class LoggingWebDriver implements WebDriver, JavascriptExecutor,
 				"Underlying driver instance does not support input devices");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.HasInputDevices#getMouse()
+	 */
 	@Override
 	public Mouse getMouse() {
 		if (driver instanceof HasInputDevices) {
@@ -240,6 +328,9 @@ public class LoggingWebDriver implements WebDriver, JavascriptExecutor,
 				"Underlying driver instance does not support input devices");
 	}
 
+	/**
+	 * Log js errors.
+	 */
 	private void logJsErrors() {
 		if (!JsErrorCatcherConfiguration.getInstance().getJsErrorAutolog())
 			return;

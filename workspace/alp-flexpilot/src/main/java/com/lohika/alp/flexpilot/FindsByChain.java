@@ -16,8 +16,25 @@ package com.lohika.alp.flexpilot;
 
 import java.util.List;
 
-public interface FindsByChain {
-	  FlexElement findElementByChain(String using);
 
-	  List<FlexElement> findElementsByChain(String using);
+/**
+ * The Interface FindsByChain.
+ */
+public interface FindsByChain {
+	  
+  	/**
+  	 * Find element by chain.
+  	 *
+  	 * @param using
+  	 * @return found FlexElement
+  	 */
+  	FlexElement findElementByChain(String using);
+
+	  /**
+  	 * Find elements by chain.
+  	 *
+  	 * @param using 
+  	 * @return the list of found FlexElements
+  	 */
+  	List<FlexElement> findElementsByChain(String using);
 }

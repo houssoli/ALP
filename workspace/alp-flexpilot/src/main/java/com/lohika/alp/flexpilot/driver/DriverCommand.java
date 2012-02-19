@@ -14,32 +14,32 @@
 //    along with ALP.  If not, see <http://www.gnu.org/licenses/>.
 package com.lohika.alp.flexpilot.driver;
 
-public interface DriverCommand {
+class DriverCommand {
 
-	String CLICK = "fp_click";
-	String TYPE = "fp_type";
-	String GET_TEXT_VALUE = "fp_getTextValue";
-	String SELECT = "fp_select";
-	String DOUBLE_CLICK = "fp_doubleClick";
-	String MOUSE_OUT = "fp_mouseOut";
-	String MOUSE_OVER = "fp_mouseOver";
-	String MOUSE_UP = "fp_mouseUp";
-	String MOUSE_DOWN = "fp_mouseDown";
-	String FOCUS_OUT = "fp_focusOut";
-	String GET_PROPERTY_VALUE = "fp_getPropertyValue"; 
-	String SET_PROPERTY_VALUE = "fp_setPropertyValue"; 
-	String DATE = "fp_date";
-	String DRAG_DROP_TO_COORDS = "fp_dragDropToCoords";
-	String DRAG_DROP_ELEM_TO_ELEM = "fp_dragDropElemToElem";
-	String GET_OBJECT_COORDS = "fp_getObjectCoords";
-	String GET_OBJECT_SIZE = "fp_getObjectSize";
-	String CONTEXT_MENU_CLICK = "fp_rightClick";
-	String SET_TEXT_SELECTION = "fp_setTextSelection";
+	public static final String CLICK = "fp_click";
+	public static final String TYPE = "fp_type";
+	public static final String GET_TEXT_VALUE = "fp_getTextValue";
+	public static final String SELECT = "fp_select";
+	public static final String DOUBLE_CLICK = "fp_doubleClick";
+	public static final String MOUSE_OUT = "fp_mouseOut";
+	public static final String MOUSE_OVER = "fp_mouseOver";
+	public static final String MOUSE_UP = "fp_mouseUp";
+	public static final String MOUSE_DOWN = "fp_mouseDown";
+	public static final String FOCUS_OUT = "fp_focusOut";
+	public static final String GET_PROPERTY_VALUE = "fp_getPropertyValue"; 
+	public static final String SET_PROPERTY_VALUE = "fp_setPropertyValue"; 
+	public static final String DATE = "fp_date";
+	public static final String DRAG_DROP_TO_COORDS = "fp_dragDropToCoords";
+	public static final String DRAG_DROP_ELEM_TO_ELEM = "fp_dragDropElemToElem";
+	public static final String GET_OBJECT_COORDS = "fp_getObjectCoords";
+	public static final String GET_OBJECT_SIZE = "fp_getObjectSize";
+	public static final String CONTEXT_MENU_CLICK = "fp_rightClick";
+	public static final String SET_TEXT_SELECTION = "fp_setTextSelection";
 
-	String DUMP = "fp_dump";
+	public static final String DUMP = "fp_dump";
 
-	String GET_VERSION = "fp_getVersion";
+	public static final String GET_VERSION = "fp_getVersion";
 	
-	String ASSERT_DISPLAY_OBJECT = "fp_assertDisplayObject";
+	public static final String ASSERT_DISPLAY_OBJECT = "fp_assertDisplayObject";
 
 }

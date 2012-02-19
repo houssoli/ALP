@@ -14,9 +14,16 @@
 //    along with ALP.  If not, see <http://www.gnu.org/licenses/>.
 package com.lohika.alp.flexpilot;
 
+// TODO: Auto-generated Javadoc
 /**
- * Indicates that there is an underlying element that can be used
+ * Indicates that there is an underlying element that can be used.
  */
 public interface WrapsElement {
+	
+	/**
+	 * Gets the wrapped element.
+	 *
+	 * @return the wrapped element
+	 */
 	FlexElement getWrappedElement();
 }

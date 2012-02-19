@@ -25,14 +25,29 @@ import com.lohika.alp.selenium.log.DescribedElement;
 import com.lohika.alp.selenium.log.LogDescriptionAnnotations;
 import com.lohika.alp.selenium.log.LogDescriptionBean;
 
+
+/**
+ * The Class FlexPilotElementLocator.
+ */
 public class FlexPilotElementLocator implements FlexElementLocator {
 	
-	  private final FlexDriver driver;
-	  private final boolean shouldCache;
-	  private final By by;
-	  private FlexElement cachedElement;
-	  private List<FlexElement> cachedElementList;
-	  private final LogDescriptionBean descr;
+	  /** The instance of FlexDriver. */
+  	private final FlexDriver driver;
+	  
+  	/** If we should use cache. */
+  	private final boolean shouldCache;
+	  
+  	/** The instance of com.lohika.alp.flexpilot.By class. */
+  	private final By by;
+	  
+  	/** The cached element. */
+  	private FlexElement cachedElement;
+	  
+  	/** The cached element list. */
+  	private List<FlexElement> cachedElementList;
+	  
+  	/** LogDescriptionBean */
+  	private final LogDescriptionBean descr;
 
 	  /**
 	   * Creates a new element locator.
@@ -52,8 +67,10 @@ public class FlexPilotElementLocator implements FlexElementLocator {
 	  }
 
 	  /**
-	   * Find the element.
-	   */
+  	 * Find the element.
+  	 *
+  	 * @return the flex element
+  	 */
 	  public FlexElement findElement() {
 	    if (cachedElement != null && shouldCache) {
 	      return cachedElement;
@@ -74,8 +91,10 @@ public class FlexPilotElementLocator implements FlexElementLocator {
 	  }
 
 	  /**
-	   * Find the element list.
-	   */
+  	 * Find the element list.
+  	 *
+  	 * @return the list of flexelements 
+  	 */
 	  public List<FlexElement> findElements() {
 	    if (cachedElementList != null && shouldCache) {
 	      return cachedElementList;

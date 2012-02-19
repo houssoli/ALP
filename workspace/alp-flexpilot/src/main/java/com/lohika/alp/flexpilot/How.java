@@ -14,11 +14,28 @@
 //    along with ALP.  If not, see <http://www.gnu.org/licenses/>.
 package com.lohika.alp.flexpilot;
 
+
+
+/**
+ * The Enum How.
+ */
 public enum How {
-	  ID,
-	  USING,
-	  ID_OR_NAME,
-	  LINK_TEXT,
-	  NAME,
-	  CHAIN,	  
+	  
+  	/** The ID. */
+  	ID,
+	  
+  	/** The USING. */
+  	USING,
+	  
+  	/** The I d_ o r_ name. */
+  	ID_OR_NAME,
+	  
+  	/** The LIN k_ text. */
+  	LINK_TEXT,
+	  
+  	/** The NAME. */
+  	NAME,
+	  
+  	/** The CHAIN. */
+  	CHAIN,	  
 }

@@ -28,15 +28,25 @@ import com.lohika.alp.selenium.log.LogDescriptionBean;
  * message with {@link LogDescription} info
  */
 public class ElementNotVisibleException extends RuntimeException {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long			serialVersionUID	= 9202333194773543853L;
 
+	/** LogDescriptionBean. */
 	private final LogDescriptionBean	description;
+	
+	/** The log4j logger . */
 	private Logger						lg					= Logger.getLogger(ElementNotVisibleException.class);
+	
+	/** The log factory. */
 	private FlexPilotFactory			logFactory = new FlexPilotFactoryJAXB();
 
+	/**
+	 * Instantiates a new element not visible exception.
+	 *
+	 * @param element - DescribedElement
+	 * @param takesScreenshot - instance of Object that supports TakesScreenshot 
+	 */
 	public ElementNotVisibleException(DescribedElement element, TakesScreenshot takesScreenshot) {
 		this(element.getDescription());
 		if (takesScreenshot != null)
@@ -44,16 +54,29 @@ public class ElementNotVisibleException extends RuntimeException {
 					takesScreenshot, getMessage()));
 	}
 
+	/**
+	 * Instantiates a new element not visible exception.
+	 *
+	 * @param element DescribedElement
+	 */
 	public ElementNotVisibleException(DescribedElement element) {
 		this(element.getDescription());
 	}
 
+	/**
+	 * Instantiates a new element not visible exception.
+	 *
+	 * @param LogDescriptionBean
+	 */
 	public ElementNotVisibleException(LogDescriptionBean description) {
 		super();
 		this.description = description;
 		lg.error(getMessage(), this);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Throwable#getMessage()
+	 */
 	public String getMessage() {
 		// TODO add locator info
 		String reason = "Element is not currently visible and so may not be interacted: {"

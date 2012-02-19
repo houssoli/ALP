@@ -14,10 +14,23 @@
 //    along with ALP.  If not, see <http://www.gnu.org/licenses/>.
 package com.lohika.alp.selenium.log;
 
+/**
+ * The Interface DescribedElement.
+ */
 public interface DescribedElement {
 
+	/**
+	 * Sets the description of type LogDescriptionBean
+	 *
+	 * @param description - new LogDescriptionBean
+	 */
 	public void setDescription(LogDescriptionBean description);
 
+	/**
+	 * Gets the LogDescriptionBean.
+	 *
+	 * @return LogDescriptionBean
+	 */
 	public LogDescriptionBean getDescription();
 
 }

@@ -16,8 +16,18 @@ package com.lohika.alp.selenium.configurator;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+
+/**
+ * The Interface IWebDriverConfigurator.
+ */
 public interface IWebDriverConfigurator {
 	
+	/**
+	 * Add additional settings for DesiredCapabilities.
+	 *
+	 * @param capabilities - DesiredCapabilities for modification
+	 * @return modified DesiredCapabilities
+	 */
 	public DesiredCapabilities configure(DesiredCapabilities capabilities);
 	
 }

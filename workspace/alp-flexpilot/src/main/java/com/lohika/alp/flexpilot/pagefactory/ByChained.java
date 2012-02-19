@@ -23,14 +23,26 @@ import com.lohika.alp.flexpilot.By;
 import com.lohika.alp.flexpilot.FlexElement;
 import com.lohika.alp.flexpilot.SearchContext;
 
+/**
+ * The Class ByChained.
+ */
 public class ByChained extends By {
 
+  /** The array of By. */
   private By[] bys;
 
+  /**
+   * Instantiates a new by chained.
+   *
+   * @param bys the bys
+   */
   public ByChained(By... bys) {
     this.bys = bys;
   }
 
+  /* (non-Javadoc)
+   * @see com.lohika.alp.flexpilot.By#findElement(com.lohika.alp.flexpilot.SearchContext)
+   */
   @Override
   public FlexElement findElement(SearchContext context) {
     List<FlexElement> elements = findElements(context);
@@ -39,6 +51,9 @@ public class ByChained extends By {
     return elements.get(0);
   }
 
+  /* (non-Javadoc)
+   * @see com.lohika.alp.flexpilot.By#findElements(com.lohika.alp.flexpilot.SearchContext)
+   */
   @Override
   public List<FlexElement> findElements(SearchContext context) {
     if (bys.length == 0) {
@@ -62,6 +77,9 @@ public class ByChained extends By {
     return elems;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder stringBuilder = new StringBuilder("By.chained(");

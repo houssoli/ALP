@@ -19,13 +19,26 @@ import java.lang.reflect.Field;
 import com.lohika.alp.flexpilot.driver.FlexDriver;
 
 
+/**
+ * A factory for creating FlexPilotElementLocator objects.
+ */
 public class FlexPilotElementLocatorFactory implements FlexElementLocatorFactory {
 	
+	/** The instance of FlexDriver */
 	private final FlexDriver driverRef;
 
+	/**
+	 * Instantiates a new flex pilot element locator factory.
+	 *
+	 * @param driver the driver
+	 */
 	public FlexPilotElementLocatorFactory(FlexDriver driver) {
 		this.driverRef = driver;
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.lohika.alp.flexpilot.pagefactory.FlexElementLocatorFactory#createLocator(java.lang.reflect.Field)
+	 */
 	public FlexElementLocator createLocator(Field field) {
 		return new FlexPilotElementLocator(driverRef, field);
 	}

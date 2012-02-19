@@ -19,21 +19,67 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+
+/**
+ * The Interface FindBy.
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface FindBy {
+  
+  /**
+   * How.
+   *
+   * @return the how
+   */
   How how() default How.ID;
 
+  /**
+   * Using.
+   *
+   * @return the string
+   */
   String using() default "";
   
+  /**
+   * Id.
+   *
+   * @return the string
+   */
   String id() default "";
 
+  /**
+   * Name.
+   *
+   * @return the string
+   */
   String name() default "";
 
+  /**
+   * Link text.
+   *
+   * @return the string
+   */
   String linkText() default "";
 
+  /**
+   * Chain.
+   *
+   * @return the string
+   */
   String chain() default "";
  
+  /**
+   * Rootobj.
+   *
+   * @return the string
+   */
   String rootobj() default "";
+  
+  /**
+   * Maxdepth.
+   *
+   * @return the string
+   */
   String maxdepth() default "";
 }

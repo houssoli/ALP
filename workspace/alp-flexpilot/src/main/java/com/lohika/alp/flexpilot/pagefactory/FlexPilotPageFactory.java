@@ -23,14 +23,30 @@ import com.lohika.alp.flexpilot.driver.FlexDriver;
 import com.lohika.alp.flexpilot.driver.FlexPilotDriver;
 
 
+/**
+ * A factory for creating objects wrapped with ALP autologging according to PageObject pattern   
+ */
 public class FlexPilotPageFactory {
 	
+	/**
+	 * init elements within class pageClassToProxy using driver 
+	 *
+	 * @param driver - instance of FlexPilotDriver 
+	 * @param pageClassToProxy - that describe PageObject instance 
+	 * @return initilaized instance of PageObject
+	 */
 	public static <T> T initElements(FlexPilotDriver driver, Class<T> pageClassToProxy) {
 		T page = instantiatePage(driver, pageClassToProxy);
 		initElements(driver, page);
 		return page;
 	}
 
+	/**
+	 * init elements within class page using driver
+	 *
+	 * @param driver - instance of FlexPilotDriver
+	 * @param page - that describe PageObject instance
+	 */
 	public static void initElements(FlexPilotDriver driver, Object page) {
 		final FlexDriver driverRef = driver;
 
@@ -43,6 +59,12 @@ public class FlexPilotPageFactory {
 		initElements(factory, page);
 	}
 	
+	/**
+	 * Inits the elements.
+	 *
+	 * @param factory - FlexElementLocatorFactory
+	 * @param page - that describe PageObject instance
+	 */
 	public static void initElements(FlexElementLocatorFactory factory, Object page) {
 		final FlexElementLocatorFactory factoryRef = factory;
 		
@@ -50,6 +72,13 @@ public class FlexPilotPageFactory {
 		PageFactory.initElements(new FlexPilotDefaultFieldDecorator(factoryRef), page);
 	}
 
+	/**
+	 * Instantiate page.
+	 *
+	 * @param driver the driver
+	 * @param pageClassToProxy the page class to proxy
+	 * @return the t
+	 */
 	private static <T> T instantiatePage(FlexPilotDriver driver,
 			Class<T> pageClassToProxy) {
 		try {

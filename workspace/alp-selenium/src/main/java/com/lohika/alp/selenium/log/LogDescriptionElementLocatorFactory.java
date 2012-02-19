@@ -19,15 +19,27 @@ import java.lang.reflect.Field;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
+/**
+ * A factory for creating LogDescriptionElementLocator objects.
+ */
 public class LogDescriptionElementLocatorFactory implements
 		ElementLocatorFactory {
 
+	/** The element locator factory. */
 	private final ElementLocatorFactory factory;
 
+	/**
+	 * Instantiates a new log description element locator factory.
+	 *
+	 * @param factory the factory
+	 */
 	public LogDescriptionElementLocatorFactory(ElementLocatorFactory factory) {
 		this.factory = factory;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.support.pagefactory.ElementLocatorFactory#createLocator(java.lang.reflect.Field)
+	 */
 	@Override
 	public ElementLocator createLocator(Field field) {
 		ElementLocator elementLocator = factory.createLocator(field);

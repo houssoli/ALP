@@ -25,14 +25,31 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import com.lohika.alp.selenium.log.LogDescriptionDefaultFieldDecorator;
 import com.lohika.alp.selenium.log.LogDescriptionElementLocatorFactory;
 
+/**
+ * A factory for creating objects wrapped with ALP autologging according to PageObject pattern.
+ */
 public class AlpPageFactory {
 
+	/**
+	 * Inits WebElements within class created by PageObject pattern.
+	 *
+	 * @param <T> the generic type
+	 * @param driver the driver
+	 * @param pageClassToProxy the page class to proxy
+	 * @return the t
+	 */
 	public static <T> T initElements(WebDriver driver, Class<T> pageClassToProxy) {
 		T page = instantiatePage(driver, pageClassToProxy);
 		initElements(driver, page);
 		return page;
 	}
 
+	/**
+	 * Inits WebElements within class created by PageObject pattern.
+	 *
+	 * @param driver the driver
+	 * @param page the page
+	 */
 	public static void initElements(WebDriver driver, Object page) {
 		final WebDriver driverRef = driver;
 
@@ -45,6 +62,12 @@ public class AlpPageFactory {
 		initElements(factory, page);
 	}
 	
+	/**
+	 * Inits WebElements within class created by PageObject pattern.
+	 *
+	 * @param factory the factory
+	 * @param page the page
+	 */
 	public static void initElements(ElementLocatorFactory factory, Object page) {
 		final ElementLocatorFactory factoryRef = factory;
 		
@@ -52,6 +75,14 @@ public class AlpPageFactory {
 		PageFactory.initElements(new LogDescriptionDefaultFieldDecorator(factoryRef), page);
 	}
 
+	/**
+	 * Instantiate page.
+	 *
+	 * @param <T> the generic type
+	 * @param driver the driver
+	 * @param pageClassToProxy the page class to proxy
+	 * @return the t
+	 */
 	private static <T> T instantiatePage(WebDriver driver,
 			Class<T> pageClassToProxy) {
 		try {

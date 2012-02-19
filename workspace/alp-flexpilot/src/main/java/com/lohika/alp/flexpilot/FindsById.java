@@ -16,8 +16,25 @@ package com.lohika.alp.flexpilot;
 
 import java.util.List;
 
-public interface FindsById {
-	  FlexElement findElementById(String using);
 
-	  List<FlexElement> findElementsById(String using);
+/**
+ * The Interface FindsById.
+ */
+public interface FindsById {
+	  
+  	/**
+  	 * Find element by id.
+  	 *
+  	 * @param using
+  	 * @return Found FlexElement
+  	 */
+  	FlexElement findElementById(String using);
+
+	  /**
+  	 * Find elements by id.
+  	 *
+  	 * @param using 
+  	 * @return the list of found FlexElements
+  	 */
+  	List<FlexElement> findElementsById(String using);
 }

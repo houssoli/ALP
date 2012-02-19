@@ -24,14 +24,26 @@ import org.openqa.selenium.support.pagefactory.FieldDecorator;
 import com.lohika.alp.flexpilot.FlexElement;
 import com.lohika.alp.flexpilot.WrapsElement;
 
+/**
+ * The Class FlexPilotDefaultFieldDecorator.
+ */
 public class FlexPilotDefaultFieldDecorator implements FieldDecorator {
 	
+	/** The factory. */
 	protected FlexElementLocatorFactory factory;
 	  
+	/**
+	 * Instantiates a new flex pilot default field decorator.
+	 *
+	 * @param FlexElementLocatorFactory 
+	 */
 	public FlexPilotDefaultFieldDecorator(FlexElementLocatorFactory factory) {
 		this.factory = factory;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.support.pagefactory.FieldDecorator#decorate(java.lang.ClassLoader, java.lang.reflect.Field)
+	 */
 	public Object decorate(ClassLoader loader, Field field) {
 		if (!FlexElement.class.isAssignableFrom(field.getType())) {
 			return null;
@@ -45,6 +57,13 @@ public class FlexPilotDefaultFieldDecorator implements FieldDecorator {
 		return proxyForLocator(loader, locator);
 	}
 	
+	/**
+	 * Proxy for locator.
+	 *
+	 * @param loader ClassLoader 
+	 * @param locator FlexElementLocatorFactory
+	 * @return the flex element
+	 */
 	protected FlexElement proxyForLocator(ClassLoader loader,
 			FlexElementLocator locator) {
 		InvocationHandler handler = new FlexPilotLocatingElementHandler(

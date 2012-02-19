@@ -21,12 +21,23 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
+/**
+ * The Class LogDescriptionElementLocator.
+ */
 public class LogDescriptionElementLocator implements ElementLocator {
 
+	/** The element locator. */
 	private final ElementLocator locator;
 
+	/** LogDescriptionBean */
 	private final LogDescriptionBean descr;
 
+	/**
+	 * Instantiates a new log description element locator.
+	 *
+	 * @param elementLocator the element locator
+	 * @param field the field
+	 */
 	public LogDescriptionElementLocator(ElementLocator elementLocator,
 			Field field) {
 		this.locator = elementLocator;
@@ -37,6 +48,9 @@ public class LogDescriptionElementLocator implements ElementLocator {
 		descr = annotations.buildLogDescriptionBean();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openqa.selenium.support.pagefactory.ElementLocator#findElement()
+	 */
 	@Override
 	public WebElement findElement() {
 		WebElement element;
@@ -57,6 +71,9 @@ public class LogDescriptionElementLocator implements ElementLocator {
 
 
 
+    /* (non-Javadoc)
+     * @see org.openqa.selenium.support.pagefactory.ElementLocator#findElements()
+     */
     @Override
     public List<WebElement> findElements() {
         List<WebElement> elements;

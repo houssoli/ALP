@@ -17,7 +17,6 @@ package com.lohika.alp.selenium;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.apache.log4j.Category;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -33,12 +32,24 @@ import com.lohika.alp.selenium.log.LogElementsSeleniumFactoryJAXB;
 import com.lohika.alp.selenium.log.LoggingWebDriver;
 import com.lohika.alp.selenium.log.LoggingWebDriverListener;
 
+
+/**
+ * A factory to wrap WebDriver objects with ALP loggings
+ */
 public class AlpWebDriverFactory {
 	
+	/** The log4j logger . */
 	private static Logger log = Logger.getLogger(AlpWebDriverFactory.class);
-
-    public static void TestMaven(){}
-
+	
+	
+	/**
+	 * Create WebDriver object wrapped with ALP logging that allow implements autologging
+	 *
+	 * @param SeleniumUrl - represent target Selenium standalone server for WebDriver that will be created 
+	 * @param capabilities - DesiredCapabilities for WebDriver that will be created  
+	 * @return created WebDriver instance 
+	 * @throws MalformedURLException the malformed url exception
+	 */
 	public static WebDriver getDriver(String SeleniumUrl,
 			DesiredCapabilities capabilities) throws MalformedURLException {
 

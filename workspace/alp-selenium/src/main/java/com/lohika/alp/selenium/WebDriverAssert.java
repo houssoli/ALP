@@ -22,17 +22,25 @@ import org.openqa.selenium.WebDriver;
 import com.lohika.alp.selenium.log.LogElementsSeleniumFactory;
 import com.lohika.alp.selenium.log.LogElementsSeleniumFactoryJAXB;
 
+
 /**
- * Extending assertion error messages with screenshot
- * 
+ * Extending assertion error messages with screenshot.
  */
 public class WebDriverAssert extends junit.framework.Assert {
 
+	/** The log4j logger. */
 	private static Logger logger = Logger.getLogger(WebDriverAssert.class);
 
-	// TODO initialize factory separately
+	/** The elements factory. */
 	private static LogElementsSeleniumFactory elementsFactory = new LogElementsSeleniumFactoryJAXB();
 
+	/**
+	 * wrapper for assertEquals that adds autologging
+	 *
+	 * @param driver - WebDriver instance 
+	 * @param expected - etalon String
+	 * @param actual - to compare String
+	 */
 	static public void assertEquals(WebDriver driver, String expected,
 			String actual) {
 

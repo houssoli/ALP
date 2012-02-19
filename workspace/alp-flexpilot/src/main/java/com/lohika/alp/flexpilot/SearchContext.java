@@ -16,8 +16,9 @@ package com.lohika.alp.flexpilot;
 
 import java.util.List;
 
-import org.openqa.selenium.NoSuchElementException;
-
+/**
+ * The Interface SearchContext.
+ */
 public interface SearchContext {
 	  /**
 	   * Find all elements within the current context using the given mechanism.
@@ -30,11 +31,10 @@ public interface SearchContext {
 
 
 	  /**
-	   * Find the first {@link FlexElement} using the given method.
-	   * 
-	   * @param by The locating mechanism
-	   * @return The first matching element on the current context
-	   * @throws NoSuchElementException If no matching elements are found
-	   */
+  	 * Find the first {@link FlexElement} using the given method.
+  	 *
+  	 * @param by The locating mechanism
+  	 * @return The first matching element on the current context
+  	 */
 	  FlexElement findElement(By by);
 }

@@ -22,13 +22,27 @@ import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
+
+/**
+ * The Class LogDescriptionLocatingElementHandler.
+ */
 public class LogDescriptionLocatingElementHandler implements InvocationHandler {
+	
+	/** The element locator. */
 	private final ElementLocator locator;
 
+	/**
+	 * Instantiates a new log description locating element handler.
+	 *
+	 * @param locator the locator
+	 */
 	public LogDescriptionLocatingElementHandler(ElementLocator locator) {
 		this.locator = locator;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.reflect.InvocationHandler#invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[])
+	 */
 	public Object invoke(Object object, Method method, Object[] objects)
 			throws Throwable {
 		WebElement element = locator.findElement();

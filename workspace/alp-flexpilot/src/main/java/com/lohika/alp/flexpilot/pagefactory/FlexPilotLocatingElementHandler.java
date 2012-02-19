@@ -20,13 +20,27 @@ import java.lang.reflect.Method;
 
 import com.lohika.alp.flexpilot.FlexElement;
 
+
+/**
+ * The Class FlexPilotLocatingElementHandler.
+ */
 public class FlexPilotLocatingElementHandler implements InvocationHandler {
+	
+	/** The element locator. */
 	private final FlexElementLocator locator;
 
+	/**
+	 * Instantiates a new flex pilot locating element handler.
+	 *
+	 * @param locator the locator
+	 */
 	public FlexPilotLocatingElementHandler(FlexElementLocator locator) {
 		this.locator = locator;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.reflect.InvocationHandler#invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[])
+	 */
 	public Object invoke(Object object, Method method, Object[] objects)
 			throws Throwable {
 		FlexElement element = locator.findElement();

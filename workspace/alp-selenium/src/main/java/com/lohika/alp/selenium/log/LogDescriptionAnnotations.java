@@ -16,14 +16,28 @@ package com.lohika.alp.selenium.log;
 
 import java.lang.reflect.Field;
 
+/**
+ * The Class LogDescriptionAnnotations.
+ */
 public class LogDescriptionAnnotations {
 
+	/** The field. */
 	private final Field field;
 
+	/**
+	 * Instantiates a new log description annotations.
+	 *
+	 * @param field the field
+	 */
 	public LogDescriptionAnnotations(Field field) {
 		this.field = field;
 	}
 
+	/**
+	 * Builds the log description bean.
+	 *
+	 * @return the log description bean
+	 */
 	public LogDescriptionBean buildLogDescriptionBean() {
 		LogDescriptionBean bean = new LogDescriptionBean();
 
