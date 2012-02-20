@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class EmailAddressException extends Exception {
 
-	/** The emails. */
+	/** The list of mail addresses. */
 	private List<String> emails;
 	
 	/** The Constant serialVersionUID. */
@@ -51,7 +51,7 @@ public class EmailAddressException extends Exception {
 	 * @see java.lang.Throwable#getMessage()
 	 */
 	public String getMessage() {
-		String message = "Invalie email adresses: ";
+		String message = "Invalid email adresses: ";
 		if (emails!=null)
 		for (String email: emails) {
 			message.concat(email);

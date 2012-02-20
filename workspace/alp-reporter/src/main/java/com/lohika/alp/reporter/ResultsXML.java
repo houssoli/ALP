@@ -55,7 +55,6 @@ import com.lohika.alp.testng.results.schema.Test;
 import com.lohika.alp.testng.results.schema.TestInstance;
 import com.lohika.alp.testng.results.schema.TestMethod;
 
-
 /**
  * The <code>ResultsXML</code> class generates XML file with general test run
  * results according to {@link http://alp.lohika.com/testng/results/schema}
@@ -79,10 +78,13 @@ public class ResultsXML {
 
 	/**
 	 * Generate report.
-	 *
-	 * @param xmlSuites list of xml suites
-	 * @param suites list of ISuites 
-	 * @param outputDirectory - where to generate logs 
+	 * 
+	 * @param xmlSuites
+	 *            list of xml suites
+	 * @param suites
+	 *            list of ISuites
+	 * @param outputDirectory
+	 *            - where to generate logs
 	 */
 	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites,
 			String outputDirectory) {
@@ -322,10 +324,11 @@ public class ResultsXML {
 	// TODO : not understand why we need input param here ?
 	/**
 	 * New xml gregorian calendar.
-	 *
-	 * @param millis the millis
+	 * 
+	 * @param millis
+	 *            the millis
 	 * @return the xML gregorian calendar
-	 */	
+	 */
 	protected XMLGregorianCalendar newXMLGregorianCalendar(long millis) {
 		try {
 			DatatypeFactory datatypeFactory = DatatypeFactory.newInstance();

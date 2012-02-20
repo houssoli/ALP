@@ -1,18 +1,45 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>com.lohika.alp</groupId>
 	<artifactId>alp-flexpilot</artifactId>
 	<version>0.1</version>
-	<packaging>jar</packaging>
-
+	<name>ALP FlexPilot Utilities</name>
+	<packaging>jar</packaging>	
 	<name>alp-flexpilot</name>
-	<url>http://maven.apache.org</url>
-
+	<description>Enable Automatic ALP usage with FlexPilot</description>
+	<url>https://github.com/lohika/ALP/wiki</url>
+	<licenses>
+		<license>
+			<distribution>repo</distribution>
+			<name>GPLv3</name>
+			<url>http://www.gnu.org/licenses</url>
+		</license>
+	</licenses>
+	<scm>
+		<url>https://github.com/lohika/ALP</url>
+		<connection>scm:git://github.com/lohika/ALP.git</connection>
+	</scm>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	
+	<developers>
+		<developer>
+			<id>asmorodskiy</id>
+			<name>Anton Smorodskiy</name>
+			<email>asmorodskiy@lohika.com</email>
+			<organization>Lohika</organization>
+			<organizationUrl>http://www.lohika.com/</organizationUrl>
+		</developer>
+		<developer>
+			<id>dirzhov</id>
+			<name>Dmitry Irzhov</name>
+			<email>dirzhov@lohika.com</email>
+			<organization>Lohika</organization>
+			<organizationUrl>http://www.lohika.com/</organizationUrl>
+		</developer>
+	</developers>	
 
 	<dependencies>
 		<dependency>
