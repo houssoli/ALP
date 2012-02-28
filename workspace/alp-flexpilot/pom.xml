@@ -6,7 +6,6 @@
 	<version>0.1</version>
 	<name>ALP FlexPilot Utilities</name>
 	<packaging>jar</packaging>	
-	<name>alp-flexpilot</name>
 	<description>Enable Automatic ALP usage with FlexPilot</description>
 	<url>https://github.com/lohika/ALP/wiki</url>
 	<licenses>
