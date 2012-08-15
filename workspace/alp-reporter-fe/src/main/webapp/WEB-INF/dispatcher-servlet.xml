@@ -78,7 +78,7 @@
 		<property name="configurationClass" value="org.hibernate.cfg.AnnotationConfiguration" />
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<!-- The following settings allow to avoid CommunicationException time out 
